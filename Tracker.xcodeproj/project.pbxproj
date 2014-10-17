@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E4583FE419EDA9A7009ADA7F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4583FE319EDA9A7009ADA7F /* AppDelegate.swift */; };
-		E4583FE619EDA9A7009ADA7F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4583FE519EDA9A7009ADA7F /* ViewController.swift */; };
+		E4583FE619EDA9A7009ADA7F /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4583FE519EDA9A7009ADA7F /* LoadingViewController.swift */; };
 		E4583FE919EDA9A7009ADA7F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4583FE719EDA9A7009ADA7F /* Main.storyboard */; };
 		E4583FEB19EDA9A7009ADA7F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4583FEA19EDA9A7009ADA7F /* Images.xcassets */; };
 		E4583FEE19EDA9A7009ADA7F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4583FEC19EDA9A7009ADA7F /* LaunchScreen.xib */; };
@@ -29,7 +29,7 @@
 		E4583FDE19EDA9A7009ADA7F /* Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4583FE219EDA9A7009ADA7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E4583FE319EDA9A7009ADA7F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E4583FE519EDA9A7009ADA7F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E4583FE519EDA9A7009ADA7F /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		E4583FE819EDA9A7009ADA7F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E4583FEA19EDA9A7009ADA7F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		E4583FED19EDA9A7009ADA7F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -78,7 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				E4583FE319EDA9A7009ADA7F /* AppDelegate.swift */,
-				E4583FE519EDA9A7009ADA7F /* ViewController.swift */,
+				E4583FE519EDA9A7009ADA7F /* LoadingViewController.swift */,
 				E4583FE719EDA9A7009ADA7F /* Main.storyboard */,
 				E4583FEA19EDA9A7009ADA7F /* Images.xcassets */,
 				E4583FEC19EDA9A7009ADA7F /* LaunchScreen.xib */,
@@ -212,7 +212,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E4583FE619EDA9A7009ADA7F /* ViewController.swift in Sources */,
+				E4583FE619EDA9A7009ADA7F /* LoadingViewController.swift in Sources */,
 				E4583FE419EDA9A7009ADA7F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -407,6 +407,7 @@
 				E4583FFF19EDA9A8009ADA7F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E458400019EDA9A8009ADA7F /* Build configuration list for PBXNativeTarget "TrackerTests" */ = {
 			isa = XCConfigurationList;
@@ -415,6 +416,7 @@
 				E458400219EDA9A8009ADA7F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
