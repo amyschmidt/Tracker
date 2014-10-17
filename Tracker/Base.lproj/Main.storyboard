@@ -7,7 +7,7 @@
         <!--HomePage-->
         <scene sceneID="FPh-Bh-OJO">
             <objects>
-                <viewController title="HomePage" id="3vV-p3-5wo" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoadingViewController" title="HomePage" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3vV-p3-5wo" customClass="LoadingViewController" customModule="Tracker" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="OwE-Er-z9g"/>
                         <viewControllerLayoutGuide type="bottom" id="Z9W-wl-DJK"/>
@@ -15,9 +15,27 @@
                     <view key="view" contentMode="scaleToFill" id="ucX-XL-bvU">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="wbG-54-Nvo">
+                                <rect key="frame" x="34" y="151" width="94" height="29"/>
+                                <connections>
+                                    <action selector="stepperValueChanged:" destination="3vV-p3-5wo" eventType="valueChanged" id="a2z-Zw-fai"/>
+                                </connections>
+                            </stepper>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hxe-0a-SMR">
+                                <rect key="frame" x="34" y="122" width="94" height="21"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="rN0-ct-HGe"/>
+                    <connections>
+                        <outlet property="stepper" destination="wbG-54-Nvo" id="l7N-Av-WNQ"/>
+                        <outlet property="valueLabel" destination="Hxe-0a-SMR" id="A4Z-GG-KH7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HiK-v9-fZ0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
