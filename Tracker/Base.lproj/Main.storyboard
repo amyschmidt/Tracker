@@ -4,44 +4,29 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
-        <!--Loading Page-->
-        <scene sceneID="tne-QT-ifu">
+        <!--HomePage-->
+        <scene sceneID="FPh-Bh-OJO">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Tracker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="HomePage" id="3vV-p3-5wo" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                        <viewControllerLayoutGuide type="top" id="OwE-Er-z9g"/>
+                        <viewControllerLayoutGuide type="bottom" id="Z9W-wl-DJK"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="ucX-XL-bvU">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="y9V-Fy-EbB">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="y9V-Fy-EbB" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="36J-cc-Xhc"/>
-                            <constraint firstAttribute="bottom" secondItem="y9V-Fy-EbB" secondAttribute="bottom" id="64C-oG-22s"/>
-                            <constraint firstItem="y9V-Fy-EbB" firstAttribute="leading" secondItem="wfy-db-euE" secondAttribute="leading" id="iIH-rh-2eP"/>
-                            <constraint firstItem="y9V-Fy-EbB" firstAttribute="trailing" secondItem="wfy-db-euE" secondAttribute="trailing" id="xFA-as-X77"/>
-                        </constraints>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Loading Page" id="OFP-DE-Ets"/>
-                    <connections>
-                        <outlet property="loadingView" destination="y9V-Fy-EbB" id="mpM-Sb-NVN"/>
-                    </connections>
+                    <navigationItem key="navigationItem" id="rN0-ct-HGe"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HiK-v9-fZ0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="951" y="136"/>
+            <point key="canvasLocation" x="133" y="153"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gxo-Wo-ruV">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="O4x-s4-F1n" sceneMemberID="viewController">
+                <navigationController id="O4x-s4-F1n" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="LWS-VX-HlB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -52,7 +37,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="xe3-uU-sog"/>
+                        <segue destination="3vV-p3-5wo" kind="relationship" relationship="rootViewController" id="r3d-9Q-Fk7"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yWF-Tq-2g8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -60,7 +45,4 @@
             <point key="canvasLocation" x="133" y="-557"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="logo.png" width="16" height="16"/>
-    </resources>
 </document>

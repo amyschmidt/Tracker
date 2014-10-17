@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class LoadingViewController: UIViewController {
 
     
     //Create place in memory to render image
@@ -20,10 +20,19 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
     }
 
+    //What is this?
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    /*override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let segueIdentifier = segue.identifier
+        if segueIdentifier == "GoToYellow" {
+            let yellowController:YellowViewController = segue.destinationViewController as YellowViewController
+            yellowController.quote = textField?.text
+        }
+    }*/
 
 
 }
