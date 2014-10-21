@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="O4x-s4-F1n">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--HomePage-->
@@ -16,22 +17,60 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="wbG-54-Nvo">
-                                <rect key="frame" x="34" y="151" width="94" height="29"/>
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="wbG-54-Nvo">
+                                <rect key="frame" x="253" y="139" width="94" height="29"/>
                                 <connections>
                                     <action selector="stepperValueChanged:" destination="3vV-p3-5wo" eventType="valueChanged" id="a2z-Zw-fai"/>
                                 </connections>
                             </stepper>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hxe-0a-SMR">
-                                <rect key="frame" x="34" y="122" width="94" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hxe-0a-SMR">
+                                <rect key="frame" x="294" y="94" width="12" height="24"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Daily Total" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PFq-Dq-If6">
+                                <rect key="frame" x="261" y="114" width="79" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E7N-e4-9Fs">
+                                <rect key="frame" x="16" y="550" width="57" height="30"/>
+                                <state key="normal" title="Settings">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OYn-UB-Gdu">
+                                <rect key="frame" x="524" y="562" width="60" height="30"/>
+                                <state key="normal" title="Visualize">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time Since Last Cigarette" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g2Q-kG-EGE">
+                                <rect key="frame" x="201" y="174" width="198" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="wbG-54-Nvo" firstAttribute="top" secondItem="OwE-Er-z9g" secondAttribute="bottom" constant="75" id="5KS-PM-vNA"/>
+                            <constraint firstItem="Z9W-wl-DJK" firstAttribute="top" secondItem="OYn-UB-Gdu" secondAttribute="bottom" constant="8" symbolic="YES" id="9vM-xd-QE0"/>
+                            <constraint firstItem="g2Q-kG-EGE" firstAttribute="top" secondItem="OwE-Er-z9g" secondAttribute="bottom" constant="110" id="A83-lC-Atz"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="OYn-UB-Gdu" secondAttribute="trailing" id="Iid-Fq-POP"/>
+                            <constraint firstItem="Z9W-wl-DJK" firstAttribute="top" secondItem="E7N-e4-9Fs" secondAttribute="bottom" constant="8" symbolic="YES" id="aDj-e0-u4i"/>
+                            <constraint firstItem="PFq-Dq-If6" firstAttribute="top" secondItem="OwE-Er-z9g" secondAttribute="bottom" constant="50" id="cjF-Gd-N1h"/>
+                            <constraint firstAttribute="centerX" secondItem="PFq-Dq-If6" secondAttribute="centerX" id="csL-tq-yiC"/>
+                            <constraint firstItem="E7N-e4-9Fs" firstAttribute="leading" secondItem="ucX-XL-bvU" secondAttribute="leadingMargin" id="f1C-jL-eae"/>
+                            <constraint firstAttribute="centerX" secondItem="wbG-54-Nvo" secondAttribute="centerX" id="fon-St-mOS"/>
+                            <constraint firstAttribute="centerX" secondItem="g2Q-kG-EGE" secondAttribute="centerX" id="mP3-Uo-Xwm"/>
+                            <constraint firstItem="Hxe-0a-SMR" firstAttribute="top" secondItem="OwE-Er-z9g" secondAttribute="bottom" constant="30" id="v16-yO-wqh"/>
+                            <constraint firstAttribute="centerX" secondItem="Hxe-0a-SMR" secondAttribute="centerX" id="wrQ-8w-XFW"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="rN0-ct-HGe"/>
+                    <navigationItem key="navigationItem" title="Tracker" id="jdC-Uv-p0j"/>
                     <connections>
                         <outlet property="stepper" destination="wbG-54-Nvo" id="l7N-Av-WNQ"/>
                         <outlet property="valueLabel" destination="Hxe-0a-SMR" id="A4Z-GG-KH7"/>
@@ -39,7 +78,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HiK-v9-fZ0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="133" y="153"/>
+            <point key="canvasLocation" x="107" y="153"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gxo-Wo-ruV">
