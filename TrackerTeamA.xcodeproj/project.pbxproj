@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C6432A61A0C5B8A000E1A47 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C6432A51A0C5B8A000E1A47 /* CloudKit.framework */; };
 		E4583FE419EDA9A7009ADA7F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4583FE319EDA9A7009ADA7F /* AppDelegate.swift */; };
 		E4583FE619EDA9A7009ADA7F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4583FE519EDA9A7009ADA7F /* ViewController.swift */; };
 		E4583FE919EDA9A7009ADA7F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4583FE719EDA9A7009ADA7F /* Main.storyboard */; };
@@ -26,14 +27,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		E4583FDE19EDA9A7009ADA7F /* Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C6432A41A0C5B84000E1A47 /* Tracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Tracker.entitlements; sourceTree = "<group>"; };
+		5C6432A51A0C5B8A000E1A47 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		E4583FDE19EDA9A7009ADA7F /* TrackerTeamA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrackerTeamA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4583FE219EDA9A7009ADA7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E4583FE319EDA9A7009ADA7F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E4583FE519EDA9A7009ADA7F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E4583FE819EDA9A7009ADA7F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E4583FEA19EDA9A7009ADA7F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		E4583FED19EDA9A7009ADA7F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		E4583FF319EDA9A8009ADA7F /* TrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4583FF319EDA9A8009ADA7F /* TrackerTeamATests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrackerTeamATests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4583FF819EDA9A8009ADA7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E4583FF919EDA9A8009ADA7F /* TrackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -43,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C6432A61A0C5B8A000E1A47 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +63,7 @@
 		E4583FD519EDA9A7009ADA7F = {
 			isa = PBXGroup;
 			children = (
+				5C6432A51A0C5B8A000E1A47 /* CloudKit.framework */,
 				E4583FE019EDA9A7009ADA7F /* Tracker */,
 				E4583FF619EDA9A8009ADA7F /* TrackerTests */,
 				E4583FDF19EDA9A7009ADA7F /* Products */,
@@ -68,8 +73,8 @@
 		E4583FDF19EDA9A7009ADA7F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E4583FDE19EDA9A7009ADA7F /* Tracker.app */,
-				E4583FF319EDA9A8009ADA7F /* TrackerTests.xctest */,
+				E4583FDE19EDA9A7009ADA7F /* TrackerTeamA.app */,
+				E4583FF319EDA9A8009ADA7F /* TrackerTeamATests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -77,6 +82,7 @@
 		E4583FE019EDA9A7009ADA7F /* Tracker */ = {
 			isa = PBXGroup;
 			children = (
+				5C6432A41A0C5B84000E1A47 /* Tracker.entitlements */,
 				E4583FE319EDA9A7009ADA7F /* AppDelegate.swift */,
 				E4583FE519EDA9A7009ADA7F /* ViewController.swift */,
 				E4583FE719EDA9A7009ADA7F /* Main.storyboard */,
@@ -115,9 +121,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E4583FDD19EDA9A7009ADA7F /* Tracker */ = {
+		E4583FDD19EDA9A7009ADA7F /* TrackerTeamA */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E4583FFD19EDA9A8009ADA7F /* Build configuration list for PBXNativeTarget "Tracker" */;
+			buildConfigurationList = E4583FFD19EDA9A8009ADA7F /* Build configuration list for PBXNativeTarget "TrackerTeamA" */;
 			buildPhases = (
 				E4583FDA19EDA9A7009ADA7F /* Sources */,
 				E4583FDB19EDA9A7009ADA7F /* Frameworks */,
@@ -127,14 +133,14 @@
 			);
 			dependencies = (
 			);
-			name = Tracker;
+			name = TrackerTeamA;
 			productName = Tracker;
-			productReference = E4583FDE19EDA9A7009ADA7F /* Tracker.app */;
+			productReference = E4583FDE19EDA9A7009ADA7F /* TrackerTeamA.app */;
 			productType = "com.apple.product-type.application";
 		};
-		E4583FF219EDA9A8009ADA7F /* TrackerTests */ = {
+		E4583FF219EDA9A8009ADA7F /* TrackerTeamATests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E458400019EDA9A8009ADA7F /* Build configuration list for PBXNativeTarget "TrackerTests" */;
+			buildConfigurationList = E458400019EDA9A8009ADA7F /* Build configuration list for PBXNativeTarget "TrackerTeamATests" */;
 			buildPhases = (
 				E4583FEF19EDA9A8009ADA7F /* Sources */,
 				E4583FF019EDA9A8009ADA7F /* Frameworks */,
@@ -145,9 +151,9 @@
 			dependencies = (
 				E4583FF519EDA9A8009ADA7F /* PBXTargetDependency */,
 			);
-			name = TrackerTests;
+			name = TrackerTeamATests;
 			productName = TrackerTests;
-			productReference = E4583FF319EDA9A8009ADA7F /* TrackerTests.xctest */;
+			productReference = E4583FF319EDA9A8009ADA7F /* TrackerTeamATests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -161,6 +167,12 @@
 				TargetAttributes = {
 					E4583FDD19EDA9A7009ADA7F = {
 						CreatedOnToolsVersion = 6.0.1;
+						DevelopmentTeam = 4FNJNUQ3AD;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 					E4583FF219EDA9A8009ADA7F = {
 						CreatedOnToolsVersion = 6.0.1;
@@ -168,7 +180,7 @@
 					};
 				};
 			};
-			buildConfigurationList = E4583FD919EDA9A7009ADA7F /* Build configuration list for PBXProject "Tracker" */;
+			buildConfigurationList = E4583FD919EDA9A7009ADA7F /* Build configuration list for PBXProject "TrackerTeamA" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -181,8 +193,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E4583FDD19EDA9A7009ADA7F /* Tracker */,
-				E4583FF219EDA9A8009ADA7F /* TrackerTests */,
+				E4583FDD19EDA9A7009ADA7F /* TrackerTeamA */,
+				E4583FF219EDA9A8009ADA7F /* TrackerTeamATests */,
 			);
 		};
 /* End PBXProject section */
@@ -230,7 +242,7 @@
 /* Begin PBXTargetDependency section */
 		E4583FF519EDA9A8009ADA7F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E4583FDD19EDA9A7009ADA7F /* Tracker */;
+			target = E4583FDD19EDA9A7009ADA7F /* TrackerTeamA */;
 			targetProxy = E4583FF419EDA9A8009ADA7F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -338,9 +350,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Tracker/Tracker.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Tracker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = TrackerTeamA;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -348,9 +364,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Tracker/Tracker.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Tracker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = TrackerTeamA;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -368,7 +388,7 @@
 				);
 				INFOPLIST_FILE = TrackerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = TrackerTeamATests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tracker.app/Tracker";
 			};
 			name = Debug;
@@ -383,7 +403,7 @@
 				);
 				INFOPLIST_FILE = TrackerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = TrackerTeamATests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tracker.app/Tracker";
 			};
 			name = Release;
@@ -391,7 +411,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E4583FD919EDA9A7009ADA7F /* Build configuration list for PBXProject "Tracker" */ = {
+		E4583FD919EDA9A7009ADA7F /* Build configuration list for PBXProject "TrackerTeamA" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E4583FFB19EDA9A8009ADA7F /* Debug */,
@@ -400,21 +420,23 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E4583FFD19EDA9A8009ADA7F /* Build configuration list for PBXNativeTarget "Tracker" */ = {
+		E4583FFD19EDA9A8009ADA7F /* Build configuration list for PBXNativeTarget "TrackerTeamA" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E4583FFE19EDA9A8009ADA7F /* Debug */,
 				E4583FFF19EDA9A8009ADA7F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
-		E458400019EDA9A8009ADA7F /* Build configuration list for PBXNativeTarget "TrackerTests" */ = {
+		E458400019EDA9A8009ADA7F /* Build configuration list for PBXNativeTarget "TrackerTeamATests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E458400119EDA9A8009ADA7F /* Debug */,
 				E458400219EDA9A8009ADA7F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
