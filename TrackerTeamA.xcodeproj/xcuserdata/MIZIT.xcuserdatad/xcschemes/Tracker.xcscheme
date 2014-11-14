@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E4583FDD19EDA9A7009ADA7F"
-               BuildableName = "Tracker.app"
-               BlueprintName = "Tracker"
-               ReferencedContainer = "container:Tracker.xcodeproj">
+               BuildableName = "TrackerTeamA.app"
+               BlueprintName = "TrackerTeamA"
+               ReferencedContainer = "container:TrackerTeamA.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -31,7 +31,7 @@
                BlueprintIdentifier = "E4583FF219EDA9A8009ADA7F"
                BuildableName = "TrackerTests.xctest"
                BlueprintName = "TrackerTests"
-               ReferencedContainer = "container:Tracker.xcodeproj">
+               ReferencedContainer = "container:TrackerTeamA.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -49,7 +49,7 @@
                BlueprintIdentifier = "E4583FF219EDA9A8009ADA7F"
                BuildableName = "TrackerTests.xctest"
                BlueprintName = "TrackerTests"
-               ReferencedContainer = "container:Tracker.xcodeproj">
+               ReferencedContainer = "container:TrackerTeamA.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -57,9 +57,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E4583FDD19EDA9A7009ADA7F"
-            BuildableName = "Tracker.app"
-            BlueprintName = "Tracker"
-            ReferencedContainer = "container:Tracker.xcodeproj">
+            BuildableName = "TrackerTeamA.app"
+            BlueprintName = "TrackerTeamA"
+            ReferencedContainer = "container:TrackerTeamA.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -76,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E4583FDD19EDA9A7009ADA7F"
-            BuildableName = "Tracker.app"
-            BlueprintName = "Tracker"
-            ReferencedContainer = "container:Tracker.xcodeproj">
+            BuildableName = "TrackerTeamA.app"
+            BlueprintName = "TrackerTeamA"
+            ReferencedContainer = "container:TrackerTeamA.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -94,9 +94,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E4583FDD19EDA9A7009ADA7F"
-            BuildableName = "Tracker.app"
-            BlueprintName = "Tracker"
-            ReferencedContainer = "container:Tracker.xcodeproj">
+            BuildableName = "TrackerTeamA.app"
+            BlueprintName = "TrackerTeamA"
+            ReferencedContainer = "container:TrackerTeamA.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

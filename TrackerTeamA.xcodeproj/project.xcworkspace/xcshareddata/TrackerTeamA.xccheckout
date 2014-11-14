@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>6A31A65E-159C-427D-B778-7411DC463444</string>
+	<key>IDESourceControlProjectName</key>
+	<string>TrackerTeamA</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>CFBA5654687B40D07BD768CA68B41A8212B4A3A2</key>
+		<string>https://github.com/amyschmidt/Tracker.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>TrackerTeamA.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>CFBA5654687B40D07BD768CA68B41A8212B4A3A2</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/amyschmidt/Tracker.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>CFBA5654687B40D07BD768CA68B41A8212B4A3A2</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>CFBA5654687B40D07BD768CA68B41A8212B4A3A2</string>
+			<key>IDESourceControlWCCName</key>
+			<string>TrackerTeamA</string>
+		</dict>
+	</array>
+</dict>
+</plist>
