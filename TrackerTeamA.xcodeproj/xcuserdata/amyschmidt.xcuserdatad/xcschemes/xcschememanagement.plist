@@ -9,9 +9,19 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>TrackerWidget.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>5C66F0211A159F95000422ED</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>E4583FDD19EDA9A7009ADA7F</key>
 		<dict>
 			<key>primary</key>
