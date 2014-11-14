@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CloudKit
 
 class TodayTabViewController: UIViewController {
 
@@ -30,6 +31,7 @@ class TodayTabViewController: UIViewController {
     //changes dailyCount label according to the value of the stepper
     @IBAction func trackerValueChanged(sender:UIStepper) {
         dailyCount.text = Int(sender.value).description
+        var count = Int(sender.value)
     }
     
 }

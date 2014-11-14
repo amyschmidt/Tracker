@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		5C66F01D1A15921A000422ED /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C66F01C1A15921A000422ED /* CloudKit.framework */; };
+		5C66F0251A159F95000422ED /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C66F0241A159F95000422ED /* NotificationCenter.framework */; };
+		5C66F02A1A159F95000422ED /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C66F0291A159F95000422ED /* TodayViewController.swift */; };
+		5C66F02C1A159F95000422ED /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C66F02B1A159F95000422ED /* MainInterface.storyboard */; };
+		5C66F02F1A159F95000422ED /* TrackerWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5C66F0221A159F95000422ED /* TrackerWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E4583FE419EDA9A7009ADA7F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4583FE319EDA9A7009ADA7F /* AppDelegate.swift */; };
 		E4583FE919EDA9A7009ADA7F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4583FE719EDA9A7009ADA7F /* Main.storyboard */; };
 		E4583FEB19EDA9A7009ADA7F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4583FEA19EDA9A7009ADA7F /* Images.xcassets */; };
@@ -15,9 +19,38 @@
 		E49A416B1A1449D900CABD4F /* TodayTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49A416A1A1449D900CABD4F /* TodayTabViewController.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		5C66F02D1A159F95000422ED /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E4583FD619EDA9A7009ADA7F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5C66F0211A159F95000422ED;
+			remoteInfo = TrackerWidget;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		5C66F0331A159F96000422ED /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				5C66F02F1A159F95000422ED /* TrackerWidget.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		5C66F01B1A159219000422ED /* Tracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Tracker.entitlements; sourceTree = "<group>"; };
 		5C66F01C1A15921A000422ED /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		5C66F0221A159F95000422ED /* TrackerWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TrackerWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C66F0241A159F95000422ED /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		5C66F0281A159F95000422ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5C66F0291A159F95000422ED /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		5C66F02B1A159F95000422ED /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
 		E4583FDE19EDA9A7009ADA7F /* TrackerTeamA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrackerTeamA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4583FE219EDA9A7009ADA7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E4583FE319EDA9A7009ADA7F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -30,6 +63,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		5C66F01F1A159F95000422ED /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5C66F0251A159F95000422ED /* NotificationCenter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E4583FDB19EDA9A7009ADA7F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -41,12 +82,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5C66F0231A159F95000422ED /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5C66F0241A159F95000422ED /* NotificationCenter.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5C66F0261A159F95000422ED /* TrackerWidget */ = {
+			isa = PBXGroup;
+			children = (
+				5C66F0291A159F95000422ED /* TodayViewController.swift */,
+				5C66F02B1A159F95000422ED /* MainInterface.storyboard */,
+				5C66F0271A159F95000422ED /* Supporting Files */,
+			);
+			path = TrackerWidget;
+			sourceTree = "<group>";
+		};
+		5C66F0271A159F95000422ED /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5C66F0281A159F95000422ED /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		E4583FD519EDA9A7009ADA7F = {
 			isa = PBXGroup;
 			children = (
 				5C66F01C1A15921A000422ED /* CloudKit.framework */,
 				E4583FE019EDA9A7009ADA7F /* Tracker */,
 				E4583FF619EDA9A8009ADA7F /* TrackerTests */,
+				5C66F0261A159F95000422ED /* TrackerWidget */,
+				5C66F0231A159F95000422ED /* Frameworks */,
 				E4583FDF19EDA9A7009ADA7F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -55,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				E4583FDE19EDA9A7009ADA7F /* TrackerTeamA.app */,
+				5C66F0221A159F95000422ED /* TrackerWidget.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -101,6 +171,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		5C66F0211A159F95000422ED /* TrackerWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5C66F0301A159F96000422ED /* Build configuration list for PBXNativeTarget "TrackerWidget" */;
+			buildPhases = (
+				5C66F01E1A159F95000422ED /* Sources */,
+				5C66F01F1A159F95000422ED /* Frameworks */,
+				5C66F0201A159F95000422ED /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TrackerWidget;
+			productName = TrackerWidget;
+			productReference = 5C66F0221A159F95000422ED /* TrackerWidget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		E4583FDD19EDA9A7009ADA7F /* TrackerTeamA */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E4583FFD19EDA9A8009ADA7F /* Build configuration list for PBXNativeTarget "TrackerTeamA" */;
@@ -108,10 +195,12 @@
 				E4583FDA19EDA9A7009ADA7F /* Sources */,
 				E4583FDB19EDA9A7009ADA7F /* Frameworks */,
 				E4583FDC19EDA9A7009ADA7F /* Resources */,
+				5C66F0331A159F96000422ED /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				5C66F02E1A159F95000422ED /* PBXTargetDependency */,
 			);
 			name = TrackerTeamA;
 			productName = Tracker;
@@ -127,6 +216,10 @@
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "Amy Schmidt";
 				TargetAttributes = {
+					5C66F0211A159F95000422ED = {
+						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = 4FNJNUQ3AD;
+					};
 					E4583FDD19EDA9A7009ADA7F = {
 						CreatedOnToolsVersion = 6.0.1;
 						DevelopmentTeam = 4FNJNUQ3AD;
@@ -147,11 +240,20 @@
 			projectRoot = "";
 			targets = (
 				E4583FDD19EDA9A7009ADA7F /* TrackerTeamA */,
+				5C66F0211A159F95000422ED /* TrackerWidget */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		5C66F0201A159F95000422ED /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5C66F02C1A159F95000422ED /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E4583FDC19EDA9A7009ADA7F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -165,6 +267,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		5C66F01E1A159F95000422ED /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5C66F02A1A159F95000422ED /* TodayViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E4583FDA19EDA9A7009ADA7F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -175,6 +285,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5C66F02E1A159F95000422ED /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5C66F0211A159F95000422ED /* TrackerWidget */;
+			targetProxy = 5C66F02D1A159F95000422ED /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		E4583FE719EDA9A7009ADA7F /* Main.storyboard */ = {
@@ -196,6 +314,36 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		5C66F0311A159F96000422ED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = TrackerWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		5C66F0321A159F96000422ED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = TrackerWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		E4583FFB19EDA9A8009ADA7F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -282,6 +430,7 @@
 				CODE_SIGN_ENTITLEMENTS = Tracker/Tracker.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = Tracker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = TrackerTeamA;
@@ -296,6 +445,7 @@
 				CODE_SIGN_ENTITLEMENTS = Tracker/Tracker.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = Tracker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = TrackerTeamA;
@@ -306,6 +456,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		5C66F0301A159F96000422ED /* Build configuration list for PBXNativeTarget "TrackerWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5C66F0311A159F96000422ED /* Debug */,
+				5C66F0321A159F96000422ED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		E4583FD919EDA9A7009ADA7F /* Build configuration list for PBXProject "TrackerTeamA" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

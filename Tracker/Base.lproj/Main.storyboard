@@ -150,7 +150,7 @@
         <!--Today-->
         <scene sceneID="eeY-cf-vAU">
             <objects>
-                <viewController id="3oz-b8-NfC" customClass="TodayTabViewController" customModule="Tracker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="3oz-b8-NfC" customClass="TodayTabViewController" customModule="TrackerTeamA" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iEB-yJ-xbg"/>
                         <viewControllerLayoutGuide type="bottom" id="ScI-ot-Wxm"/>
@@ -266,7 +266,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="REJ-CH-fzQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="791" y="907"/>
+            <point key="canvasLocation" x="257" y="303"/>
         </scene>
     </scenes>
 </document>
