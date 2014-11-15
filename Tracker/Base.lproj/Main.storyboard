@@ -139,7 +139,23 @@
                     <view key="view" contentMode="scaleToFill" id="le3-0a-kgF">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="hjm-ro-QvN">
+                                <rect key="frame" x="16" y="20" width="568" height="29"/>
+                                <segments>
+                                    <segment title="Day"/>
+                                    <segment title="Week"/>
+                                    <segment title="Month"/>
+                                    <segment title="Year"/>
+                                </segments>
+                            </segmentedControl>
+                        </subviews>
+                        <color key="backgroundColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="hjm-ro-QvN" secondAttribute="trailing" id="7bC-tg-exA"/>
+                            <constraint firstItem="hjm-ro-QvN" firstAttribute="top" secondItem="pgL-Yp-KFg" secondAttribute="bottom" id="ibD-FQ-iJc"/>
+                            <constraint firstItem="hjm-ro-QvN" firstAttribute="leading" secondItem="le3-0a-kgF" secondAttribute="leadingMargin" id="mmW-ku-8p5"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="History" id="CkJ-C1-fau"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>

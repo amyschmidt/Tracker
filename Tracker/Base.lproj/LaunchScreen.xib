@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
@@ -9,24 +9,10 @@
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="S2J-fg-vkY">
-                    <rect key="frame" x="32" y="35" width="416" height="410"/>
-                </imageView>
-            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <constraints>
-                <constraint firstItem="S2J-fg-vkY" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="32" id="0ty-GC-4lW"/>
-                <constraint firstItem="S2J-fg-vkY" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="35" id="lEq-SD-psm"/>
-                <constraint firstAttribute="trailing" secondItem="S2J-fg-vkY" secondAttribute="trailing" constant="32" id="nxa-ps-7TH"/>
-                <constraint firstAttribute="bottom" secondItem="S2J-fg-vkY" secondAttribute="bottom" constant="35" id="w67-2w-cpR"/>
-            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="548" y="455"/>
         </view>
     </objects>
-    <resources>
-        <image name="Logo" width="227" height="204"/>
-    </resources>
 </document>
