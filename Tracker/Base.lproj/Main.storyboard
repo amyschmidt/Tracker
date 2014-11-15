@@ -126,7 +126,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xxl-a2-dYS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2225" y="556"/>
+            <point key="canvasLocation" x="-2403" y="12"/>
         </scene>
         <!--History-->
         <scene sceneID="CQx-85-ZFp">
@@ -148,14 +148,145 @@
                                     <segment title="Month"/>
                                     <segment title="Year"/>
                                 </segments>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </segmentedControl>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rhD-4T-Ory">
+                                <rect key="frame" x="16" y="48" width="568" height="503"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5yR-dd-Hut">
+                                        <rect key="frame" x="0.0" y="5" width="568" height="913"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today's Total" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OYu-3T-Onj">
+                                                <rect key="frame" x="0.0" y="64" width="180" height="35"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="180" id="4Yk-wT-XDh"/>
+                                                    <constraint firstAttribute="height" constant="35" id="Q3p-Oo-Tos"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="24"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time Since Last Smoke" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BW7-If-eWm">
+                                                <rect key="frame" x="0.0" y="769" width="568" height="35"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="35" id="4kc-Lv-9g8"/>
+                                                    <constraint firstAttribute="width" constant="200" id="U0D-90-x8g"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="24"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="U0D-90-x8g"/>
+                                                    </mask>
+                                                </variation>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hourly" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j2w-pZ-MZD">
+                                                <rect key="frame" x="0.0" y="219" width="568" height="35"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="35" id="4ev-Ff-C97"/>
+                                                    <constraint firstAttribute="width" constant="180" id="oRw-3X-b5b"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="24"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="oRw-3X-b5b"/>
+                                                    </mask>
+                                                </variation>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Daily Average" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q5h-Pl-f1I">
+                                                <rect key="frame" x="0.0" y="484" width="568" height="35"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="180" id="5UF-1D-XD8"/>
+                                                    <constraint firstAttribute="height" constant="35" id="DaU-MM-Cch"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="24"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="5UF-1D-XD8"/>
+                                                    </mask>
+                                                </variation>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time Spent Smoking" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yud-Fi-rGa">
+                                                <rect key="frame" x="0.0" y="1014" width="568" height="35"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="35" id="H8i-s4-OC6"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="24"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="yud-Fi-rGa" firstAttribute="leading" secondItem="5yR-dd-Hut" secondAttribute="leading" id="0K5-HW-jIr"/>
+                                            <constraint firstItem="OYu-3T-Onj" firstAttribute="leading" secondItem="5yR-dd-Hut" secondAttribute="leading" id="3QZ-RT-FMe"/>
+                                            <constraint firstAttribute="height" constant="913" id="9Yf-gW-Gjm"/>
+                                            <constraint firstItem="j2w-pZ-MZD" firstAttribute="leading" secondItem="5yR-dd-Hut" secondAttribute="leading" id="D8m-XP-qa8"/>
+                                            <constraint firstAttribute="trailing" secondItem="yud-Fi-rGa" secondAttribute="trailing" id="FZf-yA-PP5"/>
+                                            <constraint firstItem="OYu-3T-Onj" firstAttribute="top" secondItem="5yR-dd-Hut" secondAttribute="top" constant="69" id="JVf-Uw-Eca"/>
+                                            <constraint firstAttribute="trailing" secondItem="j2w-pZ-MZD" secondAttribute="trailing" id="RX4-wS-XxO"/>
+                                            <constraint firstItem="j2w-pZ-MZD" firstAttribute="top" secondItem="OYu-3T-Onj" secondAttribute="bottom" constant="120" id="TQl-9J-g8J"/>
+                                            <constraint firstAttribute="trailing" secondItem="BW7-If-eWm" secondAttribute="trailing" id="aJa-38-2J4"/>
+                                            <constraint firstAttribute="trailing" secondItem="q5h-Pl-f1I" secondAttribute="trailing" id="bqM-Qs-Vsx"/>
+                                            <constraint firstItem="BW7-If-eWm" firstAttribute="leading" secondItem="5yR-dd-Hut" secondAttribute="leading" id="ca3-2a-4Cx"/>
+                                            <constraint firstItem="yud-Fi-rGa" firstAttribute="top" secondItem="BW7-If-eWm" secondAttribute="bottom" constant="210" id="cln-XL-Xu5"/>
+                                            <constraint firstItem="q5h-Pl-f1I" firstAttribute="leading" secondItem="5yR-dd-Hut" secondAttribute="leading" id="gyR-UA-Hj6"/>
+                                            <constraint firstItem="q5h-Pl-f1I" firstAttribute="top" secondItem="j2w-pZ-MZD" secondAttribute="bottom" constant="230" id="ndM-sg-dcJ"/>
+                                            <constraint firstItem="BW7-If-eWm" firstAttribute="top" secondItem="q5h-Pl-f1I" secondAttribute="bottom" constant="250" id="qyM-NO-LfR"/>
+                                            <constraint firstItem="BW7-If-eWm" firstAttribute="top" secondItem="5yR-dd-Hut" secondAttribute="top" constant="500" id="rP6-yN-ajW"/>
+                                            <constraint firstItem="j2w-pZ-MZD" firstAttribute="leading" secondItem="5yR-dd-Hut" secondAttribute="leading" id="xXQ-vk-ebT"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="JVf-Uw-Eca"/>
+                                                <exclude reference="xXQ-vk-ebT"/>
+                                                <exclude reference="rP6-yN-ajW"/>
+                                            </mask>
+                                        </variation>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="OYu-3T-Onj" firstAttribute="top" secondItem="rhD-4T-Ory" secondAttribute="top" constant="69" id="2EJ-im-iYw"/>
+                                    <constraint firstAttribute="trailing" secondItem="5yR-dd-Hut" secondAttribute="trailing" id="2aH-QP-SQx"/>
+                                    <constraint firstItem="5yR-dd-Hut" firstAttribute="top" secondItem="rhD-4T-Ory" secondAttribute="top" constant="5" id="JWv-eC-6a9"/>
+                                    <constraint firstAttribute="bottom" secondItem="5yR-dd-Hut" secondAttribute="bottom" id="ebb-yz-YNU"/>
+                                    <constraint firstItem="5yR-dd-Hut" firstAttribute="leading" secondItem="rhD-4T-Ory" secondAttribute="leading" id="uYc-cz-btB"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="JWv-eC-6a9"/>
+                                    </mask>
+                                </variation>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="5yR-dd-Hut" firstAttribute="top" secondItem="hjm-ro-QvN" secondAttribute="bottom" constant="5" id="1CS-1s-PJJ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="hjm-ro-QvN" secondAttribute="trailing" id="7bC-tg-exA"/>
+                            <constraint firstItem="Ncb-p5-53u" firstAttribute="top" secondItem="rhD-4T-Ory" secondAttribute="bottom" id="FD3-7i-oW4"/>
+                            <constraint firstItem="hjm-ro-QvN" firstAttribute="leading" secondItem="5yR-dd-Hut" secondAttribute="leading" id="SeI-Cb-hIp"/>
+                            <constraint firstItem="rhD-4T-Ory" firstAttribute="leading" secondItem="le3-0a-kgF" secondAttribute="leadingMargin" id="bpY-K4-1UA"/>
+                            <constraint firstItem="OYu-3T-Onj" firstAttribute="top" secondItem="hjm-ro-QvN" secondAttribute="bottom" constant="66" id="dJd-Xy-Anq"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="rhD-4T-Ory" secondAttribute="trailing" id="faT-1Y-rJK"/>
+                            <constraint firstItem="rhD-4T-Ory" firstAttribute="top" secondItem="hjm-ro-QvN" secondAttribute="bottom" id="fi5-Eb-dNA"/>
+                            <constraint firstItem="BW7-If-eWm" firstAttribute="top" secondItem="hjm-ro-QvN" secondAttribute="bottom" constant="550" id="gUK-B4-ary"/>
                             <constraint firstItem="hjm-ro-QvN" firstAttribute="top" secondItem="pgL-Yp-KFg" secondAttribute="bottom" id="ibD-FQ-iJc"/>
                             <constraint firstItem="hjm-ro-QvN" firstAttribute="leading" secondItem="le3-0a-kgF" secondAttribute="leadingMargin" id="mmW-ku-8p5"/>
+                            <constraint firstItem="hjm-ro-QvN" firstAttribute="trailing" secondItem="5yR-dd-Hut" secondAttribute="trailing" id="pcZ-h5-IyE"/>
+                            <constraint firstItem="yud-Fi-rGa" firstAttribute="top" secondItem="hjm-ro-QvN" secondAttribute="bottom" constant="600" id="rBd-kC-AR6"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="dJd-Xy-Anq"/>
+                                <exclude reference="gUK-B4-ary"/>
+                                <exclude reference="rBd-kC-AR6"/>
+                            </mask>
+                        </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="History" id="CkJ-C1-fau"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
