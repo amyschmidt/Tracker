@@ -17,9 +17,14 @@ class TodayTabViewController: UIViewController {
     //stepper
     @IBOutlet weak var tracker: UIStepper!
     
+    // var appleDelegate:AppDelegate
+    // var CloudData:cloudData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // let appleDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        // let CloudData = appleDelegate.getCloudData()
 
         //initializing stepper
         tracker.wraps = true
@@ -31,7 +36,14 @@ class TodayTabViewController: UIViewController {
     //changes dailyCount label according to the value of the stepper
     @IBAction func trackerValueChanged(sender:UIStepper) {
         dailyCount.text = Int(sender.value).description
+        var countString = sender.value.description
         var count = Int(sender.value)
+        
+        // let appleDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        // let CloudData = appleDelegate.getCloudData()
+
+        CloudData.save_record(count)
+        
     }
     
 }

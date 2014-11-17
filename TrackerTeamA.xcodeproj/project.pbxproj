@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5C66F01D1A15921A000422ED /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C66F01C1A15921A000422ED /* CloudKit.framework */; };
 		5C66F0251A159F95000422ED /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C66F0241A159F95000422ED /* NotificationCenter.framework */; };
 		5C66F02A1A159F95000422ED /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C66F0291A159F95000422ED /* TodayViewController.swift */; };
 		5C66F02C1A159F95000422ED /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C66F02B1A159F95000422ED /* MainInterface.storyboard */; };
 		5C66F02F1A159F95000422ED /* TrackerWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5C66F0221A159F95000422ED /* TrackerWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		5C8CE9811A183E6700AA9756 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C8CE9801A183E6700AA9756 /* CloudKit.framework */; };
+		5CB13E9E1A17F76C00280BDE /* cloudData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB13E9D1A17F76C00280BDE /* cloudData.swift */; };
 		E4583FE419EDA9A7009ADA7F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4583FE319EDA9A7009ADA7F /* AppDelegate.swift */; };
 		E4583FE919EDA9A7009ADA7F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4583FE719EDA9A7009ADA7F /* Main.storyboard */; };
 		E4583FEB19EDA9A7009ADA7F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4583FEA19EDA9A7009ADA7F /* Images.xcassets */; };
@@ -45,12 +46,14 @@
 
 /* Begin PBXFileReference section */
 		5C66F01B1A159219000422ED /* Tracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Tracker.entitlements; sourceTree = "<group>"; };
-		5C66F01C1A15921A000422ED /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		5C66F0221A159F95000422ED /* TrackerWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TrackerWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C66F0241A159F95000422ED /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		5C66F0281A159F95000422ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C66F0291A159F95000422ED /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		5C66F02B1A159F95000422ED /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
+		5C8CE97F1A183E6400AA9756 /* TrackerTeamA.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TrackerTeamA.entitlements; sourceTree = "<group>"; };
+		5C8CE9801A183E6700AA9756 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		5CB13E9D1A17F76C00280BDE /* cloudData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cloudData.swift; sourceTree = "<group>"; };
 		E4583FDE19EDA9A7009ADA7F /* TrackerTeamA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrackerTeamA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4583FE219EDA9A7009ADA7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E4583FE319EDA9A7009ADA7F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -75,7 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C66F01D1A15921A000422ED /* CloudKit.framework in Frameworks */,
+				5C8CE9811A183E6700AA9756 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +88,7 @@
 		5C66F0231A159F95000422ED /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5C8CE9801A183E6700AA9756 /* CloudKit.framework */,
 				5C66F0241A159F95000422ED /* NotificationCenter.framework */,
 			);
 			name = Frameworks;
@@ -111,7 +115,7 @@
 		E4583FD519EDA9A7009ADA7F = {
 			isa = PBXGroup;
 			children = (
-				5C66F01C1A15921A000422ED /* CloudKit.framework */,
+				5C8CE97F1A183E6400AA9756 /* TrackerTeamA.entitlements */,
 				E4583FE019EDA9A7009ADA7F /* Tracker */,
 				E4583FF619EDA9A8009ADA7F /* TrackerTests */,
 				5C66F0261A159F95000422ED /* TrackerWidget */,
@@ -133,9 +137,10 @@
 			isa = PBXGroup;
 			children = (
 				5C66F01B1A159219000422ED /* Tracker.entitlements */,
+				5CB13E9D1A17F76C00280BDE /* cloudData.swift */,
 				E4583FE319EDA9A7009ADA7F /* AppDelegate.swift */,
-				E4583FE719EDA9A7009ADA7F /* Main.storyboard */,
 				E49A416A1A1449D900CABD4F /* TodayTabViewController.swift */,
+				E4583FE719EDA9A7009ADA7F /* Main.storyboard */,
 				E4583FEA19EDA9A7009ADA7F /* Images.xcassets */,
 				E4583FEC19EDA9A7009ADA7F /* LaunchScreen.xib */,
 				E4583FE119EDA9A7009ADA7F /* Supporting Files */,
@@ -223,6 +228,11 @@
 					E4583FDD19EDA9A7009ADA7F = {
 						CreatedOnToolsVersion = 6.0.1;
 						DevelopmentTeam = 4FNJNUQ3AD;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -279,6 +289,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CB13E9E1A17F76C00280BDE /* cloudData.swift in Sources */,
 				E49A416B1A1449D900CABD4F /* TodayTabViewController.swift in Sources */,
 				E4583FE419EDA9A7009ADA7F /* AppDelegate.swift in Sources */,
 			);
@@ -427,7 +438,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Tracker/Tracker.entitlements;
+				CODE_SIGN_ENTITLEMENTS = TrackerTeamA.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
@@ -442,7 +453,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Tracker/Tracker.entitlements;
+				CODE_SIGN_ENTITLEMENTS = TrackerTeamA.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
@@ -463,6 +474,7 @@
 				5C66F0321A159F96000422ED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E4583FD919EDA9A7009ADA7F /* Build configuration list for PBXProject "TrackerTeamA" */ = {
 			isa = XCConfigurationList;
