@@ -9,7 +9,7 @@
 import UIKit
 import CloudKit
 
-class TodayTabViewController: UIViewController {
+class TodayTabViewController: UIViewController, CloudKitDelegate{
 
     //daily count Label
     @IBOutlet weak var dailyCount: UILabel!
@@ -29,7 +29,7 @@ class TodayTabViewController: UIViewController {
         //initializing stepper
         tracker.wraps = true
         tracker.autorepeat = true
-        tracker.maximumValue = 40
+        tracker.maximumValue = 60
         
     }
     
@@ -44,6 +44,13 @@ class TodayTabViewController: UIViewController {
 
         CloudData.save_record(count)
         
+    }
+    
+    func errorUpdating(error: NSError) {
+        let message = error.localizedDescription
+        let alert = UIAlertView(title: "Error Loading Cloud Data",
+            message: message, delegate: nil, cancelButtonTitle: "OK")
+        alert.show()
     }
     
 }
