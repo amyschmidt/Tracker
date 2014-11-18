@@ -25,7 +25,11 @@ class TodayTabViewController: UIViewController, CloudKitDelegate{
         
         // let appleDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         // let CloudData = appleDelegate.getCloudData()
-
+        
+        CloudData.update_records()
+        dailyCount.text = String(CloudData.LogRecords.count)
+        
+        
         //initializing stepper
         tracker.wraps = true
         tracker.autorepeat = true

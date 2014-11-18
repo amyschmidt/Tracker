@@ -12,6 +12,7 @@
 		5C66F02C1A159F95000422ED /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C66F02B1A159F95000422ED /* MainInterface.storyboard */; };
 		5C66F02F1A159F95000422ED /* TrackerWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5C66F0221A159F95000422ED /* TrackerWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		5C8CE9811A183E6700AA9756 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C8CE9801A183E6700AA9756 /* CloudKit.framework */; };
+		5CA50AAB1A1AE80A00961677 /* grabbedRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA50AAA1A1AE80A00961677 /* grabbedRecord.swift */; };
 		5CB13E9E1A17F76C00280BDE /* cloudData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB13E9D1A17F76C00280BDE /* cloudData.swift */; };
 		E4583FE419EDA9A7009ADA7F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4583FE319EDA9A7009ADA7F /* AppDelegate.swift */; };
 		E4583FE919EDA9A7009ADA7F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4583FE719EDA9A7009ADA7F /* Main.storyboard */; };
@@ -53,6 +54,7 @@
 		5C66F02B1A159F95000422ED /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
 		5C8CE97F1A183E6400AA9756 /* TrackerTeamA.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TrackerTeamA.entitlements; sourceTree = "<group>"; };
 		5C8CE9801A183E6700AA9756 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		5CA50AAA1A1AE80A00961677 /* grabbedRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = grabbedRecord.swift; sourceTree = "<group>"; };
 		5CB13E9D1A17F76C00280BDE /* cloudData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cloudData.swift; sourceTree = "<group>"; };
 		E4583FDE19EDA9A7009ADA7F /* TrackerTeamA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrackerTeamA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4583FE219EDA9A7009ADA7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 			children = (
 				5C66F01B1A159219000422ED /* Tracker.entitlements */,
 				5CB13E9D1A17F76C00280BDE /* cloudData.swift */,
+				5CA50AAA1A1AE80A00961677 /* grabbedRecord.swift */,
 				E4583FE319EDA9A7009ADA7F /* AppDelegate.swift */,
 				E49A416A1A1449D900CABD4F /* TodayTabViewController.swift */,
 				E4583FE719EDA9A7009ADA7F /* Main.storyboard */,
@@ -289,6 +292,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CA50AAB1A1AE80A00961677 /* grabbedRecord.swift in Sources */,
 				5CB13E9E1A17F76C00280BDE /* cloudData.swift in Sources */,
 				E49A416B1A1449D900CABD4F /* TodayTabViewController.swift in Sources */,
 				E4583FE419EDA9A7009ADA7F /* AppDelegate.swift in Sources */,
