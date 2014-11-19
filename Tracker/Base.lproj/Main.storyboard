@@ -202,21 +202,38 @@
                                     <action selector="incrementerClicked:" destination="3oz-b8-NfC" eventType="touchUpInside" id="AJV-Yu-kHc"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="nnM-b7-Mrx">
+                                <rect key="frame" x="282" y="165" width="37" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="1vV-sm-YPF"/>
+                                    <constraint firstAttribute="height" constant="40" id="G7r-dp-hZR"/>
+                                </constraints>
+                                <color key="color" red="0.31360229420000002" green="1" blue="0.37822204450000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="1vV-sm-YPF"/>
+                                        <exclude reference="G7r-dp-hZR"/>
+                                    </mask>
+                                </variation>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.20000000298023224" green="0.20000000298023224" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="s2u-LR-bO1" secondAttribute="centerX" id="Kbn-BB-ivX"/>
                             <constraint firstItem="Das-HR-wUB" firstAttribute="top" secondItem="s2u-LR-bO1" secondAttribute="bottom" constant="5" id="LNY-04-k5C"/>
+                            <constraint firstItem="nnM-b7-Mrx" firstAttribute="centerX" secondItem="s2u-LR-bO1" secondAttribute="centerX" constant="-0.5" id="Ln9-VX-7Z5"/>
                             <constraint firstItem="9Ia-zT-oJ2" firstAttribute="top" secondItem="Das-HR-wUB" secondAttribute="bottom" constant="90" id="MHI-6t-SVL"/>
                             <constraint firstItem="s2u-LR-bO1" firstAttribute="top" secondItem="FqI-Wi-JIU" secondAttribute="topMargin" constant="125" id="PNL-WF-8Rz"/>
                             <constraint firstItem="9Ia-zT-oJ2" firstAttribute="centerX" secondItem="Das-HR-wUB" secondAttribute="centerX" id="f5Z-3T-dmD"/>
                             <constraint firstItem="s2u-LR-bO1" firstAttribute="centerX" secondItem="Das-HR-wUB" secondAttribute="centerX" id="hOS-hS-ACV"/>
                             <constraint firstItem="kN3-Us-tiB" firstAttribute="top" secondItem="9Ia-zT-oJ2" secondAttribute="bottom" constant="5" id="ifo-mW-oE6"/>
+                            <constraint firstItem="nnM-b7-Mrx" firstAttribute="centerY" secondItem="s2u-LR-bO1" secondAttribute="centerY" constant="-7" id="lv2-IT-xPY"/>
                             <constraint firstAttribute="centerX" secondItem="kN3-Us-tiB" secondAttribute="centerX" id="osc-m6-PLP"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Today" id="Iue-8n-83A"/>
                     <connections>
+                        <outlet property="activityIndicatorView" destination="nnM-b7-Mrx" id="h7j-ns-h5b"/>
                         <outlet property="dailyCount" destination="s2u-LR-bO1" id="iMN-ZC-ka8"/>
                     </connections>
                 </viewController>

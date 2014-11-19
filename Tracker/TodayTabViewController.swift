@@ -9,11 +9,11 @@ import CloudKit
 class TodayTabViewController: UIViewController, CloudKitDelegate{
 
     var model: cloudData!
-    //daily count Label
+    // daily count Label
     @IBOutlet weak var dailyCount: UILabel!
     
-    //stepper
-    @IBOutlet weak var tracker: UIStepper!
+    // spinner
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +26,7 @@ class TodayTabViewController: UIViewController, CloudKitDelegate{
         model.delegate = self
         // Call update records from cloudData.swift
         model.update_records()
+        activityIndicatorView.startAnimating()
     }
     
     /* Function for when the Increment Button is clicked */
@@ -50,8 +51,9 @@ class TodayTabViewController: UIViewController, CloudKitDelegate{
     /* Delegate functino is defined here but is actually a part of cloudData.swift 
         This function updates the count */
     func countUpdated() {
-        NSLog("Upon Load the 'count' has been updated to: \(model.LogRecords.count)")
         dailyCount.text = String(model.LogRecords.count)
+        NSLog("Upon Load the 'count' has been updated to: \(model.LogRecords.count)")
+        activityIndicatorView.stopAnimating()
     }
     
 }
