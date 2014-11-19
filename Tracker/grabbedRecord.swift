@@ -2,9 +2,7 @@
 //  grabbedRecord.swift
 //  TrackerTeamA
 //
-//  Created by Ryan Pliske on 11/17/14.
-//  Copyright (c) 2014 Amy Schmidt. All rights reserved.
-//
+
 
 import Foundation
 import CloudKit

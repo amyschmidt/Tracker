@@ -2,9 +2,6 @@
 //  cloudData.swift
 //  TrackerTeamA
 //
-//  Created by Ryan Pliske on 11/15/14.
-//  Copyright (c) 2014 Amy Schmidt. All rights reserved.
-//
 
 import CloudKit
 import Foundation
@@ -35,37 +32,39 @@ class cloudData
         privateDB = container.privateCloudDatabase
     }
     
-    func save_record(todo: Int)
+    func save_record()
     {
+        // Object that decides which Record (or Table) to save to.
         let record = CKRecord(recordType: "Log")
-        record.setValue(todo, forKey: "count")
-        
         // Grab the current date, then format the date.
         var date = NSDate()
         var formatter = NSDateFormatter()
-        // let currentLocale = NSLocale.currentLocale()
-        // formatter.timeStyle = .ShortStyle
+        // Format the day and time into string. (Might change this to date format)
         formatter.dateFormat = "MM-dd-yyyy"
         var DateString:String = formatter.stringFromDate(date)
         formatter.dateFormat = "hh:mm:ss-a"
         var TimeString:String = formatter.stringFromDate(date)
-        // println(DateString)
+        // Append the date and time to the insert query
         record.setObject(DateString, forKey: "date")
         record.setObject(TimeString, forKey: "time")
+        // Save record is the function used similar to Insert Statement in RDBMS
         self.privateDB.saveRecord(record, completionHandler: { (record, error) -> Void in
-            NSLog("Saved to cloud kit")
+            NSLog("New Record has been Saved to cloud kit")
         })
     }
     
     func update_records()
     {
         // Predicate is the condition on which the record should be matched against
-        // let predicate = NSPredicate(value: true)
-        // let predicate = NSPredicate(format: "date == '11-17-2014'")
-        let queryDate: NSString = "11-17-2014"
+        // First, Grab the current date, then format the date.
+        var date = NSDate()
+        var formatter = NSDateFormatter()
+        formatter.dateFormat = "MM-dd-yyyy"
+        var queryDate:String = formatter.stringFromDate(date)
         let predicate = NSPredicate(format: "date==%@", queryDate)
-        // Query similary to relaitonal db
+        // Build the Query: This query is similar to SELECT * FROM Log WHERE date = '' to relaitonal db.
         let query = CKQuery(recordType: "Log", predicate: predicate)
+        // Execute the Query
         self.privateDB.performQuery(query,inZoneWithID: nil)
         {
             results, error in
@@ -81,7 +80,7 @@ class cloudData
             }
             else
             {
-                NSLog("Fetching Data")
+                NSLog("Fetching Data From User's Private Cloud")
                 var i = 0
                 // Records returned
                 for record in results
@@ -92,6 +91,7 @@ class cloudData
                     self.LogRecords.append(grabRecord)
                     i++
                 }
+                // Tell the ViewController that the Data has returned and update the "Count" in the View.
                 self.delegate?.countUpdated()
             }
         }

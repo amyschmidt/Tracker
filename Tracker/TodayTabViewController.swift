@@ -2,14 +2,12 @@
 //  TodayTabViewController.swift
 //  Tracker
 //
-//  Created by Amy Schmidt on 11/12/14.
-//  Copyright (c) 2014 Amy Schmidt. All rights reserved.
-//
 
 import UIKit
 import CloudKit
 
 class TodayTabViewController: UIViewController, CloudKitDelegate{
+    // Create a cloudData object to access the delegate
     let model: cloudData = cloudData.sharedInstance()
 
     //daily count Label
@@ -18,40 +16,27 @@ class TodayTabViewController: UIViewController, CloudKitDelegate{
     //stepper
     @IBOutlet weak var tracker: UIStepper!
     
-    // var appleDelegate:AppDelegate
-    // var CloudData:cloudData
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        model.delegate = self;
-        
-        // let appleDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        // let CloudData = appleDelegate.getCloudData()
+        /* Allows this ViewController access to the cloudData's functionality via 
+            extending this viewControllers class as a delegate of the cloudData class */
+        model.delegate = self
         
         CloudDataObject.update_records()
-        // dailyCount.text = String(CloudDataObject.LogRecords.count)
-        
-        
-        //initializing stepper
-        tracker.wraps = true
-        tracker.autorepeat = true
-        tracker.maximumValue = 60
-        
     }
     
-    //changes dailyCount label according to the value of the stepper
-    @IBAction func trackerValueChanged(sender:UIStepper) {
-        dailyCount.text = Int(sender.value).description
-        var countString = sender.value.description
-        var count = Int(sender.value)
-        
-        // let appleDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        // let CloudData = appleDelegate.getCloudData()
-
-        CloudDataObject.save_record(count)
-        
+    /* Function for when the Increment Button is clicked */
+    @IBAction func incrementerClicked(sender: AnyObject) {
+        var count: Int = NSString(string: dailyCount.text!).integerValue
+        count = count + 1
+        // NOTE: There is a difference when concatenating strings with other values like integers/floats
+        // For example: println("Before: \(dailyCount.text)") concatenates the literal value
+        dailyCount.text = "\(count)"
+        CloudDataObject.save_record()
     }
     
+    /* Delegate function is defined here but is actually a part of cloudData.swift 
+        This function displays an error if the user is not connected to the internet */
     func errorUpdating(error: NSError) {
         let message = error.localizedDescription
         let alert = UIAlertView(title: "Error Loading Cloud Data",
@@ -59,10 +44,11 @@ class TodayTabViewController: UIViewController, CloudKitDelegate{
         alert.show()
     }
     
+    /* Delegate functino is defined here but is actually a part of cloudData.swift 
+        This function updates the count */
     func countUpdated() {
-        NSLog("Model refreshed \(CloudDataObject.LogRecords.count)")
+        NSLog("Upon Load the 'count' has been updated to: \(CloudDataObject.LogRecords.count)")
         dailyCount.text = String(CloudDataObject.LogRecords.count)
-        // Refresh view Controller?
     }
     
 }
