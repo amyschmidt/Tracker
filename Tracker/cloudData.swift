@@ -12,7 +12,7 @@ import Foundation
 // protocol functions will be implemented in the TodayTabViewController
 protocol CloudKitDelegate {
     func errorUpdating(error: NSError)
-    // func modelUpdated()
+    func countUpdated()
 }
 
 class cloudData
@@ -27,7 +27,7 @@ class cloudData
     var LogRecords = [grabbedRecord]()
     
     class func sharedInstance() -> cloudData{
-        return CloudData
+        return CloudDataObject
     }
     
     init(){
@@ -92,8 +92,9 @@ class cloudData
                     self.LogRecords.append(grabRecord)
                     i++
                 }
+                self.delegate?.countUpdated()
             }
         }
     }
 }
-let CloudData = cloudData()
+let CloudDataObject = cloudData()

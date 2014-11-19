@@ -10,6 +10,7 @@ import UIKit
 import CloudKit
 
 class TodayTabViewController: UIViewController, CloudKitDelegate{
+    let model: cloudData = cloudData.sharedInstance()
 
     //daily count Label
     @IBOutlet weak var dailyCount: UILabel!
@@ -22,12 +23,13 @@ class TodayTabViewController: UIViewController, CloudKitDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        model.delegate = self;
         
         // let appleDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         // let CloudData = appleDelegate.getCloudData()
         
-        CloudData.update_records()
-        dailyCount.text = String(CloudData.LogRecords.count)
+        CloudDataObject.update_records()
+        // dailyCount.text = String(CloudDataObject.LogRecords.count)
         
         
         //initializing stepper
@@ -46,7 +48,7 @@ class TodayTabViewController: UIViewController, CloudKitDelegate{
         // let appleDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         // let CloudData = appleDelegate.getCloudData()
 
-        CloudData.save_record(count)
+        CloudDataObject.save_record(count)
         
     }
     
@@ -55,6 +57,12 @@ class TodayTabViewController: UIViewController, CloudKitDelegate{
         let alert = UIAlertView(title: "Error Loading Cloud Data",
             message: message, delegate: nil, cancelButtonTitle: "OK")
         alert.show()
+    }
+    
+    func countUpdated() {
+        NSLog("Model refreshed \(CloudDataObject.LogRecords.count)")
+        dailyCount.text = String(CloudDataObject.LogRecords.count)
+        // Refresh view Controller?
     }
     
 }
