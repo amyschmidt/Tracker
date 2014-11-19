@@ -22,11 +22,7 @@ class cloudData
     var delegate: CloudKitDelegate?
     // Instantiate an array of the grabbedRecord Object which is used to grab records from the Cloud
     var LogRecords = [grabbedRecord]()
-    
-    class func sharedInstance() -> cloudData{
-        return CloudDataObject
-    }
-    
+
     init(){
         container = CKContainer.defaultContainer()
         privateDB = container.privateCloudDatabase
@@ -97,4 +93,3 @@ class cloudData
         }
     }
 }
-let CloudDataObject = cloudData()

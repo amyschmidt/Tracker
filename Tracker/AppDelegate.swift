@@ -14,13 +14,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     // instantiate a cloudData Object
-    /*
-    var CloudData:cloudData = cloudData()
+    var CloudDataObject:cloudData = cloudData()
     
     func getCloudData() ->cloudData{
-        return CloudData
+        return CloudDataObject
     }
-    */
+    
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
