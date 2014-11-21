@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5C0D880C1A1C36750055ADA2 /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 5C0D880B1A1C36750055ADA2 /* plus.png */; };
 		5C66F0251A159F95000422ED /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C66F0241A159F95000422ED /* NotificationCenter.framework */; };
 		5C66F02A1A159F95000422ED /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C66F0291A159F95000422ED /* TodayViewController.swift */; };
 		5C66F02C1A159F95000422ED /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C66F02B1A159F95000422ED /* MainInterface.storyboard */; };
 		5C66F02F1A159F95000422ED /* TrackerWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5C66F0221A159F95000422ED /* TrackerWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		5C8CE9811A183E6700AA9756 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C8CE9801A183E6700AA9756 /* CloudKit.framework */; };
+		5C91A0F01A1EDA8600F41051 /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 5C91A0EF1A1EDA8600F41051 /* plus.png */; };
 		5CA50AAB1A1AE80A00961677 /* grabbedRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA50AAA1A1AE80A00961677 /* grabbedRecord.swift */; };
 		5CB13E9E1A17F76C00280BDE /* cloudData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB13E9D1A17F76C00280BDE /* cloudData.swift */; };
 		E4583FE419EDA9A7009ADA7F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4583FE319EDA9A7009ADA7F /* AppDelegate.swift */; };
@@ -47,7 +47,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		5C0D880B1A1C36750055ADA2 /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = plus.png; path = ../../../Desktop/plus.png; sourceTree = "<group>"; };
 		5C66F01B1A159219000422ED /* Tracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Tracker.entitlements; sourceTree = "<group>"; };
 		5C66F0221A159F95000422ED /* TrackerWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TrackerWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C66F0241A159F95000422ED /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
@@ -56,6 +55,7 @@
 		5C66F02B1A159F95000422ED /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
 		5C8CE97F1A183E6400AA9756 /* TrackerTeamA.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TrackerTeamA.entitlements; sourceTree = "<group>"; };
 		5C8CE9801A183E6700AA9756 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		5C91A0EF1A1EDA8600F41051 /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
 		5CA50AAA1A1AE80A00961677 /* grabbedRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = grabbedRecord.swift; sourceTree = "<group>"; };
 		5CB13E9D1A17F76C00280BDE /* cloudData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cloudData.swift; sourceTree = "<group>"; };
 		E4583FDE19EDA9A7009ADA7F /* TrackerTeamA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrackerTeamA.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -140,7 +140,7 @@
 		E4583FE019EDA9A7009ADA7F /* Tracker */ = {
 			isa = PBXGroup;
 			children = (
-				5C0D880B1A1C36750055ADA2 /* plus.png */,
+				5C91A0EF1A1EDA8600F41051 /* plus.png */,
 				5C66F01B1A159219000422ED /* Tracker.entitlements */,
 				5CB13E9D1A17F76C00280BDE /* cloudData.swift */,
 				5CA50AAA1A1AE80A00961677 /* grabbedRecord.swift */,
@@ -275,9 +275,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4583FE919EDA9A7009ADA7F /* Main.storyboard in Resources */,
+				5C91A0F01A1EDA8600F41051 /* plus.png in Resources */,
 				E4583FEE19EDA9A7009ADA7F /* LaunchScreen.xib in Resources */,
 				E4583FEB19EDA9A7009ADA7F /* Images.xcassets in Resources */,
-				5C0D880C1A1C36750055ADA2 /* plus.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

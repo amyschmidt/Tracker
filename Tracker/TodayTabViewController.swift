@@ -15,6 +15,8 @@ class TodayTabViewController: UIViewController, CloudKitDelegate{
     // spinner
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     
+    @IBOutlet weak var plusButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         /* Allows this ViewController access to the cloudData's functionality via 
@@ -27,6 +29,7 @@ class TodayTabViewController: UIViewController, CloudKitDelegate{
         // Call update records from cloudData.swift
         model.update_records()
         activityIndicatorView.startAnimating()
+        plusButton.enabled = false
     }
     
     /* Function for when the Increment Button is clicked */
@@ -54,6 +57,7 @@ class TodayTabViewController: UIViewController, CloudKitDelegate{
         dailyCount.text = String(model.LogRecords.count)
         NSLog("Upon Load the 'count' has been updated to: \(model.LogRecords.count)")
         activityIndicatorView.stopAnimating()
+        plusButton.enabled = true
     }
     
 }

@@ -34,15 +34,21 @@ class cloudData
         let record = CKRecord(recordType: "Log")
         // Grab the current date, then format the date.
         var date = NSDate()
+        
         var formatter = NSDateFormatter()
         // Format the day and time into string. (Might change this to date format)
         formatter.dateFormat = "MM-dd-yyyy"
         var DateString:String = formatter.stringFromDate(date)
+        
         formatter.dateFormat = "hh:mm:ss-a"
         var TimeString:String = formatter.stringFromDate(date)
+        
+        var records_loaded: Int = 0
+        records_loaded = LogRecords.count
         // Append the date and time to the insert query
         record.setObject(DateString, forKey: "date")
         record.setObject(TimeString, forKey: "time")
+        record.setValue(records_loaded, forKey: "records_loaded_at_start")
         // Save record is the function used similar to Insert Statement in RDBMS
         self.privateDB.saveRecord(record, completionHandler: { (record, error) -> Void in
             NSLog("New Record has been Saved to cloud kit")
@@ -88,7 +94,13 @@ class cloudData
                     i++
                 }
                 // Tell the ViewController that the Data has returned and update the "Count" in the View.
-                self.delegate?.countUpdated()
+                // Run countUpdate() on the main thread, because that is the only thread that allows the Interface to be updated.
+                NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                    // Forces an optional to non optional (Runs only if the optional is not nil)
+                    if let aDelegate = self.delegate {
+                        aDelegate.countUpdated()
+                    }
+                })
             }
         }
     }
