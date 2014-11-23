@@ -18,6 +18,7 @@
 		E4583FEE19EDA9A7009ADA7F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4583FEC19EDA9A7009ADA7F /* LaunchScreen.xib */; };
 		E49A416B1A1449D900CABD4F /* TodayTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49A416A1A1449D900CABD4F /* TodayTabViewController.swift */; };
 		E4BCAA221A1AF61F0091BD75 /* GoalsTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BCAA211A1AF61F0091BD75 /* GoalsTabViewController.swift */; };
+		E4C84A7D1A229BF8004CD9EB /* HistoryTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C84A7C1A229BF8004CD9EB /* HistoryTabViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		E4583FF919EDA9A8009ADA7F /* TrackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerTests.swift; sourceTree = "<group>"; };
 		E49A416A1A1449D900CABD4F /* TodayTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayTabViewController.swift; sourceTree = "<group>"; };
 		E4BCAA211A1AF61F0091BD75 /* GoalsTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalsTabViewController.swift; sourceTree = "<group>"; };
+		E4C84A7C1A229BF8004CD9EB /* HistoryTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTabViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +139,7 @@
 				5C66F01B1A159219000422ED /* Tracker.entitlements */,
 				E4583FE319EDA9A7009ADA7F /* AppDelegate.swift */,
 				E4583FE719EDA9A7009ADA7F /* Main.storyboard */,
+				E4C84A7C1A229BF8004CD9EB /* HistoryTabViewController.swift */,
 				E4BCAA211A1AF61F0091BD75 /* GoalsTabViewController.swift */,
 				E49A416A1A1449D900CABD4F /* TodayTabViewController.swift */,
 				E4583FEA19EDA9A7009ADA7F /* Images.xcassets */,
@@ -283,6 +286,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E49A416B1A1449D900CABD4F /* TodayTabViewController.swift in Sources */,
+				E4C84A7D1A229BF8004CD9EB /* HistoryTabViewController.swift in Sources */,
 				E4BCAA221A1AF61F0091BD75 /* GoalsTabViewController.swift in Sources */,
 				E4583FE419EDA9A7009ADA7F /* AppDelegate.swift in Sources */,
 			);
