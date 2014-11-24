@@ -205,7 +205,16 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="saveGoals:" destination="62J-Oc-rgv" eventType="touchUpInside" id="XkB-ga-f4D"/>
+                                </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JiI-zX-ncF">
+                                <rect key="frame" x="279" y="433" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -214,6 +223,7 @@
                             <constraint firstItem="qPH-N2-JfI" firstAttribute="top" secondItem="hpK-d4-tJ5" secondAttribute="bottom" constant="20" id="7Tl-z8-b9b"/>
                             <constraint firstAttribute="trailingMargin" secondItem="y0I-s3-twW" secondAttribute="trailing" id="BGW-Sh-TBV"/>
                             <constraint firstAttribute="trailingMargin" secondItem="qPH-N2-JfI" secondAttribute="trailing" id="D07-k0-xzM"/>
+                            <constraint firstAttribute="centerX" secondItem="JiI-zX-ncF" secondAttribute="centerX" id="NH1-oF-uTQ"/>
                             <constraint firstItem="nks-dK-4YQ" firstAttribute="top" secondItem="582-su-sdE" secondAttribute="bottom" constant="20" id="P9Q-oR-wIE"/>
                             <constraint firstAttribute="trailingMargin" secondItem="nks-dK-4YQ" secondAttribute="trailing" id="Pc6-9K-0Pk"/>
                             <constraint firstAttribute="trailingMargin" secondItem="bvH-YB-iHi" secondAttribute="trailing" id="R1C-YK-Mjj"/>
@@ -234,6 +244,7 @@
                             <constraint firstItem="Rsw-Kc-Be3" firstAttribute="leading" secondItem="bvH-YB-iHi" secondAttribute="trailing" constant="26" id="ktx-Pd-AZq"/>
                             <constraint firstItem="Rsw-Kc-Be3" firstAttribute="centerY" secondItem="bvH-YB-iHi" secondAttribute="centerY" id="nH4-4H-TFd"/>
                             <constraint firstItem="DiO-pC-Nr6" firstAttribute="top" secondItem="qPH-N2-JfI" secondAttribute="bottom" constant="15" id="nje-DY-sZh"/>
+                            <constraint firstItem="nks-dK-4YQ" firstAttribute="top" secondItem="JiI-zX-ncF" secondAttribute="bottom" constant="10" id="noX-Jj-Wx5"/>
                             <constraint firstItem="nks-dK-4YQ" firstAttribute="top" secondItem="582-su-sdE" secondAttribute="bottom" constant="20" id="pS9-1c-pn8"/>
                             <constraint firstAttribute="trailingMargin" secondItem="DiO-pC-Nr6" secondAttribute="trailing" id="rqd-Ac-ZBX"/>
                             <constraint firstItem="hpK-d4-tJ5" firstAttribute="leading" secondItem="WMZ-ib-b65" secondAttribute="leadingMargin" id="sIA-qZ-sYg"/>
@@ -253,7 +264,9 @@
                     <connections>
                         <outlet property="dailyMax" destination="Rsw-Kc-Be3" id="hC5-e9-ymf"/>
                         <outlet property="goalsSlider" destination="GDT-sh-89v" id="wIM-cJ-BVP"/>
+                        <outlet property="maxLabel" destination="JiI-zX-ncF" id="Z88-3x-vfH"/>
                         <outlet property="monthlyMax" destination="DiO-pC-Nr6" id="xDf-H2-waX"/>
+                        <outlet property="save" destination="nks-dK-4YQ" id="721-SZ-iQt"/>
                         <outlet property="weeklyMax" destination="hpK-d4-tJ5" id="PWc-30-Zl2"/>
                         <outlet property="yearlyMax" destination="582-su-sdE" id="flh-CQ-5OP"/>
                     </connections>

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CloudKit
 
 class GoalsTabViewController: UIViewController {
 
@@ -16,7 +17,9 @@ class GoalsTabViewController: UIViewController {
     @IBOutlet weak var monthlyMax: UILabel!
     @IBOutlet weak var yearlyMax: UILabel!
     
+    @IBOutlet weak var save: UIButton!
     
+    @IBOutlet weak var maxLabel: UILabel!
     @IBOutlet weak var goalsSlider: UISlider!
     
     override func viewDidLoad() {
@@ -42,5 +45,17 @@ class GoalsTabViewController: UIViewController {
         
     }
     
+    @IBAction func saveGoals(sender: UIButton) {
+        
+        //get slider value and save to CloudKit table named goals
+        var max = dailyMax.text?.toInt()
+        
+        maxLabel.text = "\(max)"
+        
+       /* CKContainer *TrackerTeamA = [CKContainer TrackerTeamA];
+        CKDatabase *Goals = [myContainer Goals];*/
+        
+        save.setTitle("Saved", forState: UIControlState.Normal)
+    }
 
 }
