@@ -52,7 +52,12 @@ class GoalsTabViewController: UIViewController {
         
         maxLabel.text = "\(max)"
         
-       /* CKContainer *TrackerTeamA = [CKContainer TrackerTeamA];
+       /*
+        CKRecordID *goalsRecordID = [[CKRecordID alloc] initWithRecordName:@"115"];
+        CKRecord *goalsRecord = [[CKRecord alloc] initWithRecordType:@"Goals" recordID:goalsRecordID];
+        goalsRecord[@"dailyMax" ] = @max;
+        
+        CKContainer *TrackerTeamA = [CKContainer TrackerTeamA];
         CKDatabase *Goals = [myContainer Goals];*/
         
         save.setTitle("Saved", forState: UIControlState.Normal)
