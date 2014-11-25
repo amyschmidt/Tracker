@@ -9,7 +9,7 @@ import Foundation
 // protocol functions will be implemented in the TodayTabViewController
 protocol CloudKitDelegate {
     func errorUpdating(error: NSError)
-    func countUpdated()
+    func countUpdated(timeOfLastCig:NSDate)
 }
 
 class cloudData
@@ -22,6 +22,7 @@ class cloudData
     var delegate: CloudKitDelegate?
     // Instantiate an array of the grabbedRecord Object which is used to grab records from the Cloud
     var LogRecords = [grabbedRecord]()
+    var LastRecord = [grabbedRecord]()
 
     init(){
         container = CKContainer.defaultContainer()
@@ -40,15 +41,19 @@ class cloudData
         formatter.dateFormat = "MM-dd-yyyy"
         var DateString:String = formatter.stringFromDate(date)
         
-        formatter.dateFormat = "hh:mm:ss-a"
+        formatter.dateFormat = "hh:mm:ss a"
         var TimeString:String = formatter.stringFromDate(date)
         
         var records_loaded: Int = 0
         records_loaded = LogRecords.count
-        // Append the date and time to the insert query
+        // Append Information to the insert query
+        // These fields will be used for query purposes
         record.setObject(DateString, forKey: "date")
         record.setObject(TimeString, forKey: "time")
+        // This field will be used for grabbing new data when the user is in the app. (Because we will already have some records upon Load)
         record.setValue(records_loaded, forKey: "records_loaded_at_start")
+        // This field will be used for dealing with NSDate and NSTimer.
+        record.setObject(date, forKey: "NSDate")
         // Save record is the function used similar to Insert Statement in RDBMS
         self.privateDB.saveRecord(record, completionHandler: { (record, error) -> Void in
             NSLog("New Record has been Saved to cloud kit")
@@ -64,8 +69,10 @@ class cloudData
         formatter.dateFormat = "MM-dd-yyyy"
         var queryDate:String = formatter.stringFromDate(date)
         let predicate = NSPredicate(format: "date==%@", queryDate)
-        // Build the Query: This query is similar to SELECT * FROM Log WHERE date = '' to relaitonal db.
+        let sort = NSSortDescriptor(key: "NSDate", ascending: true)
+        // Build the Query: This query is similar to SELECT * FROM Log WHERE date = ''
         let query = CKQuery(recordType: "Log", predicate: predicate)
+        query.sortDescriptors = [sort]
         // Execute the Query
         self.privateDB.performQuery(query,inZoneWithID: nil)
         {
@@ -80,9 +87,10 @@ class cloudData
                 }
                 
             }
+            // Fetch todays data
             else
             {
-                NSLog("Fetching Data From User's Private Cloud")
+                NSLog("Fetching Data From Today")
                 var i = 0
                 // Records returned
                 for record in results
@@ -93,15 +101,64 @@ class cloudData
                     self.LogRecords.append(grabRecord)
                     i++
                 }
+                // Find Date of Last Cigarette
+                var dateOfLastCig:NSDate
+                // If no records from today, then grab the last cigarette from a different day (Not Today)
+                if (i==0)
+                {
+                    NSLog("No Records from Today, Fetching All Data")
+                    dateOfLastCig = self.grabLastCig()
+                }
+                // else use the last cigarette from Today.
+                else
+                {
+                    dateOfLastCig = self.LogRecords[self.LogRecords.count-1].date_NS
+                }
+                
                 // Tell the ViewController that the Data has returned and update the "Count" in the View.
-                // Run countUpdate() on the main thread, because that is the only thread that allows the Interface to be updated.
+                // Run countUpdated() on the main thread, because that is the only thread that allows the Interface to be updated.
                 NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
                     // Forces an optional to non optional (Runs only if the optional is not nil)
                     if let aDelegate = self.delegate {
-                        aDelegate.countUpdated()
+                        aDelegate.countUpdated(dateOfLastCig)
                     }
                 })
             }
         }
+    }
+    /* Function to grab the last record if there are no records for the current day */
+    func grabLastCig()->NSDate
+    {
+        let predicate = NSPredicate(value: true)
+        let sort = NSSortDescriptor(key: "NSDate", ascending: false)
+        let query = CKQuery(recordType: "Log", predicate: predicate)
+        query.sortDescriptors = [sort]
+        
+        let request = CKQueryOperation(query: query)
+        request.resultsLimit = 1
+        request.desiredKeys = ["NSDate"]
+        var results = NSMutableArray()
+        /*
+        request.recordFetchedBlock = { (record: CKRecord!) in
+                let grabRecord = grabbedRecord(record: record as CKRecord, database: self.privateDB)
+                self.LastRecord.append(grabRecord)
+                println("Result: \(self.LastRecord[0].date_NS)")
+                results.addObject(record)
+            }
+        */
+        
+        self.privateDB.addOperation(request)
+        if (self.LastRecord.count > 0)
+        {
+            NSLog("No Records at all. Set Timer to Right Now.")
+            return NSDate()
+        }
+        else
+        {
+            NSLog("Found a record. Setting Timer.")
+            // return self.LastRecord[0].date_NS
+            return NSDate()
+        }
+        
     }
 }

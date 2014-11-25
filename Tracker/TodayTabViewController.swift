@@ -7,15 +7,16 @@ import UIKit
 import CloudKit
 
 class TodayTabViewController: UIViewController, CloudKitDelegate{
-
+    // class variable for accessing cloudData variables and methods
     var model: cloudData!
-    // daily count Label
+    // Storyboard items
     @IBOutlet weak var dailyCount: UILabel!
-    
-    // spinner
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
-    
     @IBOutlet weak var plusButton: UIButton!
+    @IBOutlet weak var timeSinceLastSmokeLabel: UILabel!
+    
+    var timer = NSTimer()
+    var startDate = NSDate()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +41,10 @@ class TodayTabViewController: UIViewController, CloudKitDelegate{
         // For example: println("Before: \(dailyCount.text)") concatenates the literal value
         dailyCount.text = "\(count)"
         model.save_record()
+        // initiate timer
+        self.startDate = NSDate()
+        let aSelector:Selector = "updateTime"
+        self.timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: aSelector, userInfo: nil, repeats: true)
     }
     
     /* Delegate function is defined here but is actually a part of cloudData.swift 
@@ -51,13 +56,48 @@ class TodayTabViewController: UIViewController, CloudKitDelegate{
         alert.show()
     }
     
-    /* Delegate functino is defined here but is actually a part of cloudData.swift 
-        This function updates the count */
-    func countUpdated() {
+    /* Delegate function is defined here but is actually declared in cloudData.swift
+        This function updates the count with an NSDate argument in order to update the Timer */
+    func countUpdated(timeOfLastCig:NSDate) {
         dailyCount.text = String(model.LogRecords.count)
         NSLog("Upon Load the 'count' has been updated to: \(model.LogRecords.count)")
         activityIndicatorView.stopAnimating()
         plusButton.enabled = true
+        // initiate timer
+        self.startDate = timeOfLastCig
+        let aSelector:Selector = "updateTime"
+        self.timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: aSelector, userInfo: nil, repeats: true)
+    }
+    
+    /* Function to create dynamic stopwatch feature by calculating days, hours, minutes and then displaying them. This function 
+    gets called by a Selector controlled by NSTimer. So this function literally gets called every second over and over again */
+    func updateTime(){
+        // get timestamp for right now
+        var now = NSDate()
+        // set time interval (in seconds) between now and last cigarette
+        var elapsedTime:NSTimeInterval = now.timeIntervalSinceDate(self.startDate)
+        // calculate number of days (60s/min*60min/hr*24hr) from elapsedTime (which is in seconds)
+        let days = UInt8(elapsedTime / (60.0*60.0*24.0))
+        // subtract that amount from the time
+        elapsedTime -= (NSTimeInterval(days) * 60 * 60 * 24.0)
+        // Repeat for hours and minutes
+        let hours = UInt8(elapsedTime / (60.0*60.0))
+        elapsedTime -= (NSTimeInterval(hours) * 60 * 60)
+
+        let minutes = UInt8(elapsedTime / 60.0)
+        elapsedTime -= (NSTimeInterval(minutes) * 60)
+
+        // using Ternary Operator, create String variables: for values 1-9, display a leading zero
+        let strDays:String = days > 9 ? String(days):"0\(String(days))"
+        let strHours:String = hours > 9 ? String(hours):"0\(String(hours))"
+        let strMinutes:String = minutes > 9 ? String(minutes):"0\(String(minutes))"
+        // build the label
+        if (UInt8(elapsedTime) % 2 == 0){
+            timeSinceLastSmokeLabel.text = "\(strDays)d:\(strHours)h:\(strMinutes)m"
+        }
+        else {
+            timeSinceLastSmokeLabel.text = "\(strDays)d \(strHours)h \(strMinutes)m"
+        }
     }
     
 }

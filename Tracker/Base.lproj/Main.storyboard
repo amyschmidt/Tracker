@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="456-dl-Q8o">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="456-dl-Q8o">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -222,19 +222,27 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="00:00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nv6-Hg-AHm">
+                                <rect key="frame" x="260" y="158" width="91" height="57"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.20000000298023224" green="0.20000000298023224" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="nv6-Hg-AHm" firstAttribute="centerX" secondItem="Das-HR-wUB" secondAttribute="centerX" id="Cgr-1V-Q9Z"/>
                             <constraint firstItem="lyY-lm-9ua" firstAttribute="top" secondItem="kN3-Us-tiB" secondAttribute="bottom" constant="8" id="FbU-bb-N8r"/>
                             <constraint firstAttribute="centerX" secondItem="s2u-LR-bO1" secondAttribute="centerX" id="Kbn-BB-ivX"/>
                             <constraint firstItem="Das-HR-wUB" firstAttribute="top" secondItem="s2u-LR-bO1" secondAttribute="bottom" constant="5" id="LNY-04-k5C"/>
                             <constraint firstItem="nnM-b7-Mrx" firstAttribute="centerX" secondItem="s2u-LR-bO1" secondAttribute="centerX" constant="-0.5" id="Ln9-VX-7Z5"/>
-                            <constraint firstItem="9Ia-zT-oJ2" firstAttribute="top" secondItem="Das-HR-wUB" secondAttribute="bottom" constant="20" id="MHI-6t-SVL"/>
                             <constraint firstItem="s2u-LR-bO1" firstAttribute="top" secondItem="FqI-Wi-JIU" secondAttribute="topMargin" constant="15" id="PNL-WF-8Rz"/>
+                            <constraint firstItem="nv6-Hg-AHm" firstAttribute="top" secondItem="Das-HR-wUB" secondAttribute="bottom" constant="7" id="WH2-7r-vPm"/>
                             <constraint firstItem="9Ia-zT-oJ2" firstAttribute="centerX" secondItem="Das-HR-wUB" secondAttribute="centerX" id="f5Z-3T-dmD"/>
                             <constraint firstItem="s2u-LR-bO1" firstAttribute="centerX" secondItem="Das-HR-wUB" secondAttribute="centerX" id="hOS-hS-ACV"/>
                             <constraint firstItem="kN3-Us-tiB" firstAttribute="top" secondItem="9Ia-zT-oJ2" secondAttribute="bottom" constant="10" id="ifo-mW-oE6"/>
                             <constraint firstItem="nnM-b7-Mrx" firstAttribute="centerY" secondItem="s2u-LR-bO1" secondAttribute="centerY" id="lv2-IT-xPY"/>
+                            <constraint firstItem="9Ia-zT-oJ2" firstAttribute="top" secondItem="nv6-Hg-AHm" secondAttribute="bottom" constant="7" id="nsS-gn-7Lj"/>
                             <constraint firstAttribute="centerX" secondItem="kN3-Us-tiB" secondAttribute="centerX" id="osc-m6-PLP"/>
                             <constraint firstAttribute="centerX" secondItem="lyY-lm-9ua" secondAttribute="centerX" id="ySg-hW-Z42"/>
                         </constraints>
@@ -244,6 +252,7 @@
                         <outlet property="activityIndicatorView" destination="nnM-b7-Mrx" id="h7j-ns-h5b"/>
                         <outlet property="dailyCount" destination="s2u-LR-bO1" id="iMN-ZC-ka8"/>
                         <outlet property="plusButton" destination="kN3-Us-tiB" id="fex-2L-Nka"/>
+                        <outlet property="timeSinceLastSmokeLabel" destination="nv6-Hg-AHm" id="ViZ-oC-LqI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m90-A8-lyH" userLabel="First Responder" sceneMemberID="firstResponder"/>
