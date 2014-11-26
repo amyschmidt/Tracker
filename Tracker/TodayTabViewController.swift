@@ -63,10 +63,17 @@ class TodayTabViewController: UIViewController, CloudKitDelegate{
         NSLog("Upon Load the 'count' has been updated to: \(model.LogRecords.count)")
         activityIndicatorView.stopAnimating()
         plusButton.enabled = true
-        // initiate timer
+        // initiate timer (Uses starDate from today if there is a record, else calls grabLastCig)
         self.startDate = timeOfLastCig
+        // listen for when the data comes back
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "grabLastCig", name: "fetchAllRecords", object: nil)
         let aSelector:Selector = "updateTime"
         self.timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: aSelector, userInfo: nil, repeats: true)
+    }
+    
+    func grabLastCig()
+    {
+        self.startDate = model.LastRecord[0].date_NS
     }
     
     /* Function to create dynamic stopwatch feature by calculating days, hours, minutes and then displaying them. This function 

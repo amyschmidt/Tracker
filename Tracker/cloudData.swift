@@ -102,12 +102,12 @@ class cloudData
                     i++
                 }
                 // Find Date of Last Cigarette
-                var dateOfLastCig:NSDate
+                var dateOfLastCig:NSDate = NSDate()
                 // If no records from today, then grab the last cigarette from a different day (Not Today)
                 if (i==0)
                 {
                     NSLog("No Records from Today, Fetching All Data")
-                    dateOfLastCig = self.grabLastCig()
+                    self.grabLastCig()
                 }
                 // else use the last cigarette from Today.
                 else
@@ -127,7 +127,7 @@ class cloudData
         }
     }
     /* Function to grab the last record if there are no records for the current day */
-    func grabLastCig()->NSDate
+    func grabLastCig()
     {
         let predicate = NSPredicate(value: true)
         let sort = NSSortDescriptor(key: "NSDate", ascending: false)
@@ -138,27 +138,16 @@ class cloudData
         request.resultsLimit = 1
         request.desiredKeys = ["NSDate"]
         var results = NSMutableArray()
-        /*
+        
         request.recordFetchedBlock = { (record: CKRecord!) in
                 let grabRecord = grabbedRecord(record: record as CKRecord, database: self.privateDB)
                 self.LastRecord.append(grabRecord)
                 println("Result: \(self.LastRecord[0].date_NS)")
                 results.addObject(record)
+            NSNotificationCenter.defaultCenter().postNotificationName("fetchAllRecords", object: nil)
             }
-        */
         
         self.privateDB.addOperation(request)
-        if (self.LastRecord.count > 0)
-        {
-            NSLog("No Records at all. Set Timer to Right Now.")
-            return NSDate()
-        }
-        else
-        {
-            NSLog("Found a record. Setting Timer.")
-            // return self.LastRecord[0].date_NS
-            return NSDate()
-        }
-        
+        return
     }
 }
