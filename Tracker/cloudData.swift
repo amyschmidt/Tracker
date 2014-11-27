@@ -8,7 +8,7 @@ import Foundation
 
 // protocol functions will be implemented in the TodayTabViewController
 protocol CloudKitDelegate {
-    func errorUpdating(error: NSError)
+    func errorUpdating()
     func countUpdated(timeOfLastCig:NSDate)
 }
 
@@ -82,7 +82,8 @@ class cloudData
             {
                 dispatch_async(dispatch_get_main_queue())
                 {
-                    self.delegate?.errorUpdating(error)
+                    self.delegate?.errorUpdating()
+                    NSLog("No Internet Connection: \(error)")
                     return
                 }
                 

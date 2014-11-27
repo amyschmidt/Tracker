@@ -14,6 +14,8 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
     // Timer items
     var timer = NSTimer()
     var startDate = NSDate()
+    // Airplane mode
+    var airplaneMode = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,13 +33,23 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
     }
     /* Function for when the Increment Button is clicked */
     @IBAction func incrementerClicked(sender: AnyObject) {
+        if (!self.airplaneMode)
+        {
+            model.save_record()
+        }
+        else
+        {
+            let message = "Once you regain connection to the internet, you can edit this entry."
+            let alert = UIAlertView(title: "Notice: You're in Airplane Mode",
+                message: message, delegate: nil, cancelButtonTitle: "OK")
+            alert.show()
+        }
+        // increment count
         var count: Int = NSString(string: dailyCount.text!).integerValue
         count = count + 1
-        // NOTE: There is a difference when concatenating strings with other values like integers/floats
-        // For example: println("Before: \(dailyCount.text)") concatenates the literal value
         dailyCount.text = "\(count)"
-        model.save_record()
-        // initiate timer
+        
+        // start/reset timer
         self.startDate = NSDate()
         let aSelector:Selector = "updateTime"
         self.timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: aSelector, userInfo: nil, repeats: true)
@@ -45,11 +57,19 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
     
     /* Delegate function is defined here but is actually a part of cloudData.swift
     This function displays an error if the user is not connected to the internet */
-    func errorUpdating(error: NSError) {
-        let message = error.localizedDescription
-        let alert = UIAlertView(title: "Error Loading Cloud Data. Please Check your Internet Connection",
+    func errorUpdating() {
+        let message = "You do not have internet access. Now Entering Air Plane Mode."
+        let alert = UIAlertView(title: "Error Loading Cloud Data.",
             message: message, delegate: nil, cancelButtonTitle: "OK")
         alert.show()
+        // Display Airplane Mode
+        activityIndicatorView.stopAnimating()
+        dailyCount.text = "0"
+        self.startDate = NSDate()
+        let aSelector:Selector = "updateTime"
+        self.timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: aSelector, userInfo: nil, repeats: true)
+        plusButton.enabled = true
+        self.airplaneMode = true
     }
     
     /* Delegate function is defined here but is actually declared in cloudData.swift
