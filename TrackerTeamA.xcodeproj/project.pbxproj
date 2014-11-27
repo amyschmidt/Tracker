@@ -12,6 +12,9 @@
 		5C66F02A1A159F95000422ED /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C66F0291A159F95000422ED /* TodayViewController.swift */; };
 		5C66F02C1A159F95000422ED /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C66F02B1A159F95000422ED /* MainInterface.storyboard */; };
 		5C66F02F1A159F95000422ED /* TrackerWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5C66F0221A159F95000422ED /* TrackerWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		5CA847AF1A269E330061FE02 /* button.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5CA847AE1A269E330061FE02 /* button.jpg */; };
+		5CA847B11A26A88D0061FE02 /* cloudData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA847B01A26A88D0061FE02 /* cloudData.swift */; };
+		5CA847B31A26A8A00061FE02 /* grabbedRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA847B21A26A8A00061FE02 /* grabbedRecord.swift */; };
 		E4583FE419EDA9A7009ADA7F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4583FE319EDA9A7009ADA7F /* AppDelegate.swift */; };
 		E4583FE919EDA9A7009ADA7F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4583FE719EDA9A7009ADA7F /* Main.storyboard */; };
 		E4583FEB19EDA9A7009ADA7F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4583FEA19EDA9A7009ADA7F /* Images.xcassets */; };
@@ -53,6 +56,9 @@
 		5C66F0281A159F95000422ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C66F0291A159F95000422ED /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		5C66F02B1A159F95000422ED /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
+		5CA847AE1A269E330061FE02 /* button.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = button.jpg; sourceTree = "<group>"; };
+		5CA847B01A26A88D0061FE02 /* cloudData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cloudData.swift; sourceTree = "<group>"; };
+		5CA847B21A26A8A00061FE02 /* grabbedRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = grabbedRecord.swift; sourceTree = "<group>"; };
 		E4583FDE19EDA9A7009ADA7F /* TrackerTeamA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrackerTeamA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4583FE219EDA9A7009ADA7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E4583FE319EDA9A7009ADA7F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -136,8 +142,11 @@
 		E4583FE019EDA9A7009ADA7F /* Tracker */ = {
 			isa = PBXGroup;
 			children = (
+				5CA847AE1A269E330061FE02 /* button.jpg */,
 				5C66F01B1A159219000422ED /* Tracker.entitlements */,
 				E4583FE319EDA9A7009ADA7F /* AppDelegate.swift */,
+				5CA847B01A26A88D0061FE02 /* cloudData.swift */,
+				5CA847B21A26A8A00061FE02 /* grabbedRecord.swift */,
 				E4583FE719EDA9A7009ADA7F /* Main.storyboard */,
 				E4C84A7C1A229BF8004CD9EB /* HistoryTabViewController.swift */,
 				E4BCAA211A1AF61F0091BD75 /* GoalsTabViewController.swift */,
@@ -265,6 +274,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4583FE919EDA9A7009ADA7F /* Main.storyboard in Resources */,
+				5CA847AF1A269E330061FE02 /* button.jpg in Resources */,
 				E4583FEE19EDA9A7009ADA7F /* LaunchScreen.xib in Resources */,
 				E4583FEB19EDA9A7009ADA7F /* Images.xcassets in Resources */,
 			);
@@ -285,7 +295,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CA847B11A26A88D0061FE02 /* cloudData.swift in Sources */,
 				E49A416B1A1449D900CABD4F /* TodayTabViewController.swift in Sources */,
+				5CA847B31A26A8A00061FE02 /* grabbedRecord.swift in Sources */,
 				E4C84A7D1A229BF8004CD9EB /* HistoryTabViewController.swift in Sources */,
 				E4BCAA221A1AF61F0091BD75 /* GoalsTabViewController.swift in Sources */,
 				E4583FE419EDA9A7009ADA7F /* AppDelegate.swift in Sources */,
