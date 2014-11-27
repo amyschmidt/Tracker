@@ -116,10 +116,10 @@
             </objects>
             <point key="canvasLocation" x="-636" y="312"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Navigation View Controller-->
         <scene sceneID="b0q-OH-AWS">
             <objects>
-                <tabBarController id="456-dl-Q8o" sceneMemberID="viewController">
+                <tabBarController id="456-dl-Q8o" customClass="NavigationViewController" customModule="TrackerTeamA" customModuleProvider="target" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="iw3-2p-uYA">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>

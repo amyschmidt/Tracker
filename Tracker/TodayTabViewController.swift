@@ -16,6 +16,8 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
     var startDate = NSDate()
     // Airplane mode
     var airplaneMode = false
+    // Tab Bar Items
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +45,7 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
             let alert = UIAlertView(title: "Notice: You're in Airplane Mode",
                 message: message, delegate: nil, cancelButtonTitle: "OK")
             alert.show()
+            
         }
         // increment count
         var count: Int = NSString(string: dailyCount.text!).integerValue
@@ -70,6 +73,8 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
         self.timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: aSelector, userInfo: nil, repeats: true)
         plusButton.enabled = true
         self.airplaneMode = true
+        self.view.backgroundColor = UIColor.grayColor()
+        // self.tabBarItem.enabled = false
     }
     
     /* Delegate function is defined here but is actually declared in cloudData.swift
