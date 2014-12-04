@@ -134,7 +134,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OAo-T3-LcC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1367" y="-119"/>
+            <point key="canvasLocation" x="-1267" y="-15"/>
         </scene>
         <!--Goals-->
         <scene sceneID="0Hh-K1-J40">
@@ -154,6 +154,7 @@
                                     <constraint firstAttribute="width" constant="265" id="xIP-Du-QhD"/>
                                 </constraints>
                                 <connections>
+                                    <action selector="sliderStopped:" destination="62J-Oc-rgv" eventType="touchUpInside" id="bu6-Gt-yY6"/>
                                     <action selector="sliderValueChanged:" destination="62J-Oc-rgv" eventType="valueChanged" id="cjs-qK-U2h"/>
                                 </connections>
                             </slider>

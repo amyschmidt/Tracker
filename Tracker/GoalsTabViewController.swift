@@ -27,7 +27,7 @@ class GoalsTabViewController: UIViewController {
     }
 
     
-    //when slider value changes, update all labels to correct value
+    // when slider value changes, update all labels to correct value
     @IBAction func sliderValueChanged(sender: UISlider) {
 
         var currentValue = Int(sender.value)
@@ -39,8 +39,14 @@ class GoalsTabViewController: UIViewController {
         monthlyMax.text = "\(currentValue * 30)"
         
         yearlyMax.text = "\(currentValue * 356)"
-        
     }
+    
+    // when slider value stops
+    @IBAction func sliderStopped(sender: AnyObject) {
+        println("STOP!")
+    }
+    
+
     
 
 }

@@ -3,6 +3,10 @@
 import UIKit
 import CloudKit
 
+protocol TodayDelegate {
+    func disableTabBar()
+}
+
 class TodayTabViewController: UIViewController, CloudKitDelegate {
     // class variable for accessing cloudDate variables and methods
     var model: cloudData!
@@ -16,7 +20,8 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
     var startDate = NSDate()
     // Airplane mode
     var airplaneMode = false
-    // Tab Bar Items
+    // delegate to disable tab bar
+    var todayDelegate: TodayDelegate?
     
     
     override func viewDidLoad() {
@@ -32,9 +37,11 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
         model.update_records()
         activityIndicatorView.startAnimating()
         plusButton.enabled = false
+        return
     }
     /* Function for when the Increment Button is clicked */
     @IBAction func incrementerClicked(sender: AnyObject) {
+        // If no internet connection
         if (!self.airplaneMode)
         {
             model.save_record()
@@ -45,7 +52,6 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
             let alert = UIAlertView(title: "Notice: You're in Airplane Mode",
                 message: message, delegate: nil, cancelButtonTitle: "OK")
             alert.show()
-            
         }
         // increment count
         var count: Int = NSString(string: dailyCount.text!).integerValue
@@ -56,6 +62,7 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
         self.startDate = NSDate()
         let aSelector:Selector = "updateTime"
         self.timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: aSelector, userInfo: nil, repeats: true)
+        return
     }
     
     /* Delegate function is defined here but is actually a part of cloudData.swift
@@ -74,7 +81,11 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
         plusButton.enabled = true
         self.airplaneMode = true
         self.view.backgroundColor = UIColor.grayColor()
-        // self.tabBarItem.enabled = false
+        // Trying Delegate (Doesn't work)
+        todayDelegate?.disableTabBar()
+        // Trying to access via instance (doesn't work)
+        // NavigationViewController.disableTabBar()
+        return
     }
     
     /* Delegate function is defined here but is actually declared in cloudData.swift
@@ -86,15 +97,18 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
         plusButton.enabled = true
         // initiate timer (Uses starDate from today if there is a record, else calls grabLastCig)
         self.startDate = timeOfLastCig
-        // listen for when the data comes back
+        // listens for when the data comes back
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "grabLastCig", name: "fetchAllRecords", object: nil)
         let aSelector:Selector = "updateTime"
         self.timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: aSelector, userInfo: nil, repeats: true)
+        return
     }
     
     func grabLastCig()
     {
         self.startDate = model.LastRecord[0].date_NS
+        println("Fetched Last Record: \(model.LastRecord[0].date_NS)")
+        return
     }
     
     /* Function to create dynamic stopwatch feature by calculating days, hours, minutes and then displaying them. This function
@@ -126,6 +140,7 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
         else {
             timeSinceLastSmokeLabel.text = "\(strDays)d \(strHours)h \(strMinutes)m"
         }
+        return
     }
     
     

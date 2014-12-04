@@ -4,7 +4,7 @@
 //
 
 
-import Foundation
+// import Foundation
 import CloudKit
 
 class grabbedRecord: NSObject
