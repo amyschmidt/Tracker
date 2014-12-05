@@ -3,10 +3,6 @@
 import UIKit
 import CloudKit
 
-protocol TodayDelegate {
-    func disableTabBar()
-}
-
 class TodayTabViewController: UIViewController, CloudKitDelegate {
     // class variable for accessing cloudDate variables and methods
     var model: cloudData!
@@ -19,10 +15,7 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
     var timer = NSTimer()
     var startDate = NSDate()
     // Airplane mode
-    var airplaneMode = false
-    // delegate to disable tab bar
-    var todayDelegate: TodayDelegate?
-    
+    var airplaneMode = false    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +35,7 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
     /* Function for when the Increment Button is clicked */
     @IBAction func incrementerClicked(sender: AnyObject) {
         // If no internet connection
-        if (!self.airplaneMode)
+        if (self.airplaneMode)
         {
             model.save_record()
         }
@@ -81,10 +74,8 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
         plusButton.enabled = true
         self.airplaneMode = true
         self.view.backgroundColor = UIColor.grayColor()
-        // Trying Delegate (Doesn't work)
-        todayDelegate?.disableTabBar()
-        // Trying to access via instance (doesn't work)
-        // NavigationViewController.disableTabBar()
+        self.tabBarController?.tabBar.userInteractionEnabled = false
+        
         return
     }
     

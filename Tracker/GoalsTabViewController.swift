@@ -40,13 +40,5 @@ class GoalsTabViewController: UIViewController {
         
         yearlyMax.text = "\(currentValue * 356)"
     }
-    
-    // when slider value stops
-    @IBAction func sliderStopped(sender: AnyObject) {
-        println("STOP!")
-    }
-    
-
-    
 
 }

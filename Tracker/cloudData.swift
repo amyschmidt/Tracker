@@ -78,7 +78,7 @@ class cloudData
         {
             results, error in
             // If we have an error than display it
-            if error == nil
+            if error != nil
             {
                 dispatch_async(dispatch_get_main_queue())
                 {
