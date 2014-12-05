@@ -49,7 +49,9 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
         }
         else
         {
-            model.todaysRecords[0].date_NS = NSDate()
+            // let record = grabbedRecord(record: , database: <#CKDatabase#>)
+            // model.todaysRecords.append(record)
+            // model.todaysRecords[0].date_NS = NSDate()
         }
     }
     

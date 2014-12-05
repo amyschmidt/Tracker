@@ -29,7 +29,6 @@ class cloudData
     init(){
         container = CKContainer.defaultContainer()
         privateDB = container.privateCloudDatabase
-        let Todayrecords = todaysRecords
     }
     
     func save_record()
