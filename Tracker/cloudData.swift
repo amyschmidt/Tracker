@@ -23,13 +23,31 @@ class cloudData
     // Instantiate an array of the grabbedRecord Object which is used to grab records from the Cloud
     var LogRecords = [grabbedRecord]()
     var LastRecord = [grabbedRecord]()
+    // Today's records
+    var todaysRecords = [incrementedRecord]()
 
     init(){
         container = CKContainer.defaultContainer()
         privateDB = container.privateCloudDatabase
     }
     
-    func save_record()
+    func save_record_inArray()
+    {
+        /*
+        // if NOT first time hitting incrementer, then just add the date to the object
+        if (self.todaysRecords.count > 0)
+        {
+            self.todaysRecords[self.todaysRecords.count].date_NS = NSDate()
+        }
+        else
+        { */
+            // if first time hitting incrementer, then create a new record for today
+            let today = incrementedRecord(date: NSDate())
+            self.todaysRecords.append(today)
+        //}
+    }
+    
+    func save_record_to_THECLOUD()
     {
         // Object that decides which Record (or Table) to save to.
         let record = CKRecord(recordType: "Log")
@@ -149,5 +167,25 @@ class cloudData
         
         self.privateDB.addOperation(request)
         return
+    }
+    
+    /*Function to update the goal data*/
+    func updateGoal(var goal: Int){
+        println("updating Goal")
+        println("\(goal)")
+
+        /*Object that decides which Record (or Table) to save to.*/
+        let record = CKRecord(recordType: "Goals")
+        
+        var dailyMax:Int = 1
+        dailyMax = goal
+        // Append Information to the insert query
+        // These fields will be used for query purposes
+        record.setObject(dailyMax, forKey: "DailyMax")
+        self.privateDB.saveRecord(record, completionHandler: { (record, error) -> Void in
+            NSLog("Goal Has Been Updated")
+        })
+
+        
     }
 }

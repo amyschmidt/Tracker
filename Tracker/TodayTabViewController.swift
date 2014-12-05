@@ -14,6 +14,7 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
     // Timer items
     var timer = NSTimer()
     var startDate = NSDate()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,12 +32,16 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
     }
     /* Function for when the Increment Button is clicked */
     @IBAction func incrementerClicked(sender: AnyObject) {
+        // Change Count of the Label
         var count: Int = NSString(string: dailyCount.text!).integerValue
         count = count + 1
-        // NOTE: There is a difference when concatenating strings with other values like integers/floats
-        // For example: println("Before: \(dailyCount.text)") concatenates the literal value
         dailyCount.text = "\(count)"
-        model.save_record()
+        // Save Record to the cloud
+        model.save_record_to_THECLOUD()
+        
+        // Save Record to an array of objects locally to be used in GoalsTAB
+        model.save_record_inArray()
+        
         // initiate timer
         self.startDate = NSDate()
         let aSelector:Selector = "updateTime"
