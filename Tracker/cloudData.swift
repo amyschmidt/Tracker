@@ -24,14 +24,30 @@ class cloudData
     var LogRecords = [grabbedRecord]()
     var LastRecord = [grabbedRecord]()
     // Today's records
-    var todaysRecords = [grabbedRecord]()
+    var todaysRecords = [incrementedRecord]()
 
     init(){
         container = CKContainer.defaultContainer()
         privateDB = container.privateCloudDatabase
     }
     
-    func save_record()
+    func save_record_inArray()
+    {
+        /*
+        // if NOT first time hitting incrementer, then just add the date to the object
+        if (self.todaysRecords.count > 0)
+        {
+            self.todaysRecords[self.todaysRecords.count].date_NS = NSDate()
+        }
+        else
+        { */
+            // if first time hitting incrementer, then create a new record for today
+            let today = incrementedRecord(date: NSDate())
+            self.todaysRecords.append(today)
+        //}
+    }
+    
+    func save_record_to_THECLOUD()
     {
         // Object that decides which Record (or Table) to save to.
         let record = CKRecord(recordType: "Log")

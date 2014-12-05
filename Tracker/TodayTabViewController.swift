@@ -32,27 +32,20 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
     }
     /* Function for when the Increment Button is clicked */
     @IBAction func incrementerClicked(sender: AnyObject) {
+        // Change Count of the Label
         var count: Int = NSString(string: dailyCount.text!).integerValue
         count = count + 1
-        // NOTE: There is a difference when concatenating strings with other values like integers/floats
-        // For example: println("Before: \(dailyCount.text)") concatenates the literal value
         dailyCount.text = "\(count)"
-        model.save_record()
+        // Save Record to the cloud
+        model.save_record_to_THECLOUD()
+        
+        // Save Record to an array of objects locally to be used in GoalsTAB
+        model.save_record_inArray()
+        
         // initiate timer
         self.startDate = NSDate()
         let aSelector:Selector = "updateTime"
         self.timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: aSelector, userInfo: nil, repeats: true)
-        // Save record for today
-        if (model.todaysRecords.count > 0)
-        {
-           model.todaysRecords[model.todaysRecords.count].date_NS = NSDate()
-        }
-        else
-        {
-            // let record = grabbedRecord(record: , database: <#CKDatabase#>)
-            // model.todaysRecords.append(record)
-            // model.todaysRecords[0].date_NS = NSDate()
-        }
     }
     
     /* Delegate function is defined here but is actually a part of cloudData.swift

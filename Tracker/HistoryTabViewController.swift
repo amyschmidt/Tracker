@@ -25,25 +25,17 @@ class HistoryTabViewController: UIViewController {
     
     @IBOutlet weak var dataLabel: UILabel!
     
-    
+    override func viewWillAppear(animated: Bool) {
+        // Grab total records (Cloud records + Incremented Records)
+        todaysCount = historyData.LogRecords.count + historyData.todaysRecords.count
+        dataLabel.text = "\(todaysCount)"
+    }
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         historyData = appDelegate.getCloudData()
-        
-        // grab total
-        todaysCount = historyData.LogRecords.count + historyData.todaysRecords.count
-        
-        dataLabel.text = "\(todaysCount)"
-        /*for count in historyCloudData.LogRecords[] {
-            
-        }
-        
-        how to grab from LogRecords Array (date_NS "types" are declared in grabbedRecord.swift)*/
-        // historyData.LogRecords[0].date_NS)
-        // historyData.LogRecords[0].dateString)
     }
     
     @IBAction func indexChanged(sender: UISegmentedControl) {
@@ -55,7 +47,7 @@ class HistoryTabViewController: UIViewController {
             total.text = "Today's Total"
             
             // grab total
-            todaysCount = historyData.LogRecords.count
+            todaysCount = historyData.LogRecords.count + historyData.todaysRecords.count
             
             dataLabel.text = "\(todaysCount)"
             
