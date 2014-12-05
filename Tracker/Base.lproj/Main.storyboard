@@ -154,6 +154,7 @@
                                     <constraint firstAttribute="width" constant="265" id="xIP-Du-QhD"/>
                                 </constraints>
                                 <connections>
+                                    <action selector="sliderStopped:" destination="62J-Oc-rgv" eventType="touchUpInside" id="YPz-YG-CrH"/>
                                     <action selector="sliderValueChanged:" destination="62J-Oc-rgv" eventType="valueChanged" id="cjs-qK-U2h"/>
                                 </connections>
                             </slider>

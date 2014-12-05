@@ -152,4 +152,20 @@ class cloudData
         self.privateDB.addOperation(request)
         return
     }
+    
+    /*Function to update the goal data*/
+    func updateGoal() {
+        println("updating Goal")
+        // Object that decides which Record (or Table) to save to.
+        let record = CKRecord(recordType: "Goals")
+        
+        var dailyMax:Int = 1
+        // dailyMax =
+        // Append Information to the insert query
+        // These fields will be used for query purposes
+        record.setObject(dailyMax, forKey: "DailyMax")
+        
+
+        
+    }
 }

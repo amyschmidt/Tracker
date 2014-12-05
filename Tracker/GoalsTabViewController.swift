@@ -10,6 +10,8 @@ import UIKit
 
 class GoalsTabViewController: UIViewController {
 
+    var model: cloudData!
+    
     //daily, weekly, monthly, yearly labels
     @IBOutlet weak var dailyMax: UILabel!
     @IBOutlet weak var weeklyMax: UILabel!
@@ -19,10 +21,13 @@ class GoalsTabViewController: UIViewController {
     
     @IBOutlet weak var goalsSlider: UISlider!
     
+    var goal: Int!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        model = appDelegate.getCloudData()
 
     }
 
@@ -41,6 +46,18 @@ class GoalsTabViewController: UIViewController {
         yearlyMax.text = "\(currentValue * 356)"
         
     }
+    
+    @IBAction func sliderStopped(sender: UISlider) {
+        println("Stopped")
+        
+        goal = Int(sender.value)
+        
+        println("\(goal)")
+        
+        //call updateGoal with new goal data?
+        model.updateGoal()
+    }
+    
     
 
 }
