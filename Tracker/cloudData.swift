@@ -154,17 +154,21 @@ class cloudData
     }
     
     /*Function to update the goal data*/
-    func updateGoal() {
+    func updateGoal(var goal: Int){
         println("updating Goal")
-        // Object that decides which Record (or Table) to save to.
+        println("\(goal)")
+
+        /*Object that decides which Record (or Table) to save to.*/
         let record = CKRecord(recordType: "Goals")
         
         var dailyMax:Int = 1
-        // dailyMax =
+        dailyMax = goal
         // Append Information to the insert query
         // These fields will be used for query purposes
         record.setObject(dailyMax, forKey: "DailyMax")
-        
+        self.privateDB.saveRecord(record, completionHandler: { (record, error) -> Void in
+            NSLog("New Record has been Saved to cloud kit")
+        })
 
         
     }

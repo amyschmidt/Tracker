@@ -55,7 +55,7 @@ class GoalsTabViewController: UIViewController {
         println("\(goal)")
         
         //call updateGoal with new goal data?
-        model.updateGoal()
+        model.updateGoal(goal)
     }
     
     
