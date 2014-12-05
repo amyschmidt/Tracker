@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // instantiate a cloudData Object
     var CloudDataObject:cloudData = cloudData()
     
+    
     func getCloudData() ->cloudData{
         return CloudDataObject
     }

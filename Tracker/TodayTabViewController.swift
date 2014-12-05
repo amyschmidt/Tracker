@@ -14,6 +14,7 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
     // Timer items
     var timer = NSTimer()
     var startDate = NSDate()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +42,15 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
         self.startDate = NSDate()
         let aSelector:Selector = "updateTime"
         self.timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: aSelector, userInfo: nil, repeats: true)
+        // Save record for today
+        if (model.todaysRecords.count > 0)
+        {
+           model.todaysRecords[model.todaysRecords.count].date_NS = NSDate()
+        }
+        else
+        {
+            model.todaysRecords[0].date_NS = NSDate()
+        }
     }
     
     /* Delegate function is defined here but is actually a part of cloudData.swift

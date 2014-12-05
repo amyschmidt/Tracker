@@ -23,10 +23,13 @@ class cloudData
     // Instantiate an array of the grabbedRecord Object which is used to grab records from the Cloud
     var LogRecords = [grabbedRecord]()
     var LastRecord = [grabbedRecord]()
+    // Today's records
+    var todaysRecords = [grabbedRecord]()
 
     init(){
         container = CKContainer.defaultContainer()
         privateDB = container.privateCloudDatabase
+        let Todayrecords = todaysRecords
     }
     
     func save_record()

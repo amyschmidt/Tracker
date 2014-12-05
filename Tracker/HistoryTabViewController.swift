@@ -20,11 +20,30 @@ class HistoryTabViewController: UIViewController {
     @IBOutlet weak var lastSmokeTimer: UILabel!
     @IBOutlet weak var mostSmokedDay: UILabel!
     
+    var historyData : cloudData!
+    var todaysCount : Int!
+    
+    @IBOutlet weak var dataLabel: UILabel!
+    
+    
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        historyData = appDelegate.getCloudData()
+        
+        // grab total
+        todaysCount = historyData.LogRecords.count + historyData.todaysRecords.count
+        
+        dataLabel.text = "\(todaysCount)"
+        /*for count in historyCloudData.LogRecords[] {
+            
+        }
+        
+        how to grab from LogRecords Array (date_NS "types" are declared in grabbedRecord.swift)*/
+        // historyData.LogRecords[0].date_NS)
+        // historyData.LogRecords[0].dateString)
     }
     
     @IBAction func indexChanged(sender: UISegmentedControl) {
@@ -34,6 +53,12 @@ class HistoryTabViewController: UIViewController {
         {
         case 0:
             total.text = "Today's Total"
+            
+            // grab total
+            todaysCount = historyData.LogRecords.count
+            
+            dataLabel.text = "\(todaysCount)"
+            
             barGraph.text = "Hourly"
             average.text = "Daily Average"
             lastSmokeTimer.text = "Time Since Last Smoke"
@@ -62,7 +87,18 @@ class HistoryTabViewController: UIViewController {
             mostSmokedDay.text = "Most Smoked Day"
             lastSmokeTimer.font = UIFont(name: lastSmokeTimer.font.fontName, size: 22)
         default:
-            break;
+            total.text = "Today's Total"
+            
+            // grab total
+            todaysCount = historyData.LogRecords.count
+            
+            dataLabel.text = "\(todaysCount)"
+            
+            barGraph.text = "Hourly"
+            average.text = "Daily Average"
+            lastSmokeTimer.text = "Time Since Last Smoke"
+            lastSmokeTimer.font = UIFont(name: lastSmokeTimer.font.fontName, size: 24)
+            mostSmokedDay.text = " "
         }
     }
 
