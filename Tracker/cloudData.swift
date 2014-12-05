@@ -183,7 +183,7 @@ class cloudData
         // These fields will be used for query purposes
         record.setObject(dailyMax, forKey: "DailyMax")
         self.privateDB.saveRecord(record, completionHandler: { (record, error) -> Void in
-            NSLog("New Record has been Saved to cloud kit")
+            NSLog("Goal Has Been Updated")
         })
 
         

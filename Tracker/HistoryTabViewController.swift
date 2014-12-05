@@ -29,6 +29,9 @@ class HistoryTabViewController: UIViewController {
         // Grab total records (Cloud records + Incremented Records)
         todaysCount = historyData.LogRecords.count + historyData.todaysRecords.count
         dataLabel.text = "\(todaysCount)"
+        for records in historyData.todaysRecords{
+            println("Incremented Record: \(records.date_NS)")
+        }
     }
     
     override func viewDidLoad() {
