@@ -67,9 +67,9 @@ class cloudData
         // Append Information to the insert query
         // These fields will be used for query purposes
         record.setObject(DateString, forKey: "date")
-        record.setObject(TimeString, forKey: "time")
+        // record.setObject(TimeString, forKey: "time")
         // This field will be used for grabbing new data when the user is in the app. (Because we will already have some records upon Load)
-        record.setValue(records_loaded, forKey: "records_loaded_at_start")
+        // record.setValue(records_loaded, forKey: "records_loaded_at_start")
         // This field will be used for dealing with NSDate and NSTimer.
         record.setObject(date, forKey: "NSDate")
         // Save record is the function used similar to Insert Statement in RDBMS
@@ -190,6 +190,10 @@ class cloudData
             NSLog("Goal Has Been Updated")
         })
 
+        
+    }
+    
+    func grabAllRecords() {
         
     }
 }

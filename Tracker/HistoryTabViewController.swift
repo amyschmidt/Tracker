@@ -34,8 +34,11 @@ class HistoryTabViewController: UIViewController {
         chartHTML = buildDayChartHTML()
         // getChart(chartPeriod)
         drawChart(chartHTML)
-        
+        // For user to return to Day view
         segmentControl.selectedSegmentIndex = 0
+        
+        // Grab all records
+        historyData.grabAllRecords()
     }
 
     // UIWebView for bar chart
