@@ -20,36 +20,27 @@ class cloudData
     let privateDB: CKDatabase
     // delegate for TodayTabViewController to display if error or success, etc.
     var delegate: CloudKitDelegate?
-    // Instantiate an array of the grabbedRecord Object which is used to grab records from the Cloud
-    var LogRecords = [grabbedRecord]()
-    var LastRecord = [grabbedRecord]()
-    // Today's records
-    var todaysRecords = [incrementedRecord]()
+    // Instantiate an array of the dailyRecord Object which is used to grab records from the Cloud
+    var dailyRecords = [dailyRecord]()
+    var lastRecord = [dailyRecord]()
+    // Current session records
+    var sessionRecords = [sessionRecord]()
     // All Records
-    var AllRecords = [allRecords]()
+    var allRecords = [allRecord]()
 
     init(){
         container = CKContainer.defaultContainer()
         privateDB = container.privateCloudDatabase
     }
     
-    func save_record_inArray()
+    func save_record_to_phone()
     {
-        /*
-        // if NOT first time hitting incrementer, then just add the date to the object
-        if (self.todaysRecords.count > 0)
-        {
-            self.todaysRecords[self.todaysRecords.count].date_NS = NSDate()
-        }
-        else
-        { */
-            // if first time hitting incrementer, then create a new record for today
-            let today = incrementedRecord(date: NSDate())
-            self.todaysRecords.append(today)
-        //}
+        // Save to current session's records array
+        let today = sessionRecord(date: NSDate())
+        self.sessionRecords.append(today)
     }
     
-    func save_record_to_THECLOUD()
+    func save_record_to_cloud()
     {
         // Object that decides which Record (or Table) to save to.
         let record = CKRecord(recordType: "Log")
@@ -65,7 +56,7 @@ class cloudData
         var TimeString:String = formatter.stringFromDate(date)
         
         var records_loaded: Int = 0
-        records_loaded = LogRecords.count
+        records_loaded = dailyRecords.count
         // Append Information to the insert query
         // These fields will be used for query purposes
         record.setObject(DateString, forKey: "date")
@@ -119,10 +110,10 @@ class cloudData
                 // Records returned
                 for record in results
                 {
-                    // Initialize multiple grabbedRecord Objects
-                    let grabRecord = grabbedRecord(record: record as CKRecord, database: self.privateDB)
+                    // Initialize multiple dailyRecord Objects
+                    let grabRecord = dailyRecord(record: record as CKRecord, database: self.privateDB)
                     // Append the record to LogRecords Object which is local to this class.
-                    self.LogRecords.append(grabRecord)
+                    self.dailyRecords.append(grabRecord)
                     i++
                 }
                 // Find Date of Last Cigarette
@@ -136,7 +127,7 @@ class cloudData
                 // else use the last cigarette from Today.
                 else
                 {
-                    dateOfLastCig = self.LogRecords[self.LogRecords.count-1].date_NS
+                    dateOfLastCig = self.dailyRecords[self.dailyRecords.count-1].date_NS
                 }
                 
                 // Tell the ViewController that the Data has returned and update the "Count" in the View.
@@ -164,9 +155,9 @@ class cloudData
         var results = NSMutableArray()
         
         request.recordFetchedBlock = { (record: CKRecord!) in
-                let grabRecord = grabbedRecord(record: record as CKRecord, database: self.privateDB)
-                self.LastRecord.append(grabRecord)
-                println("Result: \(self.LastRecord[0].date_NS)")
+                let grabRecord = dailyRecord(record: record as CKRecord, database: self.privateDB)
+                self.lastRecord.append(grabRecord)
+                println("Result: \(self.lastRecord[0].date_NS)")
                 results.addObject(record)
             NSNotificationCenter.defaultCenter().postNotificationName("fetchLastRecord", object: nil)
             }
@@ -230,9 +221,9 @@ class cloudData
                 for record in results
                 {
                     // Initialize multiple allRecord Objects
-                    let allRecord = allRecords(record: record as CKRecord, database: self.privateDB)
+                    let aRecord = allRecord(record: record as CKRecord, database: self.privateDB)
                     // Append the record to LogRecords Object which is local to this class.
-                    self.AllRecords.append(allRecord)
+                    self.allRecords.append(aRecord)
                     i++
                 }
                 

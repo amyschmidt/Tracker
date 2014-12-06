@@ -1,5 +1,5 @@
 //
-//  incrementedRecord.swift
+//  sessionRecord.swift
 //  TrackerTeamA
 //
 //  Created by Ryan Pliske on 12/4/14.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class incrementedRecord: NSObject {
+class sessionRecord: NSObject {
     var date_NS : NSDate!
     init(date: NSDate)
     {

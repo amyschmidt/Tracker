@@ -1,5 +1,5 @@
 //
-//  allRecords.swift
+//  allRecord.swift
 //  TrackerTeamA
 //
 //  Created by Kyle Carlson on 12/5/14.
@@ -9,7 +9,7 @@
 import Foundation
 import CloudKit
 
-class allRecords: NSObject {
+class allRecord: NSObject {
 
     var record : CKRecord!
     var dateString : String!

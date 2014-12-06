@@ -1,5 +1,5 @@
 //
-//  grabbedRecord.swift
+//  dailyRecord.swift
 //  TrackerTeamA
 //
 
@@ -7,7 +7,7 @@
 import Foundation
 import CloudKit
 
-class grabbedRecord: NSObject
+class dailyRecord: NSObject
 {
     var record : CKRecord!
     var dateString : String!

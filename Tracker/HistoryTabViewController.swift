@@ -27,7 +27,7 @@ class HistoryTabViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         // Grab total records (Cloud records + Incremented Records)
-        todaysCount = historyData.LogRecords.count + historyData.todaysRecords.count
+        todaysCount = historyData.dailyRecords.count + historyData.sessionRecords.count
         dataLabel.text = "\(todaysCount)"
         
         // Get Day chart as default
@@ -77,7 +77,7 @@ class HistoryTabViewController: UIViewController {
             total.text = "Today's Total"
             
             // grab total
-            todaysCount = historyData.LogRecords.count + historyData.todaysRecords.count
+            todaysCount = historyData.dailyRecords.count + historyData.sessionRecords.count
             
             dataLabel.text = "\(todaysCount)"
             
@@ -132,7 +132,7 @@ class HistoryTabViewController: UIViewController {
             total.text = "Today's Total"
             
             // grab total
-            todaysCount = historyData.LogRecords.count
+            todaysCount = historyData.dailyRecords.count
             
             dataLabel.text = "\(todaysCount)"
             
@@ -179,19 +179,19 @@ class HistoryTabViewController: UIViewController {
         var i = 0
         
         // Add data stored in cloud
-        for entry in historyData.LogRecords {
+        for entry in historyData.dailyRecords {
             
             // Formatter to get 24-hour time from record
             var formatter: NSDateFormatter = NSDateFormatter()
             formatter.dateFormat = "HH"
             
             // Get hour from record's timestamp (24-hour)
-            var TimeString:String = formatter.stringFromDate(historyData.LogRecords[i].date_NS)
+            var TimeString:String = formatter.stringFromDate(historyData.dailyRecords[i].date_NS)
             
             // Unused:
             // formatter.timeStyle = .ShortStyle
             // println("Date of Smoke: \(entry.dateString)")
-            // println("\(model.LogRecords[0].date_NS)")
+            // println("\(model.dailyRecords[0].date_NS)")
             
             // Debugging purposes:
             // println("Time of Smoke: \(TimeString)")
@@ -222,14 +222,14 @@ class HistoryTabViewController: UIViewController {
         
         i = 0
         // Add data from current session
-        for record in historyData.todaysRecords{
+        for record in historyData.sessionRecords{
             
             // Formatter to get 24-hour time from record
             var formatter: NSDateFormatter = NSDateFormatter()
             formatter.dateFormat = "HH"
             
             // Get hour from record's timestamp (24-hour)
-            var TimeString:String = formatter.stringFromDate(historyData.todaysRecords[i].date_NS)
+            var TimeString:String = formatter.stringFromDate(historyData.sessionRecords[i].date_NS)
             
             // Convert hour from string to int
             var hour: Int = TimeString.toInt()!

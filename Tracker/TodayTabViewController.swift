@@ -37,10 +37,10 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
         count = count + 1
         dailyCount.text = "\(count)"
         // Save Record to the cloud
-        model.save_record_to_THECLOUD()
+        model.save_record_to_cloud()
         
         // Save Record to an array of objects locally to be used in GoalsTAB
-        model.save_record_inArray()
+        // model.save_record_to_phone()
         
         // initiate timer
         self.startDate = NSDate()
@@ -60,8 +60,8 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
     /* Delegate function is defined here but is actually declared in cloudData.swift
     This function updates the count with an NSDate argument in order to update the Timer */
     func countUpdated(timeOfLastCig:NSDate) {
-        dailyCount.text = String(model.LogRecords.count)
-        NSLog("Upon Load the 'count' has been updated to: \(model.LogRecords.count)")
+        dailyCount.text = String(model.dailyRecords.count)
+        NSLog("Upon Load the 'count' has been updated to: \(model.dailyRecords.count)")
         activityIndicatorView.stopAnimating()
         plusButton.enabled = true
         // initiate timer (Uses starDate from today if there is a record, else calls grabLastCig)
@@ -74,7 +74,7 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
     
     func grabLastCig()
     {
-        self.startDate = model.LastRecord[0].date_NS
+        self.startDate = model.lastRecord[0].date_NS
     }
     
     /* Function to create dynamic stopwatch feature by calculating days, hours, minutes and then displaying them. This function
