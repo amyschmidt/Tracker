@@ -1,10 +1,6 @@
 //
 //  AppDelegate.swift
-//  Tracker
-//
-//  Created by Amy Schmidt on 10/14/14.
-//  Copyright (c) 2014 Amy Schmidt. All rights reserved.
-//
+//  TrackerTeamA
 
 import UIKit
 

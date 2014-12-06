@@ -1,10 +1,6 @@
 //
 //  HistoryTabViewController.swift
 //  TrackerTeamA
-//
-//  Created by Amy Schmidt on 11/23/14.
-//  Copyright (c) 2014 Amy Schmidt. All rights reserved.
-//
 
 import UIKit
 

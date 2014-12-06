@@ -1,43 +1,34 @@
 //
 //  GoalsTabViewController.swift
 //  TrackerTeamA
-//
-//  Created by Amy Schmidt on 11/17/14.
-//  Copyright (c) 2014 Amy Schmidt. All rights reserved.
-//
 
 import UIKit
 
 class GoalsTabViewController: UIViewController {
 
     var model: cloudData!
-    
+    var goal: Int!
     //daily, weekly, monthly, yearly labels
     @IBOutlet weak var dailyMax: UILabel!
     @IBOutlet weak var weeklyMax: UILabel!
     @IBOutlet weak var monthlyMax: UILabel!
     @IBOutlet weak var yearlyMax: UILabel!
-    
-    
     @IBOutlet weak var goalsSlider: UISlider!
-    
-    var goal: Int!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         model = appDelegate.getCloudData()
-        // Grab the goal from the cloud
-        // model.grabGoal()
-        // NSNotificationCenter.defaultCenter().addObserver(self, selector: "setGoal", name: "fetchGoal", object: self.goal)
     }
     
     override func viewWillAppear(animated: Bool) {
-        model.grabGoal()
+        model.grabGoal(false, newGoal: 0)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "setGoal", name: "fetchGoal", object: self.goal)
     }
     
+    /* set the labels according to the record pulled from the cloud
+        This record gets called in viewWillAppear */
     func setGoal(){
         println("Setting the Slider to: \(model.maxGoal)")
         // Set label text equal to the goal
@@ -52,7 +43,7 @@ class GoalsTabViewController: UIViewController {
     }
 
     
-    //when slider value changes, update all labels to correct value
+    // when slider value changes, update all labels to correct value
     @IBAction func sliderValueChanged(sender: UISlider) {
         var currentValue = Int(sender.value)
         dailyMax.text = "\(currentValue)"
@@ -60,10 +51,10 @@ class GoalsTabViewController: UIViewController {
         monthlyMax.text = "\(currentValue * 30)"
         yearlyMax.text = "\(currentValue * 356)"
     }
-    
+    // when slider stops (Technically user "untouches" the screen) then save goal
     @IBAction func sliderStopped(sender: UISlider) {
-        goal = Int(sender.value)
+        self.goal = Int(sender.value)
         //calls function in cloudData.swift
-        model.saveGoal(goal)
+        model.saveGoal(self.goal)
     }
 }
