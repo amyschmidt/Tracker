@@ -14,7 +14,8 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
     // Timer items
     var timer = NSTimer()
     var startDate = NSDate()
-
+    // Airplane mode
+    var airplaneMode = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,20 +32,31 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
         model.grabGoal(false, newGoal: 0)
         activityIndicatorView.startAnimating()
         plusButton.enabled = false
+        self.tabBarController?.tabBar.userInteractionEnabled = false
     }
     /* Function for when the Increment Button is clicked */
     @IBAction func incrementerClicked(sender: AnyObject) {
-        // Change Count of the Label
+        // If airplane mode is enabled
+        if (self.airplaneMode)
+        {
+            let message = "Once you regain connection iCloud, you can edit this entry."
+            let alert = UIAlertView(title: "Notice: You're in Airplane Mode",
+                message: message, delegate: nil, cancelButtonTitle: "OK")
+            alert.show()
+            // Save Record to an array of objects locally to be used in GoalsTAB
+            model.save_record_to_phone()
+        }
+        else
+        {
+            // Save Record to the cloud
+            model.save_record_to_cloud()
+        }
+
+        // Increment count Label
         var count: Int = NSString(string: dailyCount.text!).integerValue
         count = count + 1
         dailyCount.text = "\(count)"
-        // Save Record to the cloud
-        model.save_record_to_cloud()
-        
-        // Save Record to an array of objects locally to be used in GoalsTAB
-        // model.save_record_to_phone()
-        
-        // initiate timer
+        // start/reset timer
         self.startDate = NSDate()
         let aSelector:Selector = "updateTime"
         self.timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: aSelector, userInfo: nil, repeats: true)
@@ -53,10 +65,36 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
     /* Delegate function is defined here but is actually a part of cloudData.swift
     This function displays an error if the user is not connected to the internet */
     func errorUpdating(error: NSError) {
-        let message = error.localizedDescription
-        let alert = UIAlertView(title: "Error Loading Cloud Data. Please Check your Internet Connection",
-            message: message, delegate: nil, cancelButtonTitle: "OK")
-        alert.show()
+        // Error Code 4 is Network Failure
+        if error.code == 4
+        {
+            let message = "You do not have internet access. Now Entering Air Plane Mode."
+            let alert = UIAlertView(title: "Error Loading Cloud Data.",
+                message: message, delegate: nil, cancelButtonTitle: "OK")
+            alert.show()
+        }
+        // Error Code 9 is iCloud Not Setup
+        else if error.code == 9
+        {
+            let message = "Please go to iPhone Settings->iCloud and sign in."
+            let alert = UIAlertView(title: "This App Requires iCloud",
+                message: message, delegate: nil, cancelButtonTitle: "OK")
+            alert.show()
+        }
+
+        // Display Airplane Mode
+        activityIndicatorView.stopAnimating()
+        dailyCount.text = "0"
+        self.startDate = NSDate()
+        let aSelector:Selector = "updateTime"
+        self.timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: aSelector, userInfo: nil, repeats: true)
+        plusButton.enabled = true
+        // set Airplane Mode
+        self.airplaneMode = true
+        self.view.backgroundColor = UIColor.blackColor()
+        self.tabBarController?.tabBar.userInteractionEnabled = false
+        
+        return
     }
     
     /* Delegate function is defined here but is actually declared in cloudData.swift
@@ -66,6 +104,7 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
         NSLog("Upon Load 'Today's Count' has been updated to: \(model.dailyRecords.count)")
         activityIndicatorView.stopAnimating()
         plusButton.enabled = true
+        self.tabBarController?.tabBar.userInteractionEnabled = true
         // initiate timer (Uses starDate from today if there is a record, else calls grabLastCig)
         self.startDate = timeOfLastCig
         // listen for when the data comes back

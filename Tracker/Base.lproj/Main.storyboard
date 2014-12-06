@@ -449,6 +449,7 @@
                     <tabBarItem key="tabBarItem" title="History" id="CkJ-C1-fau"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="MaxLabel" destination="LxX-ym-KHW" id="GaS-rI-WjC"/>
                         <outlet property="average" destination="Hqe-xS-Kbv" id="Hfb-GE-jRf"/>
                         <outlet property="barChart" destination="Hm8-z8-57V" id="lJb-3m-PSr"/>
                         <outlet property="barGraph" destination="iaZ-KY-kEX" id="Pvj-lb-zG1"/>

@@ -45,6 +45,10 @@ class cloudData
     
     func save_record_to_cloud()
     {
+        // Save to current session's records array
+        let today = sessionRecord(date: NSDate())
+        self.sessionRecords.append(today)
+        
         // Object that decides which Record (or Table) to save to.
         let record = CKRecord(recordType: "Log")
         // Grab the current date, then format the date.

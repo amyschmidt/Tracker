@@ -15,17 +15,18 @@ class HistoryTabViewController: UIViewController {
     @IBOutlet weak var average: UILabel!
     @IBOutlet weak var lastSmokeTimer: UILabel!
     @IBOutlet weak var mostSmokedDay: UILabel!
-    
+    @IBOutlet weak var MaxLabel: UILabel!
+    @IBOutlet weak var dataLabel: UILabel!
     var historyData : cloudData!
     var todaysCount : Int!
     
-    @IBOutlet weak var dataLabel: UILabel!
+    
     
     override func viewWillAppear(animated: Bool) {
         // Grab total records (Cloud records + Incremented Records)
         todaysCount = historyData.dailyRecords.count + historyData.sessionRecords.count
         dataLabel.text = "\(todaysCount)"
-        
+        MaxLabel.text = "\(historyData.maxGoal)"
         // Get Day chart as default
         chartHTML = buildDayChartHTML()
         // getChart(chartPeriod)
