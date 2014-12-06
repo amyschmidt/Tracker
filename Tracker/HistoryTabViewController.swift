@@ -199,20 +199,20 @@ class HistoryTabViewController: UIViewController {
             
             // Convert hour from string to int
             var hour: Int = TimeString.toInt()!
-            
+            println("Adding record with hour: \(hour)")
             // Increment index based upon hour
             switch hour {
-            case 1...4:
+            case 0..<4:
                 dataArray[0]++
-            case 5...8:
+            case 4..<8:
                 dataArray[1]++
-            case 9...12:
+            case 8..<12:
                 dataArray[2]++
-            case 13...16:
+            case 12..<16:
                 dataArray[3]++
-            case 17...20:
+            case 16..<20:
                 dataArray[4]++
-            case 21...24:
+            case 20..<24:
                 dataArray[5]++
             default:
                 break
@@ -233,20 +233,20 @@ class HistoryTabViewController: UIViewController {
             
             // Convert hour from string to int
             var hour: Int = TimeString.toInt()!
-            
+            println("Adding record with hour: \(hour)")
             // Increment index based upon hour
             switch hour {
-            case 1...4:
+            case 0..<4:
                 dataArray[0]++
-            case 5...8:
+            case 4..<8:
                 dataArray[1]++
-            case 9...12:
+            case 8..<12:
                 dataArray[2]++
-            case 13...16:
+            case 12..<16:
                 dataArray[3]++
-            case 17...20:
+            case 16..<20:
                 dataArray[4]++
-            case 21...24:
+            case 20..<24:
                 dataArray[5]++
             default:
                 break

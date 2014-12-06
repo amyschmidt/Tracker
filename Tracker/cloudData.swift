@@ -25,6 +25,8 @@ class cloudData
     var LastRecord = [grabbedRecord]()
     // Today's records
     var todaysRecords = [incrementedRecord]()
+    // All Records
+    var AllRecords = [allRecords]()
 
     init(){
         container = CKContainer.defaultContainer()
@@ -166,7 +168,7 @@ class cloudData
                 self.LastRecord.append(grabRecord)
                 println("Result: \(self.LastRecord[0].date_NS)")
                 results.addObject(record)
-            NSNotificationCenter.defaultCenter().postNotificationName("fetchAllRecords", object: nil)
+            NSNotificationCenter.defaultCenter().postNotificationName("fetchLastRecord", object: nil)
             }
         
         self.privateDB.addOperation(request)
@@ -194,6 +196,51 @@ class cloudData
     }
     
     func grabAllRecords() {
+        // First, Grab the current date, then format the date.
+        var date = NSDate()
+        var formatter = NSDateFormatter()
+        formatter.dateFormat = "MM-dd-yyyy"
+        var queryDate:String = formatter.stringFromDate(date)
+        let predicate = NSPredicate(value: true)
+        let sort = NSSortDescriptor(key: "NSDate", ascending: true)
+        // Build the Query: This query is similar to SELECT * FROM Log WHERE date = ''
+        let query = CKQuery(recordType: "Log", predicate: predicate)
         
+        query.sortDescriptors = [sort]
+        // Execute the Query
+        self.privateDB.performQuery(query,inZoneWithID: nil)
+        {
+            results, error in
+            // If we have an error than display it
+            if error != nil
+            {
+                dispatch_async(dispatch_get_main_queue())
+                    {
+                        self.delegate?.errorUpdating(error)
+                        return
+                }
+                
+            }
+                // Fetch todays data
+            else
+            {
+                NSLog("Fetching All Data")
+                var i = 0
+                // Records returned
+                for record in results
+                {
+                    // Initialize multiple allRecord Objects
+                    let allRecord = allRecords(record: record as CKRecord, database: self.privateDB)
+                    // Append the record to LogRecords Object which is local to this class.
+                    self.AllRecords.append(allRecord)
+                    i++
+                }
+                
+                NSNotificationCenter.defaultCenter().postNotificationName("fetchAllRecords", object: nil)
+            }
+    
+        }
+       
     }
+    
 }

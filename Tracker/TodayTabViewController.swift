@@ -67,7 +67,7 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
         // initiate timer (Uses starDate from today if there is a record, else calls grabLastCig)
         self.startDate = timeOfLastCig
         // listen for when the data comes back
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "grabLastCig", name: "fetchAllRecords", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "grabLastCig", name: "fetchLastRecord", object: nil)
         let aSelector:Selector = "updateTime"
         self.timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: aSelector, userInfo: nil, repeats: true)
     }
