@@ -29,9 +29,13 @@ class HistoryTabViewController: UIViewController {
         // Grab total records (Cloud records + Incremented Records)
         todaysCount = historyData.LogRecords.count + historyData.todaysRecords.count
         dataLabel.text = "\(todaysCount)"
-        for records in historyData.todaysRecords{
-            println("Incremented Record: \(records.date_NS)")
-        }
+        
+        // Get Day chart as default
+        chartHTML = buildDayChartHTML()
+        // getChart(chartPeriod)
+        drawChart(chartHTML)
+        
+        segmentControl.selectedSegmentIndex = 0
     }
 
     // UIWebView for bar chart
@@ -171,6 +175,7 @@ class HistoryTabViewController: UIViewController {
         var dataArray: [Int] = [0, 0, 0, 0, 0, 0]
         var i = 0
         
+        // Add data stored in cloud
         for entry in historyData.LogRecords {
             
             // Formatter to get 24-hour time from record
@@ -212,8 +217,43 @@ class HistoryTabViewController: UIViewController {
             i++
         }
         
+        i = 0
+        // Add data from current session
+        for record in historyData.todaysRecords{
+            
+            // Formatter to get 24-hour time from record
+            var formatter: NSDateFormatter = NSDateFormatter()
+            formatter.dateFormat = "HH"
+            
+            // Get hour from record's timestamp (24-hour)
+            var TimeString:String = formatter.stringFromDate(historyData.todaysRecords[i].date_NS)
+            
+            // Convert hour from string to int
+            var hour: Int = TimeString.toInt()!
+            
+            // Increment index based upon hour
+            switch hour {
+            case 1...4:
+                dataArray[0]++
+            case 5...8:
+                dataArray[1]++
+            case 9...12:
+                dataArray[2]++
+            case 13...16:
+                dataArray[3]++
+            case 17...20:
+                dataArray[4]++
+            case 21...24:
+                dataArray[5]++
+            default:
+                break
+            }
+            i++
+            // println("Incremented Record: \(record.date_NS)")
+        }
+        
         // Build HTML string with dataArray info inserted into graph
-        var stringHTML: String = "<html><head><script type='text/javascript' src='https://www.google.com/jsapi'></script><script type='text/javascript'>google.load('visualization', '1', {packages:['corechart']});google.setOnLoadCallback(drawChart);function drawChart() { var data = google.visualization.arrayToDataTable([ ['Hour', 'Cigs'], ['12am - 4am', \(dataArray[0])], ['4am - 8am', \(dataArray[1])], ['8am - 12pm', \(dataArray[2])], ['12pm - 4pm', \(dataArray[3])], ['4pm - 8pm', \(dataArray[4])], ['8pm - 12am', \(dataArray[5])] ]); var options = { width: '100%', height: '100%', legend: { position: 'none' }, bar: { groupWidth: '70%' }, backgroundColor: '#333333', backgroundColor: { strokeWidth: 0, fill: '#333333' }, chartArea: { left: 20, top: 10, width:'95%', height:'80%'}, fontSize: 8, Style: { color: 'white' }, hAxis: { textStyle:{color: '#FFF'} } }; var chart = new google.visualization.ColumnChart(document.getElementById('chart_div')); chart.draw(data, options);}</script><style> #chart_div { position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; color: white; }</style></head><body> <div id='chart_div'></div></body></html>"
+        var stringHTML: String = "<html><head><script type='text/javascript' src='https://www.google.com/jsapi'></script><script type='text/javascript'>google.load('visualization', '1', {packages:['corechart']});google.setOnLoadCallback(drawChart);function drawChart() { var data = google.visualization.arrayToDataTable([ ['Hour', 'Cigs', { role: 'style' } ], ['12am - 4am', \(dataArray[0]), 'color: white; opacity: 0.75'], ['4am - 8am', \(dataArray[1]), 'color: white; opacity: 0.75'], ['8am - 12pm', \(dataArray[2]), 'color: white; opacity: 0.75'], ['12pm - 4pm', \(dataArray[3]), 'color: white; opacity: 0.75'], ['4pm - 8pm', \(dataArray[4]), 'color: white; opacity: 0.75'], ['8pm - 12am', \(dataArray[5]), 'color: white; opacity: 0.75'] ]); var options = { width: '100%', height: '100%', legend: { position: 'none' }, bar: { groupWidth: '70%' }, backgroundColor: '#333333', backgroundColor: { strokeWidth: 0, fill: '#333333' }, chartArea: { left: 20, top: 10, width:'95%', height:'80%'}, fontSize: 8, Style: { color: 'white' }, hAxis: { textStyle:{color: '#FFF'} } }; var chart = new google.visualization.ColumnChart(document.getElementById('chart_div')); chart.draw(data, options);}</script><style> #chart_div { position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; color: white; }</style></head><body> <div id='chart_div'></div></body></html>"
         
         // Return HTML string
         return stringHTML

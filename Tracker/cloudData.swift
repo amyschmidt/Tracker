@@ -90,6 +90,10 @@ class cloudData
         let sort = NSSortDescriptor(key: "NSDate", ascending: true)
         // Build the Query: This query is similar to SELECT * FROM Log WHERE date = ''
         let query = CKQuery(recordType: "Log", predicate: predicate)
+        
+        // Select all records
+        // let query = CKQuery(recordType: "Log", predicate: true)
+        
         query.sortDescriptors = [sort]
         // Execute the Query
         self.privateDB.performQuery(query,inZoneWithID: nil)
