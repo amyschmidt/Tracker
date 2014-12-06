@@ -59,7 +59,7 @@ class cloudData
         formatter.dateFormat = "MM-dd-yyyy"
         var DateString:String = formatter.stringFromDate(date)
         
-        formatter.dateFormat = "hh:mm:ss a"
+        formatter.dateFormat = "HH"
         var TimeString:String = formatter.stringFromDate(date)
         
         var records_loaded: Int = 0
