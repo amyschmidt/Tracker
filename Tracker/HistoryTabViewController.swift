@@ -20,7 +20,6 @@ class HistoryTabViewController: UIViewController {
     @IBOutlet weak var lastSmokeTimer: UILabel!
     @IBOutlet weak var mostSmokedDay: UILabel!
     
-<<<<<<< HEAD
     var historyData : cloudData!
     var todaysCount : Int!
     
@@ -34,7 +33,7 @@ class HistoryTabViewController: UIViewController {
             println("Incremented Record: \(records.date_NS)")
         }
     }
-=======
+
     // UIWebView for bar chart
     @IBOutlet weak var barChart: UIWebView!
     // Time period to display in bar chart (day view by default)
@@ -44,22 +43,13 @@ class HistoryTabViewController: UIViewController {
     // The string is just the compressed code from the HTML files
     var chartHTML: String!
     
-    var model: cloudData!
-    
-
->>>>>>> dev/DataGraphs
-    
     override func viewDidLoad() {
         
         super.viewDidLoad()
-<<<<<<< HEAD
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        historyData = appDelegate.getCloudData()
-=======
-        
+
         // Set the delegate of this ViewController class
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        model = appDelegate.getCloudData()
+        historyData = appDelegate.getCloudData()
         
         webViewConfiguration()
         
@@ -68,7 +58,7 @@ class HistoryTabViewController: UIViewController {
         
         // getChart(chartPeriod)
         drawChart(chartHTML)
->>>>>>> dev/DataGraphs
+
     }
     
     @IBAction func indexChanged(sender: UISegmentedControl) {
@@ -131,7 +121,7 @@ class HistoryTabViewController: UIViewController {
             drawChart(chartHTML)
             
         default:
-<<<<<<< HEAD
+
             total.text = "Today's Total"
             
             // grab total
@@ -144,9 +134,9 @@ class HistoryTabViewController: UIViewController {
             lastSmokeTimer.text = "Time Since Last Smoke"
             lastSmokeTimer.font = UIFont(name: lastSmokeTimer.font.fontName, size: 24)
             mostSmokedDay.text = " "
-=======
+
             break
->>>>>>> dev/DataGraphs
+
         }
     }
 
@@ -181,14 +171,14 @@ class HistoryTabViewController: UIViewController {
         var dataArray: [Int] = [0, 0, 0, 0, 0, 0]
         var i = 0
         
-        for entry in model.LogRecords {
+        for entry in historyData.LogRecords {
             
             // Formatter to get 24-hour time from record
             var formatter: NSDateFormatter = NSDateFormatter()
             formatter.dateFormat = "HH"
             
             // Get hour from record's timestamp (24-hour)
-            var TimeString:String = formatter.stringFromDate(model.LogRecords[i].date_NS)
+            var TimeString:String = formatter.stringFromDate(historyData.LogRecords[i].date_NS)
             
             // Unused:
             // formatter.timeStyle = .ShortStyle
