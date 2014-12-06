@@ -29,7 +29,7 @@ class cloudData
     var allRecords = [allRecord]()
     // Goal (record)
     var goalRecord: CKRecord!
-    var maxGoal: Int!
+    var maxGoal: Int = 0
 
     init(){
         container = CKContainer.defaultContainer()

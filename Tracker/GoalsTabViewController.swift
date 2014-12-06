@@ -17,29 +17,28 @@ class GoalsTabViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         model = appDelegate.getCloudData()
+        // May need to uncomment next line IF experiecing bugs or Lag
+        // NSNotificationCenter.defaultCenter().addObserver(self, selector: "setGoal", name: "fetchGoal", object: nil)
+        self.setGoal()
     }
     
-    override func viewWillAppear(animated: Bool) {
-        model.grabGoal(false, newGoal: 0)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "setGoal", name: "fetchGoal", object: self.goal)
-    }
-    
-    /* set the labels according to the record pulled from the cloud
-        This record gets called in viewWillAppear */
+    // set the labels according to the record pulled from the cloud
     func setGoal(){
-        println("Setting the Slider to: \(model.maxGoal)")
-        // Set label text equal to the goal
-        self.dailyMax.text = "\(model.maxGoal)"
-        // Set the actual slider equal to the goal
-        goalsSlider.value = Float(model.maxGoal)
-        // Set rest of the labels
-        dailyMax.text = "\(model.maxGoal)"
-        weeklyMax.text = "\(model.maxGoal * 7)"
-        monthlyMax.text = "\(model.maxGoal * 30)"
-        yearlyMax.text = "\(model.maxGoal * 356)"
+        if (model.maxGoal > 0)
+        {
+            println("Setting the Slider to: \(model.maxGoal)")
+            // Set label text equal to the goal
+            self.dailyMax.text = "\(model.maxGoal)"
+            // Set the actual slider equal to the goal
+            goalsSlider.value = Float(model.maxGoal)
+            // Set rest of the labels
+            dailyMax.text = "\(model.maxGoal)"
+            weeklyMax.text = "\(model.maxGoal * 7)"
+            monthlyMax.text = "\(model.maxGoal * 30)"
+            yearlyMax.text = "\(model.maxGoal * 356)"
+        }
     }
 
     

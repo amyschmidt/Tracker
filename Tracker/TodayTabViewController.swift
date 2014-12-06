@@ -27,6 +27,8 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
         model.delegate = self
         // Call update records from cloudData.swift
         model.update_records()
+        // Grab Goal for GoalsTab
+        model.grabGoal(false, newGoal: 0)
         activityIndicatorView.startAnimating()
         plusButton.enabled = false
     }
