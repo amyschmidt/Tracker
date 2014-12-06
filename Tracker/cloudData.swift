@@ -27,6 +27,9 @@ class cloudData
     var sessionRecords = [sessionRecord]()
     // All Records
     var allRecords = [allRecord]()
+    // Goal (record)
+    var goalRecord: CKRecord!
+    var maxGoal: Int!
 
     init(){
         container = CKContainer.defaultContainer()
@@ -157,7 +160,7 @@ class cloudData
         request.recordFetchedBlock = { (record: CKRecord!) in
                 let grabRecord = dailyRecord(record: record as CKRecord, database: self.privateDB)
                 self.lastRecord.append(grabRecord)
-                println("Result: \(self.lastRecord[0].date_NS)")
+                println("Last Cigarette was: \(self.lastRecord[0].date_NS)")
                 results.addObject(record)
             NSNotificationCenter.defaultCenter().postNotificationName("fetchLastRecord", object: nil)
             }
@@ -166,24 +169,53 @@ class cloudData
         return
     }
     
-    /*Function to update the goal data*/
-    func updateGoal(var goal: Int){
-        println("updating Goal")
-        println("\(goal)")
+    // Function to save the goal to the cloud
+    func saveGoal(var goal: Int){
 
-        /*Object that decides which Record (or Table) to save to.*/
-        let record = CKRecord(recordType: "Goals")
+        var record_id:CKRecordID = CKRecordID(recordName: "1")
+        self.goalRecord = CKRecord(recordType: "Goals", recordID: record_id)
+        var record: CKRecord!
+        var error: NSError!
         
-        var dailyMax:Int = 1
-        dailyMax = goal
+        let dailyMax:Int = goal
         // Append Information to the insert query
         // These fields will be used for query purposes
-        record.setObject(dailyMax, forKey: "DailyMax")
-        self.privateDB.saveRecord(record, completionHandler: { (record, error) -> Void in
-            NSLog("Goal Has Been Updated")
+        // self.goalRecord!.setObject(dailyMax, forKey: "DailyMax")
+        self.privateDB.saveRecord(self.goalRecord, completionHandler: { record, error in
+            if error != nil {
+                println("Error occurred while saving")
+            }
+            else
+            {
+                NSLog("Saving Goal to iCloud As: \(dailyMax)")
+            }
+            
         })
-
-        
+        // let recordM = CKModifyRecordsOperation(recordsToSave: [self.goalRecord], recordIDsToDelete: record_id)
+    }
+    
+    // Function to grab the goal from the cloud
+    func grabGoal(){
+        let record_id:CKRecordID = CKRecordID(recordName: "1")
+        var record: CKRecord!
+        var error: NSError!
+        var number:Int!
+        privateDB.fetchRecordWithID(record_id){
+            (record, error) in
+            if error != nil
+            {
+                println("There was an error")
+            }
+            else
+            {
+                self.goalRecord = record
+                number = self.goalRecord?.objectForKey("DailyMax") as Int!
+                self.maxGoal = number
+                NSNotificationCenter.defaultCenter().postNotificationName("fetchGoal", object: nil)
+                self.goalRecord.setObject(number, forKey: "DailyMax")
+            }
+        }
+        return
     }
     
     func grabAllRecords() {

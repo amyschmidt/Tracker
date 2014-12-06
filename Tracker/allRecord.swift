@@ -2,9 +2,7 @@
 //  allRecord.swift
 //  TrackerTeamA
 //
-//  Created by Kyle Carlson on 12/5/14.
-//  Copyright (c) 2014 Amy Schmidt. All rights reserved.
-//
+
 
 import Foundation
 import CloudKit

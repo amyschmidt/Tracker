@@ -61,7 +61,7 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
     This function updates the count with an NSDate argument in order to update the Timer */
     func countUpdated(timeOfLastCig:NSDate) {
         dailyCount.text = String(model.dailyRecords.count)
-        NSLog("Upon Load the 'count' has been updated to: \(model.dailyRecords.count)")
+        NSLog("Upon Load 'Today's Count' has been updated to: \(model.dailyRecords.count)")
         activityIndicatorView.stopAnimating()
         plusButton.enabled = true
         // initiate timer (Uses starDate from today if there is a record, else calls grabLastCig)
