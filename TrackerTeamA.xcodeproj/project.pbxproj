@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5C66F01D1A15921A000422ED /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C66F01C1A15921A000422ED /* CloudKit.framework */; };
+		5C07AC541A33EFEE0068E629 /* button.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5C07AC531A33EFEE0068E629 /* button.jpg */; };
+		5C07AC581A340BB80068E629 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C07AC571A340BB80068E629 /* CloudKit.framework */; };
 		5C66F0251A159F95000422ED /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C66F0241A159F95000422ED /* NotificationCenter.framework */; };
 		5C66F02A1A159F95000422ED /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C66F0291A159F95000422ED /* TodayViewController.swift */; };
 		5C66F02C1A159F95000422ED /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C66F02B1A159F95000422ED /* MainInterface.storyboard */; };
@@ -51,8 +52,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5C07AC531A33EFEE0068E629 /* button.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = button.jpg; sourceTree = "<group>"; };
+		5C07AC551A33F1400068E629 /* TrackerWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TrackerWidget.entitlements; sourceTree = "<group>"; };
+		5C07AC571A340BB80068E629 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		5C66F01B1A159219000422ED /* Tracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Tracker.entitlements; sourceTree = "<group>"; };
-		5C66F01C1A15921A000422ED /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		5C66F0221A159F95000422ED /* TrackerWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TrackerWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C66F0241A159F95000422ED /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		5C66F0281A159F95000422ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -89,7 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C66F01D1A15921A000422ED /* CloudKit.framework in Frameworks */,
+				5C07AC581A340BB80068E629 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,6 +102,7 @@
 		5C66F0231A159F95000422ED /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5C07AC571A340BB80068E629 /* CloudKit.framework */,
 				5C66F0241A159F95000422ED /* NotificationCenter.framework */,
 			);
 			name = Frameworks;
@@ -107,6 +111,8 @@
 		5C66F0261A159F95000422ED /* TrackerWidget */ = {
 			isa = PBXGroup;
 			children = (
+				5C07AC551A33F1400068E629 /* TrackerWidget.entitlements */,
+				5C07AC531A33EFEE0068E629 /* button.jpg */,
 				5C66F0291A159F95000422ED /* TodayViewController.swift */,
 				5C66F02B1A159F95000422ED /* MainInterface.storyboard */,
 				5C66F0271A159F95000422ED /* Supporting Files */,
@@ -125,7 +131,6 @@
 		E4583FD519EDA9A7009ADA7F = {
 			isa = PBXGroup;
 			children = (
-				5C66F01C1A15921A000422ED /* CloudKit.framework */,
 				E4583FE019EDA9A7009ADA7F /* Tracker */,
 				E4583FF619EDA9A8009ADA7F /* TrackerTests */,
 				5C66F0261A159F95000422ED /* TrackerWidget */,
@@ -240,10 +245,23 @@
 					5C66F0211A159F95000422ED = {
 						CreatedOnToolsVersion = 6.1;
 						DevelopmentTeam = 4FNJNUQ3AD;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 0;
+							};
+						};
 					};
 					E4583FDD19EDA9A7009ADA7F = {
 						CreatedOnToolsVersion = 6.0.1;
 						DevelopmentTeam = 4FNJNUQ3AD;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -272,6 +290,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C66F02C1A159F95000422ED /* MainInterface.storyboard in Resources */,
+				5C07AC541A33EFEE0068E629 /* button.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,6 +364,7 @@
 		5C66F0311A159F96000422ED /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = TrackerWidget/TrackerWidget.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -363,6 +383,7 @@
 		5C66F0321A159F96000422ED /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = TrackerWidget/TrackerWidget.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = TrackerWidget/Info.plist;

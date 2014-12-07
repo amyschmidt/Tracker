@@ -16,6 +16,7 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
     var startDate = NSDate()
     // Airplane mode
     var airplaneMode = false
+    var airplaneDate : NSDate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,10 +31,29 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
         model.update_records()
         // Grab Goal for GoalsTab
         model.grabGoal(false, newGoal: 0)
+        // Show Loading Animation
         activityIndicatorView.startAnimating()
+        // Disable Buttons
         plusButton.enabled = false
         self.tabBarController?.tabBar.userInteractionEnabled = false
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        // Upload dates saved by the Widget
+        // model.update_records()
+        let sharedDefaults = NSUserDefaults(suiteName: "group.TrackerTeamA")
+        self.airplaneDate = sharedDefaults?.objectForKey("record") as NSDate?
+        if (self.airplaneDate != nil)
+        {
+            model.save_record_to_cloud(self.airplaneDate!)
+            dailyCount.text = String(model.dailyRecords.count+1)
+        }
+        // Clear Out the recent save from the Widget
+        self.airplaneDate = nil
+        sharedDefaults?.setObject(nil, forKey: "record")
+        sharedDefaults?.synchronize()
+    }
+    
     /* Function for when the Increment Button is clicked */
     @IBAction func incrementerClicked(sender: AnyObject) {
         // If airplane mode is enabled
@@ -49,7 +69,7 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
         else
         {
             // Save Record to the cloud
-            model.save_record_to_cloud()
+            model.save_record_to_cloud(NSDate())
         }
 
         // Increment count Label
@@ -111,6 +131,10 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "grabLastCig", name: "fetchLastRecord", object: nil)
         let aSelector:Selector = "updateTime"
         self.timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: aSelector, userInfo: nil, repeats: true)
+        // refresh Today Widget values
+        let sharedDefaults = NSUserDefaults(suiteName: "group.TrackerTeamA")
+        sharedDefaults?.setObject(model.dailyRecords.count, forKey: "count")
+        sharedDefaults?.synchronize()
     }
     
     func grabLastCig()

@@ -25,6 +25,10 @@ class cloudData
     var lastRecord = [dailyRecord]()
     // Current session records
     var sessionRecords = [sessionRecord]()
+    // AirplaneMode records
+    var airplaneModeRecords = [sessionRecord]()
+    var airplaneModeRecord : sessionRecord?
+    var airplaneModeDates = [NSDate]()
     // All Records
     var allRecords = [allRecord]()
     // Goal (record)
@@ -38,24 +42,48 @@ class cloudData
     
     func save_record_to_phone()
     {
-        // Save to current session's records array
-        let today = sessionRecord(date: NSDate())
-        self.sessionRecords.append(today)
+        // var path: NSArray = NSSearchPathForDirectoriesInDomains(NSD, NSUserDefaults, YES)
+        // var directory: NSString = path.objectAtIndex(0)
+        // var success = false
+        // Save to airplaneMode records array
+        /*
+        if let today = airplaneModeRecord{
+            success = NSKeyedArchiver.archiveRootObject(today, toFile: "record.plist")
+            if success
+            {
+                println("Saved Successfully")
+            }
+            else
+            {
+                println("Error saving data file")
+            }
+        }
+        */
+        // let today = sessionRecord()
+        // self.airplaneModeRecords.append(today)
+        // NSKeyedArchiver.archiveRootObject(airplaneModeRecords, toFile: "records")
+        /*
+        for dates in airplaneModeDates{
+            println("\(self.airplaneModeDates[airplaneModeDates.count-1])")
+        }
+        */
+        self.airplaneModeDates.append(NSDate())
+        // let data : NSData = NSKeyedArchiver.archivedDataWithRootObject(self.airplaneModeDates)
+        NSUserDefaults.standardUserDefaults().setObject(self.airplaneModeDates, forKey: "records")
+        println("Saving Record [\(NSDate())]to Phone")
     }
     
-    func save_record_to_cloud()
+    func save_record_to_cloud(date: NSDate)
     {
         // Save to current session's records array
-        let today = sessionRecord(date: NSDate())
+        let today = sessionRecord()
         self.sessionRecords.append(today)
         
         // Object that decides which Record (or Table) to save to.
         let record = CKRecord(recordType: "Log")
-        // Grab the current date, then format the date.
-        var date = NSDate()
-        
+
         var formatter = NSDateFormatter()
-        // Format the day and time into string. (Might change this to date format)
+        // Format the day and time into string.
         formatter.dateFormat = "MM-dd-yyyy"
         var DateString:String = formatter.stringFromDate(date)
         
@@ -144,9 +172,33 @@ class cloudData
                         aDelegate.countUpdated(dateOfLastCig)
                     }
                 })
+                
+                /*
+                if let localRecord = NSKeyedUnarchiver.unarchiveObjectWithFile("records") as sessionRecord?
+                {
+                    println("Local Records: \(localRecord.date_NS)")
+                }
+                */
+                // Unarchive + Load any records if user incremented during Airplane Mode or using the Widget.
+                if let savedDates = NSUserDefaults.standardUserDefaults().objectForKey("records") as? [NSDate] {
+                    println("There are some Records saved on the phone. Now Uploading them to iCloud...")
+                    // airplaneModeDates can be used in other ViewControllers if someone needs them.
+                    self.airplaneModeDates = savedDates
+                    // Save All the Records to the Cloud
+                    for records in self.airplaneModeDates{
+                        self.save_record_to_cloud(records)
+                        println(records)
+                    }
+                    println("Those Records have been sent to iCloud. Now Clearing local records.")
+                    // Clear out the local data from NSUserDefaults
+                    var appDomain = NSBundle.mainBundle().bundleIdentifier
+                    // NSUserDefaults.removePersistentDomainForName(appDomain)
+                    NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain!)
+                }
             }
         }
     }
+    
     /* Function to grab the last record if there are no records for the current day */
     func grabLastCig()
     {
