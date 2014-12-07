@@ -1,5 +1,6 @@
 import UIKit
 import NotificationCenter
+import Foundation
 
 class TodayViewController: UIViewController, NCWidgetProviding {
     
@@ -30,8 +31,11 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     
     @IBAction func openTracker(sender: AnyObject) {
-        var url: NSURL = NSURL(fileURLWithPath: "hostingapp://home")!
-        self.extensionContext?.openURL(url, completionHandler: nil)
+        var url: NSURL = NSURL(fileURLWithPath: "TrackerTeamA://")!
+        // self.extensionContext?.openURL(url, completionHandler: nil)
+        var url2: NSExtensionContext = self.extensionContext!
+        // NSExtensionContext.openURL(url2)
+        url2.openURL(url, completionHandler: nil)
     }
     
     @IBAction func buttonClicked(sender: AnyObject) {
