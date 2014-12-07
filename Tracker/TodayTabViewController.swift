@@ -59,7 +59,7 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
         // If airplane mode is enabled
         if (self.airplaneMode)
         {
-            let message = "Once you regain connection iCloud, you can edit this entry."
+            let message = "Once you regain connection in iCloud, you can edit this entry."
             let alert = UIAlertView(title: "Notice: You're in Airplane Mode",
                 message: message, delegate: nil, cancelButtonTitle: "OK")
             alert.show()
@@ -88,7 +88,7 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
         // Error Code 4 is Network Failure
         if error.code == 4
         {
-            let message = "You do not have internet access. Now Entering Air Plane Mode."
+            let message = "You do not have internet access. Now Entering AirPlane Mode."
             let alert = UIAlertView(title: "Error Loading Cloud Data.",
                 message: message, delegate: nil, cancelButtonTitle: "OK")
             alert.show()

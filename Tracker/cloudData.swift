@@ -229,16 +229,41 @@ class cloudData
         grabGoal(true, newGoal: goal)
     }
     
+    func saveNewGoal(newGoal: Int) {
+        let record_id:CKRecordID = CKRecordID(recordName: "1")
+        var record2: CKRecord!
+        record2 = CKRecord(recordType: "Goals", recordID: record_id)
+        record2.setObject(newGoal, forKey: "DailyMax")
+        
+        self.privateDB.saveRecord(record2, completionHandler: { record, error in
+            if error != nil {
+                println("Error occurred while saving \(error)")
+            }
+            else
+            {
+                NSLog("Saving Goal to iCloud As: \(newGoal)")
+                self.maxGoal = newGoal
+            }
+        })
+
+    }
+    
     // Function to grab the goal from the cloud AND THEN SAVE IF NECCESSARY
     func grabGoal(save : BooleanType, newGoal: Int){
         let record_id:CKRecordID = CKRecordID(recordName: "1")
         var record: CKRecord!
         var error: NSError!
         privateDB.fetchRecordWithID(record_id){
-            (record, error) in
+            (dbRecord, error) in
             if error != nil
             {
                 println("Error Grabbing Goal from iCloud \(error)")
+                println(save)
+                println("\(newGoal)")
+                if (save) {
+                    self.saveNewGoal(newGoal)
+                }
+
             }
             else
             {
@@ -246,12 +271,12 @@ class cloudData
                 dispatch_async(dispatch_get_main_queue())
                 {
                     // Save the Goal (Integer) to maxGoal
-                    self.maxGoal = record.objectForKey("DailyMax") as Int!
+                    self.maxGoal = dbRecord.objectForKey("DailyMax") as Int!
                     // If user wants to save, then push to Cloud, else don't push to Cloud
                     if (save)
                     {
-                        record.setObject(newGoal, forKey: "DailyMax")
-                        self.privateDB.saveRecord(record, completionHandler: { record, error in
+                        dbRecord.setObject(newGoal, forKey: "DailyMax")
+                        self.privateDB.saveRecord(dbRecord, completionHandler: { record, error in
                             if error != nil {
                                 println("Error occurred while saving \(error)")
                             }
