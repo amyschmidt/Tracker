@@ -90,9 +90,6 @@ class cloudData
         formatter.dateFormat = "MM-dd-yyyy"
         var DateString:String = formatter.stringFromDate(date)
         
-        formatter.dateFormat = "HH"
-        var TimeString:String = formatter.stringFromDate(date)
-        
         //format the month and year variables
         formatter.dateFormat = "MM"
         var month:String = formatter.stringFromDate(date)
@@ -122,7 +119,7 @@ class cloudData
     }
     
     /* This function grabs today's records based on date */
-    func todays_records()
+    func grab_todays_records()
     {
         // Predicate is the condition on which the record should be matched against
         // First, Grab the current date, then format the date.

@@ -28,7 +28,7 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
         // Set the delegate of this ViewController class
         model.delegate = self
         // Call update records from cloudData.swift
-        model.todays_records()
+        model.grab_todays_records()
         // Grab Goal for GoalsTab
         model.grabGoal(false, newGoal: 0)
         // Show Loading Animation
@@ -111,7 +111,7 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
         plusButton.enabled = true
         // set Airplane Mode
         self.airplaneMode = true
-        self.view.backgroundColor = UIColor.blackColor()
+        // self.view.backgroundColor = UIColor.blackColor()
         self.tabBarController?.tabBar.userInteractionEnabled = false
         
         return
