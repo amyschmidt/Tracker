@@ -56,6 +56,8 @@ class HistoryTabViewController: UIViewController {
         historyData = appDelegate.getCloudData()
         
         webViewConfiguration()
+        MaxLabel.text = "\(historyData.maxGoal)"
+
         
         //println(historyData.monthlyRecords)
         // Get Day chart as default
