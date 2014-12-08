@@ -28,7 +28,7 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
         // Set the delegate of this ViewController class
         model.delegate = self
         // Call update records from cloudData.swift
-        model.update_records()
+        model.todays_records()
         // Grab Goal for GoalsTab
         model.grabGoal(false, newGoal: 0)
         // Show Loading Animation
@@ -166,10 +166,10 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
         let strMinutes:String = minutes > 9 ? String(minutes):"0\(String(minutes))"
         // build the label
         if (UInt8(elapsedTime) % 2 == 0){
-            timeSinceLastSmokeLabel.text = "\(strDays)d:\(strHours)h:\(strMinutes)m"
+            timeSinceLastSmokeLabel.text = "\(strDays):\(strHours):\(strMinutes)"
         }
         else {
-            timeSinceLastSmokeLabel.text = "\(strDays)d \(strHours)h \(strMinutes)m"
+            timeSinceLastSmokeLabel.text = "\(strDays) \(strHours) \(strMinutes)"
         }
     }
     

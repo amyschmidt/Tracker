@@ -23,6 +23,9 @@ class cloudData
     // Instantiate an array of the dailyRecord Object which is used to grab records from the Cloud
     var dailyRecords = [dailyRecord]()
     var lastRecord = [dailyRecord]()
+    //Instantiate an array for the monthlyRecord Object and yearlyRecord Object
+    var monthlyRecords = [monthlyRecord]()
+    
     // Current session records
     var sessionRecords = [sessionRecord]()
     // AirplaneMode records
@@ -90,6 +93,13 @@ class cloudData
         formatter.dateFormat = "HH"
         var TimeString:String = formatter.stringFromDate(date)
         
+        //format the month and year variables
+        formatter.dateFormat = "MM"
+        var month:String = formatter.stringFromDate(date)
+        
+        formatter.dateFormat = "yyyy"
+        var year:String = formatter.stringFromDate(date)
+        
         var records_loaded: Int = 0
         records_loaded = dailyRecords.count
         // Append Information to the insert query
@@ -100,20 +110,28 @@ class cloudData
         // record.setValue(records_loaded, forKey: "records_loaded_at_start")
         // This field will be used for dealing with NSDate and NSTimer.
         record.setObject(date, forKey: "NSDate")
+        
+        //Append Month and Year info to insert query
+        record.setObject(month, forKey: "month")
+        record.setObject(year, forKey: "year")
+        
         // Save record is the function used similar to Insert Statement in RDBMS
         self.privateDB.saveRecord(record, completionHandler: { (record, error) -> Void in
             NSLog("New Record has been Saved to cloud kit")
         })
     }
     
-    func update_records()
+    /* This function grabs today's records based on date */
+    func todays_records()
     {
         // Predicate is the condition on which the record should be matched against
         // First, Grab the current date, then format the date.
         var date = NSDate()
         var formatter = NSDateFormatter()
         formatter.dateFormat = "MM-dd-yyyy"
+        
         var queryDate:String = formatter.stringFromDate(date)
+        
         let predicate = NSPredicate(format: "date==%@", queryDate)
         let sort = NSSortDescriptor(key: "NSDate", ascending: true)
         // Build the Query: This query is similar to SELECT * FROM Log WHERE date = ''
@@ -198,6 +216,64 @@ class cloudData
             }
         }
     }
+    
+    /* Function to grab the current month's records */
+    func grab_months_records() {
+        //Make Query to get the records of the current month
+        // Predicate is the condition on which the record should be matched against
+        // First, Grab the current month, then format the month.
+        var date = NSDate()
+        var formatter = NSDateFormatter()
+        formatter.dateFormat = "MM"
+
+        var queryMonth:String = formatter.stringFromDate(date)
+        
+        let predicate = NSPredicate(format: "month==%@", queryMonth)
+        let sort = NSSortDescriptor(key: "NSDate", ascending: true)
+        
+        // Build the Query: This query is similar to SELECT * FROM Log WHERE month = ''
+        let query = CKQuery(recordType: "Log", predicate: predicate)
+        
+        query.sortDescriptors = [sort]
+
+        // Execute the Query
+        self.privateDB.performQuery(query,inZoneWithID: nil)
+            {
+                results, error in
+                // If we have an error, display it
+                if error != nil
+                {
+                    dispatch_async(dispatch_get_main_queue())
+                        {
+                            //display error message
+                            println("Error")
+                    }
+                }
+                // Fetch Data from Current Month
+                else {
+                   NSLog("Fetching Data From Current Month")
+                    
+                    var i = 0;
+                    
+                    //Records returned (where is results set)
+                    for record in results {
+                        //initialize monthly record array NSObject?
+                        let grabRecord = monthlyRecord(record: record as CKRecord, database: self.privateDB)
+                        
+                        //append all records into the monthly record array
+                        self.monthlyRecords.append(grabRecord)
+                    }
+                }
+        }
+    }
+    
+    
+    /* Function to grab the current year's records */
+    func years_records() {
+        //Query to get the records of the current month
+        
+    }
+    
     
     /* Function to grab the last record if there are no records for the current day */
     func grabLastCig()

@@ -57,6 +57,7 @@ class HistoryTabViewController: UIViewController {
         
         webViewConfiguration()
         
+        //println(historyData.monthlyRecords)
         // Get Day chart as default
         chartHTML = buildDayChartHTML()
         

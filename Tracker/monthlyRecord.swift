@@ -1,19 +1,22 @@
 //
-//  allRecord.swift
+//  monthlyRecord.swift
 //  TrackerTeamA
 //
-
+//  Created by Amy Schmidt on 12/7/14.
+//  Copyright (c) 2014 Amy Schmidt. All rights reserved.
+//
 
 import Foundation
 import CloudKit
 
-class allRecord: NSObject {
-
+class monthlyRecord: NSObject
+{
     var record : CKRecord!
     var dateString : String!
     var date_NS : NSDate!
     var month : Int!
     var year : Int!
+    
     weak var database : CKDatabase!
     
     init(record : CKRecord, database: CKDatabase)
@@ -25,5 +28,5 @@ class allRecord: NSObject {
         self.month = record.objectForKey("month") as Int!
         self.year = record.objectForKey("year") as Int!
     }
-    
 }
+
