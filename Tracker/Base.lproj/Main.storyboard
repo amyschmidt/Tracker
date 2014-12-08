@@ -70,7 +70,7 @@
                                                 </variation>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0yE-sV-zOI">
-                                                <rect key="frame" x="124" y="401" width="96" height="32"/>
+                                                <rect key="frame" x="124" y="402" width="96" height="32"/>
                                                 <state key="normal" image="button.jpg">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -148,6 +148,7 @@
                                             <constraint firstItem="9Ia-zT-oJ2" firstAttribute="trailing" secondItem="Das-HR-wUB" secondAttribute="trailing" id="Tbw-26-xAW"/>
                                             <constraint firstAttribute="centerX" secondItem="tXa-DN-scV" secondAttribute="centerX" id="UZa-la-AxX"/>
                                             <constraint firstItem="s2u-LR-bO1" firstAttribute="centerX" secondItem="WSJ-Im-Mme" secondAttribute="centerX" id="Uuu-QV-RFk"/>
+                                            <constraint firstItem="9Ia-zT-oJ2" firstAttribute="centerX" secondItem="0yE-sV-zOI" secondAttribute="centerX" id="VlJ-DB-r4v"/>
                                             <constraint firstItem="0yE-sV-zOI" firstAttribute="top" secondItem="9Ia-zT-oJ2" secondAttribute="bottom" constant="20" id="WF5-sC-Ffg"/>
                                             <constraint firstItem="Oyx-PQ-ltZ" firstAttribute="leading" secondItem="tXa-DN-scV" secondAttribute="trailing" constant="7" id="YLe-AV-ANM"/>
                                             <constraint firstItem="Oyx-PQ-ltZ" firstAttribute="top" secondItem="6q6-cZ-ZOr" secondAttribute="bottom" constant="1" id="bmn-gD-3m0"/>
@@ -171,19 +172,22 @@
                                             <constraint firstItem="Oyx-PQ-ltZ" firstAttribute="leading" secondItem="tXa-DN-scV" secondAttribute="trailing" constant="7" id="ul4-w6-a0L"/>
                                             <constraint firstItem="s2u-LR-bO1" firstAttribute="trailing" secondItem="Das-HR-wUB" secondAttribute="trailing" id="vJO-C7-eaa"/>
                                             <constraint firstAttribute="centerX" secondItem="0yE-sV-zOI" secondAttribute="centerX" id="vg1-cL-U5B"/>
+                                            <constraint firstItem="Das-HR-wUB" firstAttribute="top" secondItem="s2u-LR-bO1" secondAttribute="bottom" constant="5" id="wMG-zg-mag"/>
                                             <constraint firstItem="tXa-DN-scV" firstAttribute="centerY" secondItem="Oyx-PQ-ltZ" secondAttribute="centerY" id="whA-FM-wfK"/>
-                                            <constraint firstItem="0yE-sV-zOI" firstAttribute="top" secondItem="9Ia-zT-oJ2" secondAttribute="bottom" constant="14" id="xsu-mN-mLZ"/>
+                                            <constraint firstItem="0yE-sV-zOI" firstAttribute="top" secondItem="9Ia-zT-oJ2" secondAttribute="bottom" constant="15" id="xsu-mN-mLZ"/>
                                             <constraint firstItem="tXa-DN-scV" firstAttribute="top" secondItem="6q6-cZ-ZOr" secondAttribute="bottom" constant="1" id="y68-Rk-s1i"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
                                                 <exclude reference="2qw-Gt-NaG"/>
                                                 <exclude reference="8OY-DF-ZlR"/>
+                                                <exclude reference="Ivc-tt-8cJ"/>
                                                 <exclude reference="fuI-QH-Hel"/>
                                                 <exclude reference="giM-TY-nId"/>
                                                 <exclude reference="hJj-im-eni"/>
                                                 <exclude reference="q4p-rT-7Jk"/>
                                                 <exclude reference="1xC-PK-kse"/>
+                                                <exclude reference="9rE-oq-eMt"/>
                                                 <exclude reference="Afi-g1-Y54"/>
                                                 <exclude reference="TRn-MM-aV1"/>
                                                 <exclude reference="Uuu-QV-RFk"/>

@@ -218,7 +218,7 @@ class cloudData
     }
     
     /* Function to grab the current month's records */
-    func grab_months_records() {
+    /*func grab_months_records() {
         //Make Query to get the records of the current month
         // Predicate is the condition on which the record should be matched against
         // First, Grab the current month, then format the month.
@@ -272,7 +272,7 @@ class cloudData
     func years_records() {
         //Query to get the records of the current month
         
-    }
+    }*/
     
     
     /* Function to grab the last record if there are no records for the current day */
