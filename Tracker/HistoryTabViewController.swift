@@ -58,6 +58,10 @@ class HistoryTabViewController: UIViewController {
         webViewConfiguration()
         MaxLabel.text = "\(historyData.maxGoal)"
 
+        barGraph.text = "Hourly"
+        average.text = "Daily Average"
+        lastSmokeTimer.text = "Time Since Last Smoke"
+        mostSmokedDay.text = " "
         
         //println(historyData.monthlyRecords)
         // Get Day chart as default
