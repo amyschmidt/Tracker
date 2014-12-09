@@ -182,18 +182,9 @@ class HistoryTabViewController: UIViewController {
             // Get hour from record's timestamp (24-hour)
             var TimeString:String = formatter.stringFromDate(historyData.dailyRecords[i].date_NS)
             
-            // Unused:
-            // formatter.timeStyle = .ShortStyle
-            // println("Date of Smoke: \(entry.dateString)")
-            // println("\(model.dailyRecords[0].date_NS)")
-            
-            // Debugging purposes:
-            // println("Time of Smoke: \(TimeString)")
-            // println(entry.date_NS)
-            
             // Convert hour from string to int
             var hour: Int = TimeString.toInt()!
-            println("Adding record with hour: \(hour)")
+            
             // Increment index based upon hour
             switch hour {
             case 0..<4:
@@ -227,7 +218,7 @@ class HistoryTabViewController: UIViewController {
             
             // Convert hour from string to int
             var hour: Int = TimeString.toInt()!
-            println("Adding record with hour: \(hour)")
+
             // Increment index based upon hour
             switch hour {
             case 0..<4:
@@ -274,10 +265,9 @@ class HistoryTabViewController: UIViewController {
             // Convert hour from string to int
             var day: Int!
             
+            // Get int of day of record
             day = getDayOfWeek(DateString)
             
-            println("Day of week: \(day)")
-            println("Array count: \(dataArray.count)")
             // Increment index based upon day of week
             switch day {
             // Sunday
@@ -317,9 +307,8 @@ class HistoryTabViewController: UIViewController {
             // Convert hour from string to int
             var day: Int!
             
+            // Get int of day of record
             day = getDayOfWeek(DateString)
-            
-            println(day)
             
             // Increment index based upon day of week
             switch day {
