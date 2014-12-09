@@ -22,7 +22,6 @@ class HistoryTabViewController: UIViewController {
     var todaysCount : Int!
     
     
-    
     override func viewWillAppear(animated: Bool) {
         // Grab total records (Cloud records + Incremented Records)
         todaysCount = historyData.dailyRecords.count + historyData.sessionRecords.count
