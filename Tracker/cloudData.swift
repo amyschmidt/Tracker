@@ -37,6 +37,8 @@ class cloudData
     // Goal (record)
     var goalRecord: CKRecord!
     var maxGoal: Int = 0
+    // Success flag
+    var iCloudResponse = false
 
     init(){
         container = CKContainer.defaultContainer()
@@ -126,23 +128,19 @@ class cloudData
         var date = NSDate()
         var formatter = NSDateFormatter()
         formatter.dateFormat = "MM-dd-yyyy"
-        
+        // Set all paramaters we need to perform the Query
         var queryDate:String = formatter.stringFromDate(date)
-        
         let predicate = NSPredicate(format: "date==%@", queryDate)
         let sort = NSSortDescriptor(key: "NSDate", ascending: true)
-        // Build the Query: This query is similar to SELECT * FROM Log WHERE date = ''
         let query = CKQuery(recordType: "Log", predicate: predicate)
-        
-        // Select all records
-        // let query = CKQuery(recordType: "Log", predicate: true)
-        
         query.sortDescriptors = [sort]
-        // Execute the Query
+        /*  performQuery() asynchronously searches the indicated zone. In this case we search the user's private Database. The error handling block only runs if we get a message back from iCloud. During our first presentation thish block never got executed because we had a weak connection to Mizzou's WiFi. We never got a response, thus the error handling functionality was never fired. In order to solve this solution I tried multiple attempts to handle a weak connection on my own by building custom functions. But then I realized someone must have already done this so I began searching Apple's SDK looking for a library that I could implement to handle our network issues. I came across multiple libraries like NSURLConnection, NSURLSession. but I then realized these libraries are prebuilt to handle their own HTTP requests, so I came back around to further studies in Advanced CloudKit */
         self.privateDB.performQuery(query,inZoneWithID: nil)
         {
             results, error in
-            // If we have an error than display it
+            NSLog("Fetching Today's Records")
+            self.iCloudResponse = true
+            // If iCloud responds with an Error, then display the error to the User.
             if error != nil
             {
                 dispatch_async(dispatch_get_main_queue())
@@ -151,10 +149,9 @@ class cloudData
                     return
                 }
             }
-            // Fetch todays data
+            // If iCloud responds with our records, then display the count to the User.
             else
             {
-                NSLog("Fetching Data From Today")
                 var i = 0
                 // Records returned
                 for record in results
@@ -188,21 +185,16 @@ class cloudData
                     }
                 })
                 
-                /*
-                if let localRecord = NSKeyedUnarchiver.unarchiveObjectWithFile("records") as sessionRecord?
-                {
-                    println("Local Records: \(localRecord.date_NS)")
-                }
-                */
                 // Unarchive + Load any records if user incremented during Airplane Mode or using the Widget.
-                if let savedDates = NSUserDefaults.standardUserDefaults().objectForKey("records") as? [NSDate] {
+                if let savedDates = NSUserDefaults.standardUserDefaults().objectForKey("records") as? [NSDate]
+                {
                     println("There are some Records saved on the phone. Now Uploading them to iCloud...")
                     // airplaneModeDates can be used in other ViewControllers if someone needs them.
                     self.airplaneModeDates = savedDates
                     // Save All the Records to the Cloud
-                    for records in self.airplaneModeDates{
+                    for records in self.airplaneModeDates
+                    {
                         self.save_record_to_cloud(records)
-                        println(records)
                     }
                     println("Those Records have been sent to iCloud. Now Clearing local records.")
                     // Clear out the local data from NSUserDefaults
@@ -331,8 +323,7 @@ class cloudData
             if error != nil
             {
                 println("Error Grabbing Goal from iCloud \(error)")
-                println(save)
-                println("\(newGoal)")
+
                 if (save) {
                     self.saveNewGoal(newGoal)
                 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="456-dl-Q8o">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="456-dl-Q8o">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -109,10 +109,53 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="WSJ-Im-Mme">
+                                                <rect key="frame" x="161" y="146" width="20" height="20"/>
+                                            </activityIndicatorView>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T4y-xs-ACf">
+                                                <rect key="frame" x="36" y="125" width="20" height="20"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="25" id="huR-ZQ-IKC"/>
+                                                    <constraint firstAttribute="width" constant="25" id="xYn-zN-2ZL"/>
+                                                </constraints>
+                                                <state key="normal" image="reload">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="refreshCount:" destination="3oz-b8-NfC" eventType="touchUpInside" id="wfZ-Qn-AKa"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d5b-Y3-Z9z">
+                                                <rect key="frame" x="36" y="125" width="20" height="20"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="25" id="LJO-0s-MAB"/>
+                                                    <constraint firstAttribute="width" constant="25" id="TDI-v4-yOw"/>
+                                                </constraints>
+                                                <state key="normal" image="reload">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="refreshCount:" destination="3oz-b8-NfC" eventType="touchUpInside" id="CGf-vQ-x4v"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DkK-by-HhY">
+                                                <rect key="frame" x="36" y="125" width="20" height="20"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="25" id="DV9-BM-NK9"/>
+                                                    <constraint firstAttribute="height" constant="25" id="H9e-eW-4nJ"/>
+                                                </constraints>
+                                                <state key="normal" image="reload">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="refreshCount:" destination="3oz-b8-NfC" eventType="touchUpInside" id="ItV-r8-Tbq"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="tXa-DN-scV" firstAttribute="centerX" secondItem="6q6-cZ-ZOr" secondAttribute="centerX" id="1J9-dp-mZr"/>
+                                            <constraint firstItem="WSJ-Im-Mme" firstAttribute="top" secondItem="T4y-xs-ACf" secondAttribute="bottom" id="1K9-Qa-sK4"/>
                                             <constraint firstItem="s2u-LR-bO1" firstAttribute="top" secondItem="tEp-Lb-t70" secondAttribute="topMargin" constant="50" id="1xC-PK-kse"/>
                                             <constraint firstAttribute="centerX" secondItem="Das-HR-wUB" secondAttribute="centerX" id="4KF-3R-I9w"/>
                                             <constraint firstItem="9Ia-zT-oJ2" firstAttribute="centerX" secondItem="tXa-DN-scV" secondAttribute="centerX" constant="-0.5" id="5OQ-IJ-Jtz"/>
@@ -122,6 +165,7 @@
                                             <constraint firstItem="tXa-DN-scV" firstAttribute="leading" secondItem="eyH-5e-eOO" secondAttribute="trailing" constant="7" id="8JD-Wn-VnU"/>
                                             <constraint firstItem="Das-HR-wUB" firstAttribute="centerX" secondItem="6q6-cZ-ZOr" secondAttribute="centerX" id="8OY-DF-ZlR"/>
                                             <constraint firstItem="9Ia-zT-oJ2" firstAttribute="top" secondItem="tXa-DN-scV" secondAttribute="bottom" constant="5" id="8ke-3o-2de"/>
+                                            <constraint firstAttribute="centerX" secondItem="WSJ-Im-Mme" secondAttribute="centerX" id="9f2-YY-e3Z"/>
                                             <constraint firstAttribute="centerX" secondItem="s2u-LR-bO1" secondAttribute="centerX" id="9rE-oq-eMt"/>
                                             <constraint firstItem="s2u-LR-bO1" firstAttribute="top" secondItem="tEp-Lb-t70" secondAttribute="top" constant="100" id="Afi-g1-Y54"/>
                                             <constraint firstAttribute="centerX" secondItem="6q6-cZ-ZOr" secondAttribute="centerX" id="BZf-MM-unD"/>
@@ -152,7 +196,9 @@
                                             <constraint firstItem="Oyx-PQ-ltZ" firstAttribute="leading" secondItem="tXa-DN-scV" secondAttribute="trailing" constant="7" id="YLe-AV-ANM"/>
                                             <constraint firstItem="Oyx-PQ-ltZ" firstAttribute="top" secondItem="6q6-cZ-ZOr" secondAttribute="bottom" constant="1" id="bmn-gD-3m0"/>
                                             <constraint firstItem="tXa-DN-scV" firstAttribute="centerX" secondItem="6q6-cZ-ZOr" secondAttribute="centerX" id="cNU-wd-uKx"/>
+                                            <constraint firstItem="Das-HR-wUB" firstAttribute="top" secondItem="WSJ-Im-Mme" secondAttribute="bottom" constant="43" id="dSr-Tg-EsC"/>
                                             <constraint firstItem="tXa-DN-scV" firstAttribute="centerY" secondItem="eyH-5e-eOO" secondAttribute="centerY" id="dgm-fI-QES"/>
+                                            <constraint firstItem="WSJ-Im-Mme" firstAttribute="leading" secondItem="T4y-xs-ACf" secondAttribute="trailing" constant="75" id="eXK-fe-IYl"/>
                                             <constraint firstItem="0yE-sV-zOI" firstAttribute="top" secondItem="9Ia-zT-oJ2" secondAttribute="bottom" constant="20" id="fuI-6t-Gsi"/>
                                             <constraint firstItem="Das-HR-wUB" firstAttribute="top" secondItem="s2u-LR-bO1" secondAttribute="bottom" constant="5" id="fuI-QH-Hel"/>
                                             <constraint firstItem="Das-HR-wUB" firstAttribute="leading" secondItem="9Ia-zT-oJ2" secondAttribute="leading" id="giM-TY-nId"/>
@@ -223,16 +269,11 @@
                                             </mask>
                                         </variation>
                                     </view>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="WSJ-Im-Mme">
-                                        <rect key="frame" x="161" y="146" width="20" height="20"/>
-                                    </activityIndicatorView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="tEp-Lb-t70" secondAttribute="bottom" id="26K-wc-qfS"/>
                                     <constraint firstItem="6q6-cZ-ZOr" firstAttribute="centerY" secondItem="fGS-gP-NhS" secondAttribute="centerY" id="5uX-2S-eou"/>
                                     <constraint firstItem="tEp-Lb-t70" firstAttribute="top" secondItem="fGS-gP-NhS" secondAttribute="top" id="7qb-CY-xcx"/>
-                                    <constraint firstItem="WSJ-Im-Mme" firstAttribute="centerX" secondItem="tEp-Lb-t70" secondAttribute="centerX" id="FEQ-mm-fsR"/>
-                                    <constraint firstItem="WSJ-Im-Mme" firstAttribute="top" secondItem="fGS-gP-NhS" secondAttribute="top" constant="146" id="P0w-cF-n5c"/>
                                     <constraint firstItem="6q6-cZ-ZOr" firstAttribute="centerX" secondItem="fGS-gP-NhS" secondAttribute="centerX" id="Y7E-hB-wZ9"/>
                                     <constraint firstAttribute="trailing" secondItem="tEp-Lb-t70" secondAttribute="trailing" id="gQj-Tz-cE6"/>
                                     <constraint firstItem="tEp-Lb-t70" firstAttribute="leading" secondItem="fGS-gP-NhS" secondAttribute="leading" id="hMG-VS-1z6"/>
@@ -256,8 +297,9 @@
                     <tabBarItem key="tabBarItem" title="Today" image="Tracker Today Icon" id="Iue-8n-83A"/>
                     <connections>
                         <outlet property="activityIndicatorView" destination="WSJ-Im-Mme" id="vG4-pD-gtb"/>
-                        <outlet property="dailyCount" destination="s2u-LR-bO1" id="Bu6-Jh-p5b"/>
+                        <outlet property="dailyCountLabel" destination="s2u-LR-bO1" id="mKS-ZP-SZY"/>
                         <outlet property="plusButton" destination="0yE-sV-zOI" id="SG7-T9-pNg"/>
+                        <outlet property="refreshButton" destination="DkK-by-HhY" id="DhD-S6-YgI"/>
                         <outlet property="timeSinceLastSmokeLabel" destination="6q6-cZ-ZOr" id="MIz-eI-2kO"/>
                     </connections>
                 </viewController>
@@ -776,5 +818,6 @@
         <image name="Tracker History Icon" width="30" height="31"/>
         <image name="Tracker Plus Button" width="293" height="110"/>
         <image name="Tracker Today Icon" width="34" height="26"/>
+        <image name="reload" width="512" height="512"/>
     </resources>
 </document>
