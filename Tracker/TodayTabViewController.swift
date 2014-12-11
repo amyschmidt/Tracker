@@ -34,8 +34,7 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
         model = self.appDelegate.getCloudData()
         // Set the delegate of this ViewController class
         model.delegate = self
-        // Call update records from cloudData.swift
-        model.grab_todays_records()
+
         // Show Loading Animation
         activityIndicatorView.startAnimating()
         // Disable Buttons
@@ -52,11 +51,7 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
         // NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateCountFromWidget", name: "saveRecordFromWidget", object: nil)
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(true)
-        // Upload dates saved by the Widget
-        // updateCountFromWidget()
-    }
+    /*
     /* CloudKit Delegate function to update the Count From the Widget */
     func updateCountFromWidget()
     {
@@ -78,6 +73,7 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
         sharedDefaults?.setObject(nil, forKey: "record")
         sharedDefaults?.synchronize()
     }
+*/
     
     
     @IBAction func refreshCount(sender: AnyObject) {
@@ -103,7 +99,7 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
         else
         {
             // Save Record to the cloud
-            model.save_record_to_cloud(NSDate())
+            model.save_record_to_cloud(NSDate(), savedForWidget: false)
         }
     }
     /* Monitor the initial download time */
@@ -112,7 +108,7 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
         var now = NSDate()
         var elapsedTime:NSTimeInterval = now.timeIntervalSinceDate(self.startDate)
         // If we haven't heard from iCloud
-        if elapsedTime > 8 && !model.iCloudResponse
+        if elapsedTime > 12 && !model.iCloudResponse
         {
             // Display Error Message to User
             let message = "Tracker cannot access your data because the network connection was lost."
@@ -126,7 +122,7 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
             self.displayAirplaneMode()
         }
         // Else we heard from iCloud but got an Error and are therefore in Airplane Mode, we don't want this timer to keep running so I shut it off after 8 seconds.
-        else if elapsedTime > 8 && model.iCloudResponse
+        else if elapsedTime > 12 && model.iCloudResponse
         {
             // Stop requestTimer
             self.requestMonitoringTimer.invalidate()
@@ -212,7 +208,7 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
     /* CloudKitDelegate function that Sets the Labels for the count and timer */
     func successfulGrab_UpdateCount(timeOfLastCig:NSDate) {
         // Save the Count
-        self.count = model.dailyRecords.count
+        self.count = model.NumberOfDailyRecords
         dailyCountLabel.text = String(self.count)
         NSLog("Upon Load 'Today's Count' has been updated to: \(self.count)")
         activityIndicatorView.stopAnimating()

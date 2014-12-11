@@ -11,7 +11,7 @@ protocol CloudKitDelegate {
     func successfulSave()
     func errorUpdating(error: NSError)
     func successfulGrab_UpdateCount(timeOfLastCig:NSDate)
-    func updateCountFromWidget()
+    // func updateCountFromWidget()
 }
 
 class cloudData
@@ -44,6 +44,8 @@ class cloudData
     // HTTP Request Variables for Network Issues
     var iCloudResponse = false
     var requestAttempts : Int = 0
+    // THE COUNT!
+    var NumberOfDailyRecords : Int = 0
 
     init(){
         container = CKContainer.defaultContainer()
@@ -61,7 +63,8 @@ class cloudData
             // Save All the Records to the Cloud
             for records in self.airplaneModeDates
             {
-                self.save_record_to_cloud(records)
+                // If savedForWidget is true, then it will grab the records after it's called.
+                self.save_record_to_cloud(records, savedForWidget: true)
             }
             println("Those Records have been sent to iCloud. Now Clearing local records.")
             // Clear out the local data from NSUserDefaults
@@ -78,12 +81,16 @@ class cloudData
         println("Saving Record [\(NSDate())]to Phone")
     }
     
-    func save_record_to_cloud(date: NSDate)
+    func save_record_to_cloud(date: NSDate, savedForWidget: Bool)
     {
-        // Save to current session's records array
-        let today = sessionRecord()
-        self.sessionRecords.append(today)
-        
+        /*
+        if !savedForWidget
+        {
+            // Save to current session's records array
+            let today = sessionRecord()
+            self.sessionRecords.append(today)
+        }
+        */
         // Object that decides which Record (or Table) to save to.
         let record = CKRecord(recordType: "Log")
 
@@ -99,8 +106,8 @@ class cloudData
         formatter.dateFormat = "yyyy"
         var year:String = formatter.stringFromDate(date)
         
-        var records_loaded: Int = 0
-        records_loaded = dailyRecords.count
+        // var records_loaded: Int = 0
+        // records_loaded = dailyRecords.count
         // Append Information to the insert query
         // These fields will be used for query purposes
         record.setObject(DateString, forKey: "date")
@@ -131,6 +138,10 @@ class cloudData
                 {
                     println("New Record has been Saved to cloud kit")
                     self.delegate?.successfulSave()
+                    if (savedForWidget)
+                    {
+                        self.grab_todays_records()
+                    }
                     return
                 }
             }
@@ -141,6 +152,7 @@ class cloudData
     /* This function grabs today's records based on date */
     func grab_todays_records()
     {
+        
         self.requestAttempts++
         // Predicate is the condition on which the record should be matched against
         // First, Grab the current date, then format the date.
@@ -179,10 +191,21 @@ class cloudData
                     {
                         // Initialize multiple dailyRecord Objects
                         let grabRecord = dailyRecord(record: record as CKRecord, database: self.privateDB)
-                        // Append the record to LogRecords Object which is local to this class.
-                        self.dailyRecords.append(grabRecord)
+                        // Append the record to array IF in first session
+                        if self.requestAttempts == 1
+                        {
+                            self.dailyRecords.append(grabRecord)
+                        }
+                        else
+                        {
+                            self.dailyRecords = [dailyRecord]()
+                            self.dailyRecords.append(grabRecord)
+                        }
+                        
                         i++
                     }
+                    // Save the Count
+                    self.NumberOfDailyRecords = i
                     // Find Date of Last Cigarette
                     
                     // If no records from today, then grab the last cigarette from a different day (Not Today)

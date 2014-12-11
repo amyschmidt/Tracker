@@ -15,6 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var isInInitialSession = true
     // Widget Sharing Capabilities
     let sharedDefaults = NSUserDefaults(suiteName: "group.TrackerTeamA")
+    // var NumberOfDailyRecords : Int = 0
     
     /* Function for any ViewController to grab the instantiated CloudDataObject */
     func getCloudData() ->cloudData{
@@ -27,16 +28,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let activeString:String = self.appIsActive ? "Active":"Not Active"
         println("Tracker Launched. App is \(activeString).")
         self.isInInitialSession = true
+        // Call update records from cloudData.swift
+        CloudDataObject.grab_todays_records()
         return true
     }
 
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+        // App is Inactive
         self.appIsActive = false
         let activeString:String = self.appIsActive ? "Active":"Not Active"
         println("Tracker is about to be \(activeString).")
-        self.isInInitialSession = true
+        self.isInInitialSession = false
     }
 
     func applicationDidEnterBackground(application: UIApplication) {
@@ -64,8 +68,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             println("There is a record from the Widget. Attempting to Save it.")
             if (!self.isInInitialSession)
             {
-                CloudDataObject.save_record_to_cloud(date)
-                CloudDataObject.grab_todays_records()
+                println("This is not initial Session. OKAY to Save")
+                CloudDataObject.save_record_to_cloud(date, savedForWidget: true)
+                // CloudDataObject.grab_todays_records()
+                // Clear Out Records From Widget
+                sharedDefaults?.setObject(nil, forKey: "record")
+                sharedDefaults?.synchronize()
             }
         }
     }

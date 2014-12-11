@@ -25,7 +25,8 @@ class HistoryTabViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         // Grab total records (Cloud records + Incremented Records)
-        todaysCount = historyData.dailyRecords.count + historyData.sessionRecords.count
+        historyData.grab_todays_records()
+        todaysCount = historyData.NumberOfDailyRecords + historyData.sessionRecords.count
         dataLabel.text = "\(todaysCount)"
         MaxLabel.text = "\(historyData.maxGoal)"
         // Get Day chart as default
