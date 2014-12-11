@@ -35,8 +35,6 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
         model.delegate = self
         // Call update records from cloudData.swift
         model.grab_todays_records()
-        // Grab Goal for GoalsTab
-        model.grabGoal(false, newGoal: 0)
         // Show Loading Animation
         activityIndicatorView.startAnimating()
         // Disable Buttons
@@ -66,6 +64,10 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
     
     
     @IBAction func refreshCount(sender: AnyObject) {
+        // Call update records from cloudData.swift
+        model.grab_todays_records()
+        // Show Loading Animation
+        activityIndicatorView.startAnimating()
     }
     
     /* Function for when the Increment Button is clicked */
@@ -146,6 +148,9 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
         dailyCountLabel.text = "0"
         plusButton.enabled = true
         self.tabBarController?.tabBar.userInteractionEnabled = false
+        // Show refresh button
+        self.refreshButton.hidden = false
+        self.refreshButton.userInteractionEnabled = true
         // set Airplane Mode
         self.airplaneMode = true
         return
@@ -174,7 +179,7 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
 
         // Start Timer
         self.startTimer(NSDate())
-        
+
         return
     }
     
@@ -192,10 +197,12 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "grabLastCigIsFinished_UseItsDate", name: "fetchLastRecord", object: nil)
         // Initialize Timer
         self.startTimer(timeOfLastCig)
-
         // refresh Today Widget values
         self.sharedDefaults?.setObject(self.count, forKey: "count")
         self.sharedDefaults?.synchronize()
+        // Hide refresh button
+        self.refreshButton.hidden = true
+        self.refreshButton.userInteractionEnabled = false
     }
     
     func grabLastCigIsFinished_UseItsDate()

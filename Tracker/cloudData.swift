@@ -37,8 +37,9 @@ class cloudData
     // Goal (record)
     var goalRecord: CKRecord!
     var maxGoal: Int = 0
-    // Success flag
+    // HTTP Request Variables for Network Issues
     var iCloudResponse = false
+    var requestAttempts : Int = 0
 
     init(){
         container = CKContainer.defaultContainer()
@@ -123,6 +124,7 @@ class cloudData
     /* This function grabs today's records based on date */
     func grab_todays_records()
     {
+        self.requestAttempts++
         // Predicate is the condition on which the record should be matched against
         // First, Grab the current date, then format the date.
         var date = NSDate()
@@ -153,6 +155,8 @@ class cloudData
             else
             {
                 var i = 0
+                // Begin process of Grabbing the Goal
+                self.grabGoal(false, newGoal: 0)
                 // Records returned
                 for record in results
                 {
