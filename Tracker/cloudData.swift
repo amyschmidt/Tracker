@@ -10,6 +10,7 @@ import Foundation
 protocol CloudKitDelegate {
     func errorUpdating(error: NSError)
     func countUpdated(timeOfLastCig:NSDate)
+    func updateCountFromWidget()
 }
 
 class cloudData
@@ -37,6 +38,8 @@ class cloudData
     // Goal (record)
     var goalRecord: CKRecord!
     var maxGoal: Int = 0
+    // date of Last Cig
+    var dateOfLastCig:NSDate = NSDate()
     // HTTP Request Variables for Network Issues
     var iCloudResponse = false
     var requestAttempts : Int = 0
@@ -44,37 +47,32 @@ class cloudData
     init(){
         container = CKContainer.defaultContainer()
         privateDB = container.privateCloudDatabase
+        
+        // Begin process of Grabbing the Goal
+        self.grabGoal(false, newGoal: 0)
+        
+        // Unarchive + Load any records if user incremented during Airplane Mode or using the Widget.
+        if let savedDates = NSUserDefaults.standardUserDefaults().objectForKey("records") as? [NSDate]
+        {
+            println("There are some Records saved on the phone. Now Uploading them to iCloud...")
+            // airplaneModeDates can be used in other ViewControllers if someone needs them.
+            self.airplaneModeDates = savedDates
+            // Save All the Records to the Cloud
+            for records in self.airplaneModeDates
+            {
+                self.save_record_to_cloud(records)
+            }
+            println("Those Records have been sent to iCloud. Now Clearing local records.")
+            // Clear out the local data from NSUserDefaults
+            var appDomain = NSBundle.mainBundle().bundleIdentifier
+            // NSUserDefaults.removePersistentDomainForName(appDomain)
+            NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain!)
+        }
     }
     
-    func save_record_to_phone()
+    func save_record_to_phone(date : NSDate)
     {
-        // var path: NSArray = NSSearchPathForDirectoriesInDomains(NSD, NSUserDefaults, YES)
-        // var directory: NSString = path.objectAtIndex(0)
-        // var success = false
-        // Save to airplaneMode records array
-        /*
-        if let today = airplaneModeRecord{
-            success = NSKeyedArchiver.archiveRootObject(today, toFile: "record.plist")
-            if success
-            {
-                println("Saved Successfully")
-            }
-            else
-            {
-                println("Error saving data file")
-            }
-        }
-        */
-        // let today = sessionRecord()
-        // self.airplaneModeRecords.append(today)
-        // NSKeyedArchiver.archiveRootObject(airplaneModeRecords, toFile: "records")
-        /*
-        for dates in airplaneModeDates{
-            println("\(self.airplaneModeDates[airplaneModeDates.count-1])")
-        }
-        */
-        self.airplaneModeDates.append(NSDate())
-        // let data : NSData = NSKeyedArchiver.archivedDataWithRootObject(self.airplaneModeDates)
+        self.airplaneModeDates.append(date)
         NSUserDefaults.standardUserDefaults().setObject(self.airplaneModeDates, forKey: "records")
         println("Saving Record [\(NSDate())]to Phone")
     }
@@ -117,7 +115,24 @@ class cloudData
         
         // Save record is the function used similar to Insert Statement in RDBMS
         self.privateDB.saveRecord(record, completionHandler: { (record, error) -> Void in
-            NSLog("New Record has been Saved to cloud kit")
+            if error != nil
+            {
+                dispatch_async(dispatch_get_main_queue())
+                {
+                        self.delegate?.errorUpdating(error)
+                        self.save_record_to_cloud(date)
+                        return
+                }
+            }
+            else
+            {
+                dispatch_async(dispatch_get_main_queue())
+                {
+                    println("New Record has been Saved to cloud kit")
+                    return
+                }
+            }
+        
         })
     }
     
@@ -154,57 +169,34 @@ class cloudData
             // If iCloud responds with our records, then display the count to the User.
             else
             {
-                var i = 0
-                // Begin process of Grabbing the Goal
-                self.grabGoal(false, newGoal: 0)
-                // Records returned
-                for record in results
+                dispatch_async(dispatch_get_main_queue())
                 {
-                    // Initialize multiple dailyRecord Objects
-                    let grabRecord = dailyRecord(record: record as CKRecord, database: self.privateDB)
-                    // Append the record to LogRecords Object which is local to this class.
-                    self.dailyRecords.append(grabRecord)
-                    i++
-                }
-                // Find Date of Last Cigarette
-                var dateOfLastCig:NSDate = NSDate()
-                // If no records from today, then grab the last cigarette from a different day (Not Today)
-                if (i==0)
-                {
-                    NSLog("No Records from Today, Fetching All Data")
-                    self.grabLastCig()
-                }
-                // else use the last cigarette from Today.
-                else
-                {
-                    dateOfLastCig = self.dailyRecords[self.dailyRecords.count-1].date_NS
-                }
-                
-                // Tell the ViewController that the Data has returned and update the "Count" in the View.
-                // Run countUpdated() on the main thread, because that is the only thread that allows the Interface to be updated.
-                NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-                    // Forces an optional to non optional (Runs only if the optional is not nil)
-                    if let aDelegate = self.delegate {
-                        aDelegate.countUpdated(dateOfLastCig)
-                    }
-                })
-                
-                // Unarchive + Load any records if user incremented during Airplane Mode or using the Widget.
-                if let savedDates = NSUserDefaults.standardUserDefaults().objectForKey("records") as? [NSDate]
-                {
-                    println("There are some Records saved on the phone. Now Uploading them to iCloud...")
-                    // airplaneModeDates can be used in other ViewControllers if someone needs them.
-                    self.airplaneModeDates = savedDates
-                    // Save All the Records to the Cloud
-                    for records in self.airplaneModeDates
+                    var i = 0
+                    // Records returned
+                    for record in results
                     {
-                        self.save_record_to_cloud(records)
+                        // Initialize multiple dailyRecord Objects
+                        let grabRecord = dailyRecord(record: record as CKRecord, database: self.privateDB)
+                        // Append the record to LogRecords Object which is local to this class.
+                        self.dailyRecords.append(grabRecord)
+                        i++
                     }
-                    println("Those Records have been sent to iCloud. Now Clearing local records.")
-                    // Clear out the local data from NSUserDefaults
-                    var appDomain = NSBundle.mainBundle().bundleIdentifier
-                    // NSUserDefaults.removePersistentDomainForName(appDomain)
-                    NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain!)
+                    // Find Date of Last Cigarette
+                    
+                    // If no records from today, then grab the last cigarette from a different day (Not Today)
+                    if (i==0)
+                    {
+                        println("No Records from Today, Fetching All Data")
+                        self.grabLastCig()
+                    }
+                    // else use the last cigarette from Today.
+                    else
+                    {
+                        self.dateOfLastCig = self.dailyRecords[self.dailyRecords.count-1].date_NS
+                    }
+                    // Tell the ViewController that the Data has returned and update the "Count" in the View.
+                    self.delegate?.countUpdated(self.dateOfLastCig)
+                    return
                 }
             }
         }
@@ -324,21 +316,29 @@ class cloudData
         var error: NSError!
         privateDB.fetchRecordWithID(record_id){
             (dbRecord, error) in
+            // If error, then we can't connect to the Internet.
             if error != nil
             {
-                println("Error Grabbing Goal from iCloud \(error)")
-
-                if (save) {
+                dispatch_async(dispatch_get_main_queue())
+                {
+                    println("Error Grabbing Goal from iCloud \(error)")
+                }
+            }
+            // Else if there just isn't a goal in the database, then save a new one.
+            else if dbRecord == nil
+            {
+                if (save)
+                {
                     self.saveNewGoal(newGoal)
                 }
-
             }
+            // Else we received a goal, now we need to replace it
             else
             {
                 // Push this block to main thread
                 dispatch_async(dispatch_get_main_queue())
                 {
-                    // Save the Goal (Integer) to maxGoal
+                    // Set maxGoal
                     self.maxGoal = dbRecord.objectForKey("DailyMax") as Int!
                     // If user wants to save, then push to Cloud, else don't push to Cloud
                     if (save)
@@ -351,6 +351,7 @@ class cloudData
                             else
                             {
                                 NSLog("Saving Goal to iCloud As: \(newGoal)")
+                                // Set maxGoal
                                 self.maxGoal = newGoal
                             }
                             
@@ -358,7 +359,7 @@ class cloudData
                     }
                     else
                     {
-                        // Post to Notification Center to let GoalsTab Know When Done
+                        // Post to Notification Center to let GoalsTab Know that the Goal was successfuly GRABBED
                         NSNotificationCenter.defaultCenter().postNotificationName("fetchGoal", object: nil)
                     }
                 }
@@ -393,7 +394,7 @@ class cloudData
                 }
                 
             }
-                // Fetch todays data
+            // Fetch todays data
             else
             {
                 NSLog("Fetching All Data")
@@ -414,5 +415,19 @@ class cloudData
         }
        
     }
+    /*
+    func save_record_from_Widget()
+    {
+        if (true)
+        {
+            // I still need to grab actual record and not just use NSDate here...
+            self.save_record_to_cloud(NSDate())
+        }
+        else
+        {
+            self.save_record_to_phone()
+        }
+    }
+    */
     
 }

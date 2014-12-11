@@ -2,7 +2,8 @@
 
 import UIKit
 import CloudKit
-
+/* By extending this ViewController as a delegate of the cloudData class, 
+it gives responsibility to this ViewController to implement cloudData's protocols */
 class TodayTabViewController: UIViewController, CloudKitDelegate {
     // class variable for accessing cloudDate variables and methods
     var model: cloudData!
@@ -23,14 +24,14 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
     var airplaneDate : NSDate!
     // Widget Sharing Capabilities
     let sharedDefaults = NSUserDefaults(suiteName: "group.TrackerTeamA")
+    let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    var receivedRecordFromWidget = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        /* Allows this ViewController access to the cloudData's functionality via
-        extending this viewControllers class as a delegate of the cloudData class */
+
         // First, Create a cloudData object to access the delegate from the AppDelegate
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        model = appDelegate.getCloudData()
+        model = self.appDelegate.getCloudData()
         // Set the delegate of this ViewController class
         model.delegate = self
         // Call update records from cloudData.swift
@@ -44,20 +45,36 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
         println("Monitoring the Request Time...")
         let aSelector:Selector = "monitorRequestTime"
         self.requestMonitoringTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: aSelector, userInfo: nil, repeats: true)
+        // listen for when the last Record comes back
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "grabLastCigIsFinished_UseItsDate", name: "fetchLastRecord", object: nil)
+        // listen for dates saved by the Widget
+        self.airplaneDate = sharedDefaults?.objectForKey("record") as NSDate?
+        // NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateCountFromWidget", name: "saveRecordFromWidget", object: nil)
     }
     
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
         // Upload dates saved by the Widget
-        // model.update_records()
-        let sharedDefaults = NSUserDefaults(suiteName: "group.TrackerTeamA")
-        self.airplaneDate = sharedDefaults?.objectForKey("record") as NSDate?
-        if (self.airplaneDate != nil)
+        updateCountFromWidget()
+    }
+    /* CloudKit Delegate function to update the Count From the Widget */
+    func updateCountFromWidget()
+    {
+        // Skip calling this method when the app Loads
+        if (!self.appDelegate.appIsActive)
         {
-            model.save_record_to_cloud(self.airplaneDate!)
-            dailyCountLabel.text = String(model.dailyRecords.count+1)
+            self.count++
+            println("Receiving Records from Widget: Updating Count to: \(self.count) ")
+            // dailyCountLabel.text = String(self.count)
+            /*
+            if (receivedRecordFromWidget)
+            {
+                model.save_record_to_cloud(NSDate())
+            }
+            */
         }
         // Clear Out the recent save from the Widget
-        self.airplaneDate = nil
+        // self.airplaneDate = nil
         sharedDefaults?.setObject(nil, forKey: "record")
         sharedDefaults?.synchronize()
     }
@@ -72,6 +89,7 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
     
     /* Function for when the Increment Button is clicked */
     @IBAction func incrementerClicked(sender: AnyObject) {
+        println("Incrementer Clicked")
         // If airplane mode is enabled
         if (self.airplaneMode)
         {
@@ -80,7 +98,7 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
                 message: message, delegate: nil, cancelButtonTitle: "OK")
             alert.show()
             // Save Record to an array of objects locally to be used in GoalsTAB
-            model.save_record_to_phone()
+            model.save_record_to_phone(NSDate())
         }
         else
         {
@@ -94,7 +112,7 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
         dailyCountLabel.text = "\(self.count)"
         // start/reset timer
         self.startDate = NSDate()
-        let aSelector:Selector = "updateTime"
+        let aSelector:Selector = "updateViewableTimer"
         self.timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: aSelector, userInfo: nil, repeats: true)
         // refresh Today Widget values
         self.sharedDefaults?.setObject(self.count, forKey: "count")
@@ -105,7 +123,7 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
     {
         var now = NSDate()
         var elapsedTime:NSTimeInterval = now.timeIntervalSinceDate(self.startDate)
-
+        // If we haven't heard from iCloud
         if elapsedTime > 8 && !model.iCloudResponse
         {
             // Display Error Message to User
@@ -119,12 +137,14 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
             // Display Airplane Mode
             self.displayAirplaneMode()
         }
+        // Else we heard from iCloud but got an Error and are therefore in Airplane Mode, we don't want this timer to keep running so I shut it off after 8 seconds.
         else if elapsedTime > 8 && model.iCloudResponse
         {
             // Stop requestTimer
             self.requestMonitoringTimer.invalidate()
             println("Request Timer Stopped.")
         }
+        // Else we heard from iCloud and got our Today Records and therefore should shut off the timer immediately.
         else if model.iCloudResponse
         {
             // Stop requestTimer
@@ -133,10 +153,10 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
         }
     }
     /* Start the Viewable timer */
-    func startTimer(date:NSDate)
+    func startViewableTimer(date:NSDate)
     {
         self.startDate = date
-        let aSelector:Selector = "updateTime"
+        let aSelector:Selector = "updateViewableTimer"
         self.timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: aSelector, userInfo: nil, repeats: true)
         return
     }
@@ -157,6 +177,9 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
     }
     /* CloudKit Delegate function to handle errors from the server */
     func errorUpdating(error: NSError) {
+        // Force User to Go to and be trapped on TodayTab
+        // self.navigationController?.pushViewController(self, animated: true)
+        self.navigationController?.popToRootViewControllerAnimated(true)
         // Error Code 4 is Network Failure
         if error.code == 4
         {
@@ -178,7 +201,7 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
         self.displayAirplaneMode()
 
         // Start Timer
-        self.startTimer(NSDate())
+        self.startViewableTimer(NSDate())
 
         return
     }
@@ -193,10 +216,8 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
         plusButton.enabled = true
         self.tabBarController?.tabBar.userInteractionEnabled = true
 
-        // listen for when the data comes back
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "grabLastCigIsFinished_UseItsDate", name: "fetchLastRecord", object: nil)
         // Initialize Timer
-        self.startTimer(timeOfLastCig)
+        self.startViewableTimer(timeOfLastCig)
         // refresh Today Widget values
         self.sharedDefaults?.setObject(self.count, forKey: "count")
         self.sharedDefaults?.synchronize()
@@ -204,7 +225,7 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
         self.refreshButton.hidden = true
         self.refreshButton.userInteractionEnabled = false
     }
-    
+    /* Func is fired off by the Notifaction Center */
     func grabLastCigIsFinished_UseItsDate()
     {
         self.startDate = model.lastRecord[0].date_NS
@@ -212,7 +233,7 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
     
     /* Function to create dynamic stopwatch feature by calculating days, hours, minutes and then displaying them. This function
     gets called by a Selector controlled by NSTimer. So this function literally gets called every second over and over again */
-    func updateTime(){
+    func updateViewableTimer(){
         // get timestamp for right now
         var now = NSDate()
         // set time interval (in seconds) between now and last cigarette

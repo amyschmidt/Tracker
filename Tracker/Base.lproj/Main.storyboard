@@ -8,7 +8,7 @@
         <!--Today-->
         <scene sceneID="eeY-cf-vAU">
             <objects>
-                <viewController id="3oz-b8-NfC" customClass="TodayTabViewController" customModule="TrackerTeamA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TodayTab" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3oz-b8-NfC" customClass="TodayTabViewController" customModule="TrackerTeamA" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iEB-yJ-xbg"/>
                         <viewControllerLayoutGuide type="bottom" id="ScI-ot-Wxm"/>
@@ -305,7 +305,7 @@
         <!--Goals-->
         <scene sceneID="0Hh-K1-J40">
             <objects>
-                <viewController id="62J-Oc-rgv" customClass="GoalsTabViewController" customModule="TrackerTeamA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GoalsTab" useStoryboardIdentifierAsRestorationIdentifier="YES" id="62J-Oc-rgv" customClass="GoalsTabViewController" customModule="TrackerTeamA" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Tsf-En-KEQ"/>
                         <viewControllerLayoutGuide type="bottom" id="ecb-MG-cWE"/>
@@ -509,7 +509,7 @@
         <!--History-->
         <scene sceneID="CQx-85-ZFp">
             <objects>
-                <viewController id="lQJ-7F-zwz" customClass="HistoryTabViewController" customModule="TrackerTeamA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HistoryTab" useStoryboardIdentifierAsRestorationIdentifier="YES" id="lQJ-7F-zwz" customClass="HistoryTabViewController" customModule="TrackerTeamA" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="pgL-Yp-KFg"/>
                         <viewControllerLayoutGuide type="bottom" id="Ncb-p5-53u"/>

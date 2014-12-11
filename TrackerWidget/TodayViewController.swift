@@ -55,6 +55,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
                 self.countLabel.alpha = 1.0
                 self.countLabel.text = "Count: \(self.count)"
         })
+        // Post to Notification Center to let TodayTabViewController Know that the user pressed incrementer
+        NSNotificationCenter.defaultCenter().postNotificationName("saveRecordFromWidget", object: nil)
         /*
         self.airplaneModeDates.append(NSDate())
         NSUserDefaults.standardUserDefaults().setObject(self.airplaneModeDates, forKey: "records")
