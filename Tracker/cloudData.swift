@@ -8,8 +8,9 @@ import Foundation
 
 // protocol functions will be implemented in the TodayTabViewController
 protocol CloudKitDelegate {
+    func successfulSave()
     func errorUpdating(error: NSError)
-    func countUpdated(timeOfLastCig:NSDate)
+    func successfulGrab_UpdateCount(timeOfLastCig:NSDate)
     func updateCountFromWidget()
 }
 
@@ -120,7 +121,7 @@ class cloudData
                 dispatch_async(dispatch_get_main_queue())
                 {
                         self.delegate?.errorUpdating(error)
-                        self.save_record_to_cloud(date)
+                        self.save_record_to_phone(date)
                         return
                 }
             }
@@ -129,6 +130,7 @@ class cloudData
                 dispatch_async(dispatch_get_main_queue())
                 {
                     println("New Record has been Saved to cloud kit")
+                    self.delegate?.successfulSave()
                     return
                 }
             }
@@ -195,7 +197,7 @@ class cloudData
                         self.dateOfLastCig = self.dailyRecords[self.dailyRecords.count-1].date_NS
                     }
                     // Tell the ViewController that the Data has returned and update the "Count" in the View.
-                    self.delegate?.countUpdated(self.dateOfLastCig)
+                    self.delegate?.successfulGrab_UpdateCount(self.dateOfLastCig)
                     return
                 }
             }

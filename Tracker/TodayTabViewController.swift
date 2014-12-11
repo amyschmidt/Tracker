@@ -55,7 +55,7 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         // Upload dates saved by the Widget
-        updateCountFromWidget()
+        // updateCountFromWidget()
     }
     /* CloudKit Delegate function to update the Count From the Widget */
     func updateCountFromWidget()
@@ -105,18 +105,6 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
             // Save Record to the cloud
             model.save_record_to_cloud(NSDate())
         }
-
-        // Increment count Label
-        self.count = NSString(string: dailyCountLabel.text!).integerValue
-        self.count++
-        dailyCountLabel.text = "\(self.count)"
-        // start/reset timer
-        self.startDate = NSDate()
-        let aSelector:Selector = "updateViewableTimer"
-        self.timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: aSelector, userInfo: nil, repeats: true)
-        // refresh Today Widget values
-        self.sharedDefaults?.setObject(self.count, forKey: "count")
-        self.sharedDefaults?.synchronize()
     }
     /* Monitor the initial download time */
     func monitorRequestTime()
@@ -175,7 +163,7 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
         self.airplaneMode = true
         return
     }
-    /* CloudKit Delegate function to handle errors from the server */
+    /* CloudKit Delegate function to handle errors from grabbing from the server */
     func errorUpdating(error: NSError) {
         // Force User to Go to and be trapped on TodayTab
         // self.navigationController?.pushViewController(self, animated: true)
@@ -183,7 +171,7 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
         // Error Code 4 is Network Failure
         if error.code == 4
         {
-            let message = "You do not have internet access. We have set you in our AirPlane Mode."
+            let message = "You do not have internet access. Please Try again Later."
             let alert = UIAlertView(title: "Error Loading Cloud Data.",
                 message: message, delegate: nil, cancelButtonTitle: "OK")
             alert.show()
@@ -206,8 +194,23 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
         return
     }
     
+    /* CloudKit Delegate function to handle errors from saving to the server */
+    func successfulSave() {
+        // Increment count Label
+        self.count = NSString(string: dailyCountLabel.text!).integerValue
+        self.count++
+        dailyCountLabel.text = "\(self.count)"
+        // start/reset timer
+        self.startDate = NSDate()
+        let aSelector:Selector = "updateViewableTimer"
+        self.timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: aSelector, userInfo: nil, repeats: true)
+        // refresh Today Widget values
+        self.sharedDefaults?.setObject(self.count, forKey: "count")
+        self.sharedDefaults?.synchronize()
+    }
+    
     /* CloudKitDelegate function that Sets the Labels for the count and timer */
-    func countUpdated(timeOfLastCig:NSDate) {
+    func successfulGrab_UpdateCount(timeOfLastCig:NSDate) {
         // Save the Count
         self.count = model.dailyRecords.count
         dailyCountLabel.text = String(self.count)
