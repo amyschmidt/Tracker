@@ -12,6 +12,8 @@ class EditTableViewController: UIViewController, UITableViewDataSource {
     
     @IBOutlet var tableView: UITableView!
     
+    
+    
     var cloud: cloudData!
     
     var myData: NSMutableArray?
@@ -31,20 +33,36 @@ class EditTableViewController: UIViewController, UITableViewDataSource {
         return myData!.count
     }
     
+    /*
+    func performSegueWithIdentifier(identifier: "doneSegue", sender: AnyObject?) {
+        
+        //var todayTab: TodayTabViewController!
+        
+        //todayTab.viewDidLoad()
+    }
+*/
+    
+    
+    
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath:indexPath) as UITableViewCell
         
         
-        var formatter: NSDateFormatter = NSDateFormatter()
-        formatter.dateFormat = "hh:mm"
+        var timeFormatter: NSDateFormatter = NSDateFormatter()
+        timeFormatter.dateFormat = "hh:mm"
+        
+        var dateFormatter: NSDateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
         
         let anItem = myData![indexPath.row] as dailyRecord
         
-        var TimeString:String = formatter.stringFromDate(anItem.date_NS)
+        
+        var TimeString:String = timeFormatter.stringFromDate(anItem.date_NS)
+        var date:String = dateFormatter.stringFromDate(anItem.date_NS)
         
         cell.textLabel?.text = "Cigarette"
-        cell.detailTextLabel?.text = "Smoked at \(TimeString)"
+        cell.detailTextLabel?.text = "Smoked at \(TimeString) on \(date)"
         
         return cell
     }
