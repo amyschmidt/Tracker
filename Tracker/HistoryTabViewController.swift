@@ -20,6 +20,8 @@ class HistoryTabViewController: UIViewController {
     @IBOutlet weak var dataLabel: UILabel!
     @IBOutlet weak var timeSpentSmokingLabel: UILabel!
     var historyData : cloudData!
+    var todayData : cloudData!
+    var allData : cloudData!
     var todaysCount : Int!
     // UIWebView for bar chart
     @IBOutlet weak var barChart: UIWebView!
@@ -30,8 +32,8 @@ class HistoryTabViewController: UIViewController {
         // Grab total records (Cloud records + Incremented Records)
         historyData.grab_todays_records()
         
+        // Update today's total count and max goal
         todaysCount = historyData.NumberOfDailyRecords
-        
         dataLabel.text = "\(todaysCount)"
         MaxLabel.text = "\(historyData.maxGoal)"
         
@@ -54,7 +56,7 @@ class HistoryTabViewController: UIViewController {
         historyData = appDelegate.getCloudData()
         
         // Grab total records (Cloud records + Incremented Records)
-        // historyData.grab_todays_records()
+        historyData.grab_todays_records()
         
         webViewConfiguration()
         dataLabel.text = "\(todaysCount)"
@@ -66,10 +68,9 @@ class HistoryTabViewController: UIViewController {
         mostSmokedDay.text = " "
         
         // Get Day chart as default
-        chartHTML = buildDayChartHTML()
-        
+        // chartHTML = buildDayChartHTML()
         // getChart(chartPeriod)
-        drawChart(chartHTML)
+        // drawChart(chartHTML)
         
         // Grab all records
         historyData.grabAllRecords()
@@ -77,8 +78,6 @@ class HistoryTabViewController: UIViewController {
     }
     
     @IBAction func indexChanged(sender: UISegmentedControl) {
-        
-        todaysCount = historyData.NumberOfDailyRecords
         
         // switch labels and values for each segment (day, week, month, year)
         switch segmentControl.selectedSegmentIndex {
@@ -190,6 +189,8 @@ class HistoryTabViewController: UIViewController {
         var today: NSDate = NSDate()
         var date: String = formatter.stringFromDate(today)
         
+        var count: Int = 0
+        
         // Add data stored in cloud
         for record in historyData.allRecords {
             
@@ -202,6 +203,7 @@ class HistoryTabViewController: UIViewController {
 
             // Check if today
             if(DateString == date) {
+                count++
                 // Increment index based upon hour
                 switch hour {
                 case 0..<4:
@@ -223,36 +225,38 @@ class HistoryTabViewController: UIViewController {
         }
         
         // Add data from current session
-        for record in historyData.sessionRecords{
+        for record in historyData.sessionRecords {
             
-            // Formatter to get 24-hour time from record
-            var formatter: NSDateFormatter = NSDateFormatter()
-            formatter.dateFormat = "HH"
-            
-            // Get hour from record's timestamp (24-hour)
-            var TimeString:String = formatter.stringFromDate(record.date_NS)
+            // Get hour/year from record's timestamp (24-hour)
+            var HourString: String = hourFormatter.stringFromDate(record.date_NS)
+            var DateString: String = formatter.stringFromDate(record.date_NS)
             
             // Convert hour from string to int
-            var hour: Int = TimeString.toInt()!
-
-            // Increment index based upon hour
-            switch hour {
-            case 0..<4:
-                dataArray[0]++
-            case 4..<8:
-                dataArray[1]++
-            case 8..<12:
-                dataArray[2]++
-            case 12..<16:
-                dataArray[3]++
-            case 16..<20:
-                dataArray[4]++
-            case 20..<24:
-                dataArray[5]++
-            default:
-                break
+            var hour: Int = HourString.toInt()!
+            
+            // Check if today
+            if(DateString == date) {
+                count++
+                // Increment index based upon hour
+                switch hour {
+                case 0..<4:
+                    dataArray[0]++
+                case 4..<8:
+                    dataArray[1]++
+                case 8..<12:
+                    dataArray[2]++
+                case 12..<16:
+                    dataArray[3]++
+                case 16..<20:
+                    dataArray[4]++
+                case 20..<24:
+                    dataArray[5]++
+                default:
+                    break
+                }
             }
         }
+        println("Day COUNT = \(count)")
         
         // Build HTML string with dataArray info inserted into graph
         var stringHTML: String = "<html><head><script type='text/javascript' src='https://www.google.com/jsapi'></script><script type='text/javascript'>google.load('visualization', '1', {packages:['corechart']});google.setOnLoadCallback(drawChart);function drawChart() { var data = google.visualization.arrayToDataTable([ ['Hour', 'Cigs', { role: 'style' } ], ['12am - 4am', \(dataArray[0]), 'color: white; opacity: 0.75'], ['4am - 8am', \(dataArray[1]), 'color: white; opacity: 0.75'], ['8am - 12pm', \(dataArray[2]), 'color: white; opacity: 0.75'], ['12pm - 4pm', \(dataArray[3]), 'color: white; opacity: 0.75'], ['4pm - 8pm', \(dataArray[4]), 'color: white; opacity: 0.75'], ['8pm - 12am', \(dataArray[5]), 'color: white; opacity: 0.75'] ]); var options = { width: '100%', height: '100%', legend: { position: 'none' }, bar: { groupWidth: '70%' }, backgroundColor: '#333333', backgroundColor: { strokeWidth: 0, fill: '#333333' }, chartArea: { left: 20, top: 10, width:'95%', height:'80%'}, fontSize: 8, Style: { color: 'white' }, hAxis: { textStyle:{color: '#FFF'} }, vAxis: { textStyle:{color: '#FFF'} } }; var chart = new google.visualization.ColumnChart(document.getElementById('chart_div')); chart.draw(data, options);}</script><style> #chart_div { position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; color: white; }</style></head><body> <div id='chart_div'></div></body></html>"
@@ -380,7 +384,7 @@ class HistoryTabViewController: UIViewController {
         }
 
         // Build HTML string with dataArray info inserted into graph
-        var stringHTML: String = "<html><head><script type='text/javascript' src='https://www.google.com/jsapi'></script><script type='text/javascript'>google.load('visualization', '1', {packages:['corechart']});google.setOnLoadCallback(drawChart);function drawChart() { var data = google.visualization.arrayToDataTable([ ['Day', 'Cigs', { role: 'style' }, 'Maximum' ], ['SUN', \(dataArray[0]), 'color: white; opacity: 0.75', \(max)], ['MON', \(dataArray[1]), 'color: white; opacity: 0.75', \(max)], ['TUE', \(dataArray[2]), 'color: white; opacity: 0.75', \(max)], ['WED', \(dataArray[3]), 'color: white; opacity: 0.75', \(max)], ['THU', \(dataArray[4]), 'color: white; opacity: 0.75', \(max)], ['FRI', \(dataArray[5]), 'color: white; opacity: 0.75', \(max)], ['SAT', \(dataArray[6]), 'color: white; opacity: 0.75', \(max)] ]); var options = { seriesType: 'bars', series: {1: {type: 'line'}}, width: '100%', height: '100%', legend: { position: 'none' }, bar: { groupWidth: '70%' }, backgroundColor: '#333333', backgroundColor: { strokeWidth: 0, fill: '#333333' }, chartArea: { left: 20, top: 10, width:'95%', height:'80%'}, fontSize: 10, Style: { color: 'white' }, hAxis: { textStyle:{color: '#FFF'} }, vAxis: { textStyle:{color: '#FFF'} } }; var chart = new google.visualization.ComboChart(document.getElementById('chart_div')); chart.draw(data, options);}</script><style>#chart_div { position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px;}</style></head><body> <div id='chart_div'></div></body></html>"
+        var stringHTML: String = "<html><head><script type='text/javascript' src='https://www.google.com/jsapi'></script><script type='text/javascript'>google.load('visualization', '1', {packages:['corechart']});google.setOnLoadCallback(drawChart);function drawChart() { var data = google.visualization.arrayToDataTable([ ['Day', 'Cigs', { role: 'style' }, 'Maximum' ], ['SUN', \(dataArray[0]), 'color: white; opacity: 0.75', \(max)], ['MON', \(dataArray[1]), 'color: white; opacity: 0.75', \(max)], ['TUE', \(dataArray[2]), 'color: white; opacity: 0.75', \(max)], ['WED', \(dataArray[3]), 'color: white; opacity: 0.75', \(max)], ['THU', \(dataArray[4]), 'color: white; opacity: 0.75', \(max)], ['FRI', \(dataArray[5]), 'color: white; opacity: 0.75', \(max)], ['SAT', \(dataArray[6]), 'color: white; opacity: 0.75', \(max)] ]); var options = { seriesType: 'bars', series: {1: {type: 'line'}}, width: '100%', height: '100%', legend: { position: 'none' }, bar: { groupWidth: '70%' }, backgroundColor: '#333333', backgroundColor: { strokeWidth: 0, fill: '#333333' }, chartArea: { left: 20, top: 10, width:'95%', height:'80%'}, fontSize: 8, Style: { color: 'white' }, hAxis: { textStyle:{color: '#FFF'} }, vAxis: { textStyle:{color: '#FFF'} } }; var chart = new google.visualization.ComboChart(document.getElementById('chart_div')); chart.draw(data, options);}</script><style>#chart_div { position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px;}</style></head><body> <div id='chart_div'></div></body></html>"
         
         // Return HTML string
         return stringHTML
@@ -470,7 +474,7 @@ class HistoryTabViewController: UIViewController {
         }
         
         // Build HTML string with dataArray info inserted into graph
-        var stringHTML: String = "<html><head><script type='text/javascript' src='https://www.google.com/jsapi'></script><script type='text/javascript'>google.load('visualization', '1', {packages:['corechart']});google.setOnLoadCallback(drawChart);function drawChart() { var data = google.visualization.arrayToDataTable([ ['Week', 'Cigs', { role: 'style' }, 'Maximum' ], ['Week 1: 1st - 7th', \(dataArray[0]), 'color: white; opacity: 0.75', \(max)], ['Week 2: 8th - 14th', \(dataArray[1]), 'color: white; opacity: 0.75', \(max)], ['Week 3: 15th - 21st', \(dataArray[2]), 'color: white; opacity: 0.75', \(max)], ['Week 4: 22nd - 28th', \(dataArray[3]), 'color: white; opacity: 0.75', \(max)], ['Week 5: >29th', \(dataArray[4]), 'color: white; opacity: 0.75', \(max)] ]); var options = { seriesType: 'bars', series: {1: {type: 'line'}}, width: '100%', height: '100%', legend: { position: 'none' }, bar: { groupWidth: '70%' }, backgroundColor: '#333333', backgroundColor: { strokeWidth: 0, fill: '#333333' }, chartArea: { left: 20, top: 10, width:'95%', height:'80%'}, fontSize: 10, Style: { color: 'white' }, hAxis: { textStyle:{color: '#FFF'} }, vAxis: { textStyle:{color: '#FFF'} } }; var chart = new google.visualization.ComboChart(document.getElementById('chart_div')); chart.draw(data, options);}</script><style>#chart_div { position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px;}</style></head><body> <div id='chart_div'></div></body></html>"
+        var stringHTML: String = "<html><head><script type='text/javascript' src='https://www.google.com/jsapi'></script><script type='text/javascript'>google.load('visualization', '1', {packages:['corechart']});google.setOnLoadCallback(drawChart);function drawChart() { var data = google.visualization.arrayToDataTable([ ['Week', 'Cigs', { role: 'style' }, 'Maximum' ], ['1st - 7th', \(dataArray[0]), 'color: white; opacity: 0.75', \(max)], ['8th - 14th', \(dataArray[1]), 'color: white; opacity: 0.75', \(max)], ['15th - 21st', \(dataArray[2]), 'color: white; opacity: 0.75', \(max)], ['22nd - 28th', \(dataArray[3]), 'color: white; opacity: 0.75', \(max)], ['>29th', \(dataArray[4]), 'color: white; opacity: 0.75', \(max)] ]); var options = { seriesType: 'bars', series: {1: {type: 'line'}}, width: '100%', height: '100%', legend: { position: 'none' }, bar: { groupWidth: '70%' }, backgroundColor: '#333333', backgroundColor: { strokeWidth: 0, fill: '#333333' }, chartArea: { left: 20, top: 10, width:'95%', height:'80%'}, fontSize: 8, Style: { color: 'white' }, hAxis: { textStyle:{color: '#FFF'} }, vAxis: { textStyle:{color: '#FFF'} } }; var chart = new google.visualization.ComboChart(document.getElementById('chart_div')); chart.draw(data, options);}</script><style>#chart_div { position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px;}</style></head><body> <div id='chart_div'></div></body></html>"
         
         // Return HTML string
         return stringHTML
