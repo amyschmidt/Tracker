@@ -43,6 +43,7 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
         // Start timeOut Timer if the request takes too long
         println("Monitoring the Request Time...")
         let aSelector:Selector = "monitorRequestTime"
+        self.requestMonitoringTimer = NSTimer()
         self.requestMonitoringTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: aSelector, userInfo: nil, repeats: true)
         // listen for when the last Record comes back
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "grabLastCigIsFinished_UseItsDate", name: "fetchLastRecord", object: nil)

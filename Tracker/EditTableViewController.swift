@@ -81,15 +81,13 @@ class EditTableViewController: UIViewController, UITableViewDataSource {
     
 
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        // segue.destinationViewController.
+        // let destViewController = segue.destinationViewController as TodayTabViewController
+        // destViewController.viewDidLoad()
+        cloud.grab_todays_records()
     }
-    */
-
+    
 }
