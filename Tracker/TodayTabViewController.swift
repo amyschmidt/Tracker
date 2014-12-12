@@ -43,7 +43,6 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
         // Start timeOut Timer if the request takes too long
         println("Monitoring the Request Time...")
         let aSelector:Selector = "monitorRequestTime"
-        self.requestMonitoringTimer = NSTimer()
         self.requestMonitoringTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: aSelector, userInfo: nil, repeats: true)
         // listen for when the last Record comes back
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "grabLastCigIsFinished_UseItsDate", name: "fetchLastRecord", object: nil)
@@ -209,9 +208,9 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
     /* CloudKitDelegate function that Sets the Labels for the count and timer */
     func successfulGrab_UpdateCount(timeOfLastCig:NSDate) {
         // Save the Count
-        self.count = model.NumberOfDailyRecords
+        self.count = model.dailyRecords.count
         dailyCountLabel.text = String(self.count)
-        NSLog("Upon Load 'Today's Count' has been updated to: \(self.count)")
+        println("Count has been UPDATED to: \(self.count)")
         activityIndicatorView.stopAnimating()
         plusButton.enabled = true
         self.tabBarController?.tabBar.userInteractionEnabled = true

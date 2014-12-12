@@ -169,7 +169,7 @@ class cloudData
         self.privateDB.performQuery(query,inZoneWithID: nil)
         {
             results, error in
-            NSLog("Fetching Today's Records")
+            println("Fetching Today's Records")
             self.iCloudResponse = true
             // If iCloud responds with an Error, then display the error to the User.
             if error != nil
@@ -186,22 +186,19 @@ class cloudData
                 dispatch_async(dispatch_get_main_queue())
                 {
                     var i = 0
+                    // if grabbing today's records after the first time, then refresh the array (Before it was appending more and more records)
+                    if self.requestAttempts != 1
+                    {
+                        self.dailyRecords = [dailyRecord]()
+                    }
                     // Records returned
                     for record in results
                     {
+                        println(record)
                         // Initialize multiple dailyRecord Objects
-                        let grabRecord = dailyRecord(record: record as CKRecord, database: self.privateDB)
+                        var grabRecord = dailyRecord(record: record as CKRecord, database: self.privateDB)
                         // Append the record to array IF in first session
-                        if self.requestAttempts == 1
-                        {
-                            self.dailyRecords.append(grabRecord)
-                        }
-                        else
-                        {
-                            self.dailyRecords = [dailyRecord]()
-                            self.dailyRecords.append(grabRecord)
-                        }
-                        
+                        self.dailyRecords.append(grabRecord)
                         i++
                     }
                     // Save the Count
