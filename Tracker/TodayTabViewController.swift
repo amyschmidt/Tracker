@@ -208,9 +208,9 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
     /* CloudKitDelegate function that Sets the Labels for the count and timer */
     func successfulGrab_UpdateCount(timeOfLastCig:NSDate) {
         // Save the Count
-        self.count = model.NumberOfDailyRecords
+        self.count = model.dailyRecords.count
         dailyCountLabel.text = String(self.count)
-        NSLog("Upon Load 'Today's Count' has been updated to: \(self.count)")
+        println("Count has been UPDATED to: \(self.count)")
         activityIndicatorView.stopAnimating()
         plusButton.enabled = true
         self.tabBarController?.tabBar.userInteractionEnabled = true
