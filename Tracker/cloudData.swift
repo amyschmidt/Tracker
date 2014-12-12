@@ -455,4 +455,38 @@ class cloudData
     }
     */
     
+    
+    func deleteRecord(record: CKRecord){
+        
+        var error: NSError!
+        
+        
+        // var handler: completionHandler
+        
+        var recordsToSave: CKRecord!
+        
+        var recordIDsToDelete: CKRecordID!
+        
+        let returnRecord = record
+        
+        recordIDsToDelete = record.recordID
+        
+        // privateDB.deleteRecord(record)
+        
+        privateDB.deleteRecordWithID(record.recordID, completionHandler: ({returnRecord, error in
+            if let err = error {
+                dispatch_async(dispatch_get_main_queue()) {
+                    // self.notifyUser("Delete Error", message: err.localizedDescription)
+                    
+                }
+            } else {
+                dispatch_async(dispatch_get_main_queue()) {
+                    // self.notifyUser("Success", message: "Record deleted successfully")
+                }
+            }
+        }))
+        
+    }
+    
+    
 }

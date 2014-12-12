@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		30918BBC1A3A856C0095DBFA /* EditTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30918BBB1A3A856C0095DBFA /* EditTableViewController.swift */; };
 		5C07AC541A33EFEE0068E629 /* button.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5C07AC531A33EFEE0068E629 /* button.jpg */; };
 		5C07AC581A340BB80068E629 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C07AC571A340BB80068E629 /* CloudKit.framework */; };
 		5C66F0251A159F95000422ED /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C66F0241A159F95000422ED /* NotificationCenter.framework */; };
@@ -53,6 +54,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		30918BBB1A3A856C0095DBFA /* EditTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTableViewController.swift; sourceTree = "<group>"; };
 		5C07AC531A33EFEE0068E629 /* button.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = button.jpg; sourceTree = "<group>"; };
 		5C07AC551A33F1400068E629 /* TrackerWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TrackerWidget.entitlements; sourceTree = "<group>"; };
 		5C07AC571A340BB80068E629 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
@@ -163,6 +165,7 @@
 				5C8533E51A31690D00F459FD /* sessionRecord.swift */,
 				E4583FE719EDA9A7009ADA7F /* Main.storyboard */,
 				E4C84A7C1A229BF8004CD9EB /* HistoryTabViewController.swift */,
+				30918BBB1A3A856C0095DBFA /* EditTableViewController.swift */,
 				E4BCAA211A1AF61F0091BD75 /* GoalsTabViewController.swift */,
 				E49A416A1A1449D900CABD4F /* TodayTabViewController.swift */,
 				E4583FEA19EDA9A7009ADA7F /* Images.xcassets */,
@@ -326,6 +329,7 @@
 				5CA847B11A26A88D0061FE02 /* cloudData.swift in Sources */,
 				E49A416B1A1449D900CABD4F /* TodayTabViewController.swift in Sources */,
 				5CA847B31A26A8A00061FE02 /* dailyRecord.swift in Sources */,
+				30918BBC1A3A856C0095DBFA /* EditTableViewController.swift in Sources */,
 				E4C84A7D1A229BF8004CD9EB /* HistoryTabViewController.swift in Sources */,
 				5C8533E61A31690D00F459FD /* sessionRecord.swift in Sources */,
 				E4BCAA221A1AF61F0091BD75 /* GoalsTabViewController.swift in Sources */,

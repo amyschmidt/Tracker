@@ -1,0 +1,95 @@
+//
+//  EditTableViewController.swift
+//  TrackerTeamA
+//
+//  Created by Will Pierson on 12/11/14.
+//  Copyright (c) 2014 Amy Schmidt. All rights reserved.
+//
+
+import UIKit
+
+class EditTableViewController: UIViewController, UITableViewDataSource {
+    
+    @IBOutlet var tableView: UITableView!
+    
+    var cloud: cloudData!
+    
+    var myData: NSMutableArray?
+
+    override func viewDidLoad() {
+        
+        super.viewDidLoad()
+        title = "Edit"
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        cloud = appDelegate.getCloudData()
+        
+        myData = NSMutableArray(array:cloud.dailyRecords)
+        
+        // Do any additional setup after loading the view.
+    }
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return myData!.count
+    }
+    
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath:indexPath) as UITableViewCell
+        
+        
+        var formatter: NSDateFormatter = NSDateFormatter()
+        formatter.dateFormat = "hh:mm"
+        
+        let anItem = myData![indexPath.row] as dailyRecord
+        
+        var TimeString:String = formatter.stringFromDate(anItem.date_NS)
+        
+        cell.textLabel?.text = "Cigarette"
+        cell.detailTextLabel?.text = "Smoked at \(TimeString)"
+        
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let anItem = myData![indexPath.row] as dailyRecord
+        
+        var recordToRemove = anItem.record
+        
+        cloud.deleteRecord(recordToRemove)
+        
+        
+        let removed = myData!.removeObjectAtIndex(indexPath.row)
+        
+        
+        
+        tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+        
+        
+        
+    }
+    
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+
+    
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
+}
