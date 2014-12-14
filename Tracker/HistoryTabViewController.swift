@@ -19,67 +19,79 @@ class HistoryTabViewController: UIViewController {
     @IBOutlet weak var MaxLabel: UILabel!
     @IBOutlet weak var dataLabel: UILabel!
     @IBOutlet weak var timeSpentSmokingLabel: UILabel!
+    
+    // Cloud data
     var historyData : cloudData!
-    var todayData : cloudData!
-    var allData : cloudData!
+
+    // Count for today
     var todaysCount : Int!
+    
     // UIWebView for bar chart
     @IBOutlet weak var barChart: UIWebView!
-    // String for chart HTML
-    var chartHTML: String!
+    
+    // Strings for chart HTML
+    var dayChartHTML: String!
+    var weekChartHTML: String!
+    var monthChartHTML: String!
+    var yearChartHTML: String!
     
     override func viewWillAppear(animated: Bool) {
         // Grab total records (Cloud records + Incremented Records)
-        // historyData.grab_todays_records()
+        historyData.grab_todays_records()
         
         // Update today's total count and max goal
-        todaysCount = historyData.NumberOfDailyRecords
-        dataLabel.text = "\(todaysCount)"
-        MaxLabel.text = "\(historyData.maxGoal)"
+        todaysCount = historyData.dailyRecords.count + historyData.sessionRecords.count
+
+        // Create the HTML string for each chart
+        dayChartHTML = buildDayChartHTML()
+        weekChartHTML = buildWeekChartHTML()
+        monthChartHTML = buildMonthChartHTML()
+        yearChartHTML = buildYearChartHTML()
         
-        // Get Day chart as default
-        chartHTML = buildDayChartHTML()
-        // getChart(chartPeriod)
-        drawChart(chartHTML)
-        
-        // Force user to return to Day view
-        segmentControl.selectedSegmentIndex = 0
-        timeSpentSmokingLabel.text = "\(todaysCount * 5)"
+        // Build the chart according to selected time period
+        buildChart(segmentControl.selectedSegmentIndex)
     }
 
     override func viewDidLoad() {
-        
         super.viewDidLoad()
 
         // Set the delegate of this ViewController class
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         historyData = appDelegate.getCloudData()
         
-        // Grab total records (Cloud records + Incremented Records)
-        // historyData.grab_todays_records()
-        
+        // Configuration for the UIWebView
         webViewConfiguration()
-        dataLabel.text = "\(todaysCount)"
-        MaxLabel.text = "\(historyData.maxGoal)"
-
-        barGraph.text = "Hourly"
-        average.text = "Daily Average"
-        lastSmokeTimer.text = "Time Since Last Smoke"
-        mostSmokedDay.text = " "
-        
-        // Get Day chart as default
-        // chartHTML = buildDayChartHTML()
-        // getChart(chartPeriod)
-        // drawChart(chartHTML)
-        
-        // Grab all records
-        // historyData.grabAllRecords()
     }
     
     @IBAction func indexChanged(sender: UISegmentedControl) {
+        // Add the selected time period's chart to the UIWebView
+        buildChart(segmentControl.selectedSegmentIndex)
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+
+    // Draw chart from string
+    func drawChart(chartHTML: String) {
+        // Load HTML string into UIWebView to show chart
+        barChart.loadHTMLString(chartHTML, baseURL: nil)
+    }
+    
+    func webViewConfiguration() {
+        // UIWebView configuration
+        barChart.scrollView.scrollEnabled = false
+        barChart.scrollView.bounces = false
+        barChart.opaque = false
+    }
+   
+    func buildChart(selectedIndex:Int?) {
         
-        // switch labels and values for each segment (day, week, month, year)
-        switch segmentControl.selectedSegmentIndex {
+        // Switch case to determine what to do based
+        switch selectedIndex! {
+            
+        // Day information
         case 0:
             total.text = "Today's Total"
             barGraph.text = "Hourly"
@@ -91,9 +103,9 @@ class HistoryTabViewController: UIViewController {
             MaxLabel.text = "\(historyData.maxGoal)"
             timeSpentSmokingLabel.text = "\(todaysCount * 5)"
             
-            chartHTML = buildDayChartHTML()
-            drawChart(chartHTML)
+            drawChart(dayChartHTML)
             
+        // Week information
         case 1:
             total.text = "This Week"
             barGraph.text = "Daily"
@@ -106,9 +118,9 @@ class HistoryTabViewController: UIViewController {
             dataLabel.text = "\(todaysCount)"
             timeSpentSmokingLabel.text = "\(todaysCount * 10)"
             
-            chartHTML = buildWeekChartHTML()
-            drawChart(chartHTML)
+            drawChart(weekChartHTML)
             
+        // Month information
         case 2:
             total.text = "This Month"
             barGraph.text = "Weekly"
@@ -121,9 +133,9 @@ class HistoryTabViewController: UIViewController {
             MaxLabel.text = "\(monthlyMax)"
             timeSpentSmokingLabel.text = "\(todaysCount * 20)"
             
-            chartHTML = buildMonthChartHTML()
-            drawChart(chartHTML)
+            drawChart(monthChartHTML)
             
+        // Year information
         case 3:
             total.text = "This Year"
             barGraph.text = "Monthly"
@@ -136,11 +148,10 @@ class HistoryTabViewController: UIViewController {
             var yearlyMax: Int! = historyData.maxGoal * 365
             MaxLabel.text = "\(yearlyMax)"
             
-            chartHTML = buildYearChartHTML()
-            drawChart(chartHTML)
+            drawChart(yearChartHTML)
             
+        // Default to Day information
         default:
-
             total.text = "Today's Total"
             barGraph.text = "Hourly"
             average.text = "Daily Average"
@@ -150,25 +161,11 @@ class HistoryTabViewController: UIViewController {
             dataLabel.text = "\(todaysCount)"
             MaxLabel.text = "\(historyData.maxGoal)"
             timeSpentSmokingLabel.text = "\(todaysCount * 5)"
-
+            
+            drawChart(dayChartHTML)
+            
             break
         }
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    // Draw chart from string
-    func drawChart(chartHTML: String) {
-        barChart.loadHTMLString(chartHTML, baseURL: nil)
-    }
-    
-    func webViewConfiguration() {
-        barChart.scrollView.scrollEnabled = false
-        barChart.scrollView.bounces = false
-        barChart.opaque = false
     }
     
     func buildDayChartHTML() -> NSString {
@@ -266,17 +263,6 @@ class HistoryTabViewController: UIViewController {
     }
     
     func buildWeekChartHTML() -> NSString {
-        
-        /*
-        * FUNCTION UNFINISHED:
-        * - What it currently does:
-        *   - Grabs all records
-        *   - Sorts records into the day that they occured
-        *   - Graphs data from all days
-        * - What it needs to do:
-        *   - Limit the records that get graphed to the current week
-        *   - Get today's day number X (Wednesday = 4) and select the last X days of records
-        */
         
         // This array stories the count of cigs for each day ([0] = Sunday, [1] = Monday, etc.)
         var dataArray: [Int] = [0, 0, 0, 0, 0, 0, 0]
@@ -389,8 +375,6 @@ class HistoryTabViewController: UIViewController {
         // Return HTML string
         return stringHTML
     }
-    
-    
     
     func buildMonthChartHTML() -> NSString {
         // This array stories the count of cigs for each month ([0] = Week 1 (1st-7th), [1] = Week 2 (8th-15th), etc.)
@@ -593,7 +577,7 @@ class HistoryTabViewController: UIViewController {
         // Return HTML string
         return stringHTML
     }
-    
+
     func getDayOfWeek(today:String)->Int? {
 
         let formatter: NSDateFormatter = NSDateFormatter()
