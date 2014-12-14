@@ -177,6 +177,23 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
         self.airplaneMode = false
     }
     
+    /* CloudKit Delegate function to handle errors from saving to the server */
+    func unsuccessfulSave(error : NSError) {
+        println("Unable to Save record to cloud. Saving to phone instead.")
+        // Increment count Label
+        self.count = NSString(string: dailyCountLabel.text!).integerValue
+        self.count++
+        dailyCountLabel.text = "\(self.count)"
+        // start/reset timer
+        self.startDate = NSDate()
+        let aSelector:Selector = "updateViewableTimer"
+        self.timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: aSelector, userInfo: nil, repeats: true)
+        // refresh Today Widget values
+        self.sharedDefaults?.setObject(self.count, forKey: "count")
+        self.sharedDefaults?.synchronize()
+        self.airplaneMode = true
+    }
+    
     /* CloudKitDelegate function that Sets the Labels for the count and timer */
     func successfulGrab_UpdateCount(timeOfLastCig:NSDate) {
         // Save the Count

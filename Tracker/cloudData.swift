@@ -9,6 +9,7 @@ import Foundation
 // protocol functions will be implemented in the TodayTabViewController
 protocol CloudKitDelegate {
     func successfulSave()
+    func unsuccessfulSave(error : NSError)
     func errorUpdating(error: NSError)
     func successfulGrab_UpdateCount(timeOfLastCig:NSDate)
     // func updateCountFromWidget()
@@ -131,7 +132,7 @@ class cloudData
             {
                 dispatch_async(dispatch_get_main_queue())
                 {
-                        self.delegate?.errorUpdating(error)
+                        self.delegate?.unsuccessfulSave(error)
                         self.save_record_to_phone(date)
                         return
                 }

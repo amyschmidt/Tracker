@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fGS-gP-NhS">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fGS-gP-NhS">
                                 <rect key="frame" x="16" y="20" width="343" height="647"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tEp-Lb-t70">
@@ -313,7 +313,7 @@
                                     <navigationItem title="Edit" id="hu0-0S-Ya8">
                                         <barButtonItem key="leftBarButtonItem" systemItem="done" id="U46-yc-57b">
                                             <connections>
-                                                <segue destination="3oz-b8-NfC" kind="show" id="6jw-xS-ruo"/>
+                                                <segue destination="Wxt-k8-eLy" kind="unwind" unwindAction="unwindToToday:" id="tcT-Ik-5Cu"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -367,6 +367,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vkk-Oq-ZHM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Wxt-k8-eLy" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-867.5" y="1106.5"/>
         </scene>
@@ -883,7 +884,4 @@
         <image name="Tracker Today Icon" width="34" height="26"/>
         <image name="reload" width="512" height="512"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="6jw-xS-ruo"/>
-    </inferredMetricsTieBreakers>
 </document>
