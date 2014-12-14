@@ -7,9 +7,11 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     @IBOutlet weak var countLabel: UILabel!
     var count: Int = 0
     var airplaneModeDates = [NSDate]()
+    @IBOutlet weak var goToTracker: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        goToTracker.layer.cornerRadius = 5;
     }
     
     override func didReceiveMemoryWarning() {
@@ -31,6 +33,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     
     @IBAction func openTracker(sender: AnyObject) {
+        goToTracker.backgroundColor = UIColor.darkGrayColor()
         var url: NSURL = NSURL(fileURLWithPath: "TrackerTeamA://")!
         // self.extensionContext?.openURL(url, completionHandler: nil)
         var url2: NSExtensionContext = self.extensionContext!

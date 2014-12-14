@@ -234,63 +234,6 @@ class cloudData
         }
     }
     
-    /* Function to grab the current month's records */
-    /*func grab_months_records() {
-        //Make Query to get the records of the current month
-        // Predicate is the condition on which the record should be matched against
-        // First, Grab the current month, then format the month.
-        var date = NSDate()
-        var formatter = NSDateFormatter()
-        formatter.dateFormat = "MM"
-
-        var queryMonth:String = formatter.stringFromDate(date)
-        
-        let predicate = NSPredicate(format: "month==%@", queryMonth)
-        let sort = NSSortDescriptor(key: "NSDate", ascending: true)
-        
-        // Build the Query: This query is similar to SELECT * FROM Log WHERE month = ''
-        let query = CKQuery(recordType: "Log", predicate: predicate)
-        
-        query.sortDescriptors = [sort]
-
-        // Execute the Query
-        self.privateDB.performQuery(query,inZoneWithID: nil)
-            {
-                results, error in
-                // If we have an error, display it
-                if error != nil
-                {
-                    dispatch_async(dispatch_get_main_queue())
-                        {
-                            //display error message
-                            println("Error")
-                    }
-                }
-                // Fetch Data from Current Month
-                else {
-                   NSLog("Fetching Data From Current Month")
-                    
-                    var i = 0;
-                    
-                    //Records returned (where is results set)
-                    for record in results {
-                        //initialize monthly record array NSObject?
-                        let grabRecord = monthlyRecord(record: record as CKRecord, database: self.privateDB)
-                        
-                        //append all records into the monthly record array
-                        self.monthlyRecords.append(grabRecord)
-                    }
-                }
-        }
-    }
-    
-    
-    /* Function to grab the current year's records */
-    func years_records() {
-        //Query to get the records of the current month
-        
-    }*/
-    
     
     /* Function to grab the last record if there are no records for the current day */
     func grabLastCig()
