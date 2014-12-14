@@ -4,11 +4,9 @@ import Foundation
 
 class TodayViewController: UIViewController, NCWidgetProviding {
     
-    @IBOutlet weak var gaugeView: UIWebView!
     @IBOutlet weak var countLabel: UILabel!
     var count: Int = 0
     var airplaneModeDates = [NSDate]()
-    var stringHTML : String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +26,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         let sharedDefaults = NSUserDefaults(suiteName: "group.TrackerTeamA")
         self.count = sharedDefaults?.objectForKey("count") as Int
         self.countLabel.text = "Count: \(self.count)"
-        self.drawGauge()
         completionHandler(NCUpdateResult.NewData)
     }
     
@@ -68,15 +65,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         let sharedDefaults = NSUserDefaults(suiteName: "group.TrackerTeamA")
         sharedDefaults?.setObject(NSDate(), forKey: "record")
         sharedDefaults?.synchronize()
-    }
-    
-    func drawGauge()
-    {
-        self.stringHTML = "<html> <head> <script type='text/javascript' src='https://www.google.com/jsapi'></script> <script type='text/javascript'> google.load('visualization', '1', {packages:['gauge']}); google.setOnLoadCallback(drawChart); function drawChart() { var data = google.visualization.arrayToDataTable([ ['Label', 'Value'], ['Cigs', 5], ]); var options = { backgroundColor: 'transparent',  width: 60, height: 60, greenFrom: 0, greenTo: 10, yellowFrom: 10, yellowTo: 20, redFrom: 20, redTo: 40, max: 40 }; var chart = new google.visualization.Gauge(document.getElementById('chart_div')); chart.draw(data, options);}</script> </head> <body><center><div id='chart_div' style='width: 60px; height: 60px;'></div></center></body></html>"
-        gaugeView.loadHTMLString(stringHTML, baseURL: nil)
-        gaugeView.scrollView.scrollEnabled = false
-        gaugeView.scrollView.bounces = false
-        gaugeView.opaque = false
     }
     
     // Function to reset the widget margins

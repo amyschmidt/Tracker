@@ -35,6 +35,12 @@ class HistoryTabViewController: UIViewController {
     var monthChartHTML: String!
     var yearChartHTML: String!
     
+    //labels for average
+    @IBOutlet weak var averageData: UILabel!
+    
+    //var for averages
+    var hourlyAverage : float_t = 0
+    
     override func viewWillAppear(animated: Bool) {
         // Grab total records (Cloud records + Incremented Records)
         historyData.grab_todays_records()
@@ -95,12 +101,17 @@ class HistoryTabViewController: UIViewController {
         case 0:
             total.text = "Today's Total"
             barGraph.text = "Hourly"
-            average.text = "Daily Average"
+            average.text = "Hourly Average"
+            
+            hourlyAverage = getHourlyAverage()
+            averageData.text = String(format: "%.2f", hourlyAverage)
+            
             lastSmokeTimer.text = "Time Since Last Smoke"
             mostSmokedDay.text = " "
             
             dataLabel.text = "\(todaysCount)"
             MaxLabel.text = "\(historyData.maxGoal)"
+            //days count * 5
             timeSpentSmokingLabel.text = "\(todaysCount * 5)"
             
             drawChart(dayChartHTML)
@@ -109,13 +120,14 @@ class HistoryTabViewController: UIViewController {
         case 1:
             total.text = "This Week"
             barGraph.text = "Daily"
-            average.text = "Weekly Average"
+            average.text = "Daily Average"
             lastSmokeTimer.text = "Average Time Between Cigarettes"
             mostSmokedDay.text = " "
             
             var weeklyMax: Int! = historyData.maxGoal * 7
             MaxLabel.text = "\(weeklyMax)"
             dataLabel.text = "\(todaysCount)"
+            //weeks count * 5
             timeSpentSmokingLabel.text = "\(todaysCount * 10)"
             
             drawChart(weekChartHTML)
@@ -124,13 +136,15 @@ class HistoryTabViewController: UIViewController {
         case 2:
             total.text = "This Month"
             barGraph.text = "Weekly"
-            average.text = "Monthly Average"
+            average.text = "Weekly Average"
             lastSmokeTimer.text = "Average Time Between Cigarettes"
             mostSmokedDay.text = " "
             
             dataLabel.text = "\(todaysCount)"
             var monthlyMax: Int! = historyData.maxGoal * 30
             MaxLabel.text = "\(monthlyMax)"
+            
+            //months count * 5
             timeSpentSmokingLabel.text = "\(todaysCount * 20)"
             
             drawChart(monthChartHTML)
@@ -139,11 +153,13 @@ class HistoryTabViewController: UIViewController {
         case 3:
             total.text = "This Year"
             barGraph.text = "Monthly"
-            average.text = "Yearly Average"
+            average.text = "Monthly Average"
             lastSmokeTimer.text = "Average Time Between Cigarettes"
             mostSmokedDay.text = " "
             
             dataLabel.text = "\(todaysCount)"
+            
+            //years count * 5
             timeSpentSmokingLabel.text = "\(todaysCount * 30)"
             var yearlyMax: Int! = historyData.maxGoal * 365
             MaxLabel.text = "\(yearlyMax)"
@@ -154,7 +170,7 @@ class HistoryTabViewController: UIViewController {
         default:
             total.text = "Today's Total"
             barGraph.text = "Hourly"
-            average.text = "Daily Average"
+            average.text = "Hourly Average"
             lastSmokeTimer.text = "Time Since Last Smoke"
             mostSmokedDay.text = " "
             
@@ -166,6 +182,14 @@ class HistoryTabViewController: UIViewController {
             
             break
         }
+    }
+    
+    func getHourlyAverage() -> float_t {
+    
+        var today = float_t(todaysCount)
+        
+        return (today / 24)
+    
     }
     
     func buildDayChartHTML() -> NSString {
