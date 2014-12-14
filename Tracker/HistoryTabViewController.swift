@@ -43,9 +43,6 @@ class HistoryTabViewController: UIViewController {
     var hourlyAverage : float_t = 0
     
     override func viewWillAppear(animated: Bool) {
-        // Grab total records (Cloud records + Incremented Records)
-        historyData.grab_todays_records()
-        
         // Update today's total count and max goal
         todaysCount = historyData.dailyRecords.count + historyData.sessionRecords.count
 
@@ -624,8 +621,6 @@ class HistoryTabViewController: UIViewController {
         var thisMonth: String = monthFormatter.stringFromDate(today)
         var month: Int = thisMonth.toInt()!
         var year: Int = thisYear.toInt()!
-        println("Current Year: \(year)")
-        println("Current Month: \(month)")
         var lastDayOfMonth: String = String()
         
         switch month {
