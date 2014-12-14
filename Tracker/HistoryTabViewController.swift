@@ -19,6 +19,7 @@ class HistoryTabViewController: UIViewController {
     @IBOutlet weak var MaxLabel: UILabel!
     @IBOutlet weak var dataLabel: UILabel!
     @IBOutlet weak var timeSpentSmokingLabel: UILabel!
+    @IBOutlet weak var cigarettesPerLabel: UILabel!
     
     // Cloud data
     var historyData : cloudData!
@@ -105,7 +106,7 @@ class HistoryTabViewController: UIViewController {
             
             hourlyAverage = getHourlyAverage()
             averageData.text = String(format: "%.2f", hourlyAverage)
-            
+            cigarettesPerLabel.text = "cigarettes per hour"
             lastSmokeTimer.text = "Time Since Last Smoke"
             mostSmokedDay.text = " "
             
@@ -123,7 +124,7 @@ class HistoryTabViewController: UIViewController {
             average.text = "Daily Average"
             lastSmokeTimer.text = "Average Time Between Cigarettes"
             mostSmokedDay.text = " "
-            
+            cigarettesPerLabel.text = "cigarettes per day"
             var weeklyMax: Int! = historyData.maxGoal * 7
             MaxLabel.text = "\(weeklyMax)"
             dataLabel.text = "\(todaysCount)"
@@ -138,6 +139,7 @@ class HistoryTabViewController: UIViewController {
             barGraph.text = "Weekly"
             average.text = "Weekly Average"
             lastSmokeTimer.text = "Average Time Between Cigarettes"
+            cigarettesPerLabel.text = "cigarettes per week"
             mostSmokedDay.text = " "
             
             dataLabel.text = "\(todaysCount)"
@@ -155,6 +157,7 @@ class HistoryTabViewController: UIViewController {
             barGraph.text = "Monthly"
             average.text = "Monthly Average"
             lastSmokeTimer.text = "Average Time Between Cigarettes"
+            cigarettesPerLabel.text = "cigarettes per month"
             mostSmokedDay.text = " "
             
             dataLabel.text = "\(todaysCount)"
@@ -171,6 +174,7 @@ class HistoryTabViewController: UIViewController {
             total.text = "Today's Total"
             barGraph.text = "Hourly"
             average.text = "Hourly Average"
+            cigarettesPerLabel.text = "cigarettes per hour"
             lastSmokeTimer.text = "Time Since Last Smoke"
             mostSmokedDay.text = " "
             
