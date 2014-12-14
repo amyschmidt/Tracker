@@ -25,8 +25,9 @@ class EditTableViewController: UIViewController, UITableViewDataSource {
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         cloud = appDelegate.getCloudData()
         
-        myData = NSMutableArray(array:cloud.dailyRecords)
+        myData = NSMutableArray(array:reverse(cloud.dailyRecords))
         
+       
         
         // Do any additional setup after loading the view.
     }
@@ -51,7 +52,7 @@ class EditTableViewController: UIViewController, UITableViewDataSource {
         
         
         var timeFormatter: NSDateFormatter = NSDateFormatter()
-        timeFormatter.dateFormat = "hh:mm"
+        timeFormatter.dateFormat = "hh:mm a"
         
         var dateFormatter: NSDateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy"
