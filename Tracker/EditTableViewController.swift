@@ -54,7 +54,7 @@ class EditTableViewController: UIViewController, UITableViewDataSource {
         timeFormatter.dateFormat = "hh:mm"
         
         var dateFormatter: NSDateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy"
+        dateFormatter.dateFormat = "MM/dd/yyyy"
         
         let anItem = myData![indexPath.row] as dailyRecord
         
