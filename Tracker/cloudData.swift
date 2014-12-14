@@ -383,11 +383,13 @@ class cloudData
                 println("Fetching All Data")
                 var i = 0
                 // Records returned
+                self.allRecords = [allRecord]()
                 for record in results
                 {
                     // Initialize multiple allRecord Objects
                     let aRecord = allRecord(record: record as CKRecord, database: self.privateDB)
                     // Append the record to LogRecords Object which is local to this class.
+                    
                     self.allRecords.append(aRecord)
                     i++
                 }
