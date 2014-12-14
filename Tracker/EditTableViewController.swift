@@ -27,6 +27,7 @@ class EditTableViewController: UIViewController, UITableViewDataSource {
         
         myData = NSMutableArray(array:cloud.dailyRecords)
         
+        
         // Do any additional setup after loading the view.
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -90,6 +91,8 @@ class EditTableViewController: UIViewController, UITableViewDataSource {
         
         
     }
+    
+  
     
     
     override func didReceiveMemoryWarning() {

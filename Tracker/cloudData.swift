@@ -191,12 +191,13 @@ class cloudData
                 {
                     self.airPlaneMode = false
                     var i = 0
-                    // if grabbing today's records after the first time, then refresh the array (Before it was appending more and more records)
-                    if self.requestAttempts != 1
-                    {
-                        self.dailyRecords = [dailyRecord]()
-                    }
+                    // if grabbing today's records after the first time, then refresh the array (Before it was appending more and more records) 
+                    
+                    self.sessionRecords=[sessionRecord]()
+                    self.dailyRecords = [dailyRecord]()
+                    
                     // Records returned
+                    
                     for record in results
                     {
                         // Initialize multiple dailyRecord Objects
@@ -205,6 +206,10 @@ class cloudData
                         self.dailyRecords.append(grabRecord)
                         i++
                     }
+                    
+                    
+                    
+                    
                     // Save the Count
                     self.NumberOfDailyRecords = i
                     // Find Date of Last Cigarette
@@ -469,8 +474,7 @@ class cloudData
         var error: NSError!
         
         
-        // var handler: completionHandler
-        
+    
         var recordsToSave: CKRecord!
         
         var recordIDsToDelete: CKRecordID!
@@ -478,8 +482,7 @@ class cloudData
         let returnRecord = record
         
         recordIDsToDelete = record.recordID
-        
-        // privateDB.deleteRecord(record)
+    
         
         privateDB.deleteRecordWithID(record.recordID, completionHandler: ({returnRecord, error in
             if let err = error {
