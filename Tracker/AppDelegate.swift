@@ -80,7 +80,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 sharedDefaults?.setObject(nil, forKey: "record")
                 sharedDefaults?.synchronize()
             }
-        }
+        }        
     }
 
     func applicationWillTerminate(application: UIApplication) {

@@ -49,6 +49,11 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
         // listen for dates saved by the Widget
         self.airplaneDate = sharedDefaults?.objectForKey("record") as NSDate?
         // NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateCountFromWidget", name: "saveRecordFromWidget", object: nil)
+        
+    }
+    override func viewWillAppear(animated: Bool) {
+        model.grab_todays_records()
+        model.grabAllRecords()
     }
     
     @IBAction func refreshCount(sender: AnyObject) {

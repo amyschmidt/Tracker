@@ -109,7 +109,7 @@ class EditTableViewController: UIViewController, UITableViewDataSource {
         // segue.destinationViewController.
         // let destViewController = segue.destinationViewController as TodayTabViewController
         // destViewController.viewDidLoad()
-        cloud.grab_todays_records()
+        // cloud.grab_todays_records()
     }
     
 }

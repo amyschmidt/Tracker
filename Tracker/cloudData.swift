@@ -143,10 +143,11 @@ class cloudData
                 {
                     println("New Record has been Saved to cloud kit")
                     self.delegate?.successfulSave()
+                    /*
                     if (savedForWidget)
                     {
                         self.grab_todays_records()
-                    }
+                    }*/
                     return
                 }
             }
