@@ -14,11 +14,11 @@
                         <viewControllerLayoutGuide type="bottom" id="FKl-LY-JtV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" simulatedAppContext="notificationCenter" id="S3S-Oj-5AN">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uYb-SS-pYW">
-                                <rect key="frame" x="16" y="20" width="151" height="32"/>
+                                <rect key="frame" x="16" y="20" width="100" height="32"/>
                                 <state key="normal" image="button.jpg">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -26,14 +26,18 @@
                                     <action selector="buttonClicked:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="yfd-k2-FbW"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" highlighted="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Rz-BZ-G9y">
-                                <rect key="frame" x="182" y="34" width="47" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" highlighted="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Rz-BZ-G9y">
+                                <rect key="frame" x="207" y="31" width="47" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <webView userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lij-Fl-JnH">
+                                <rect key="frame" x="152" y="60" width="144" height="77"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </webView>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gz9-vo-LMf">
-                                <rect key="frame" x="37" y="60" width="109" height="30"/>
+                                <rect key="frame" x="16" y="96" width="109" height="30"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <state key="normal" title="Open Tracker">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -45,13 +49,13 @@
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="9Rz-BZ-G9y" secondAttribute="trailing" constant="30" id="1Wx-21-ats"/>
-                            <constraint firstItem="uYb-SS-pYW" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" constant="29" id="FeT-V2-UbX"/>
-                            <constraint firstItem="uYb-SS-pYW" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leadingMargin" constant="30" id="Pp8-2C-Xc8"/>
-                            <constraint firstItem="Gz9-vo-LMf" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leadingMargin" constant="20" id="Qgi-yr-Oeu"/>
-                            <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="9Rz-BZ-G9y" secondAttribute="bottom" constant="40" id="RU6-24-Vsv"/>
-                            <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="uYb-SS-pYW" secondAttribute="bottom" constant="60" id="Zwd-Jc-4uR"/>
-                            <constraint firstItem="Gz9-vo-LMf" firstAttribute="top" secondItem="uYb-SS-pYW" secondAttribute="bottom" constant="30" id="kVJ-pX-PU2"/>
-                            <constraint firstItem="9Rz-BZ-G9y" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" constant="29" id="mEW-2r-pri"/>
+                            <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="lij-Fl-JnH" secondAttribute="bottom" constant="20" id="8Ei-IM-j6g"/>
+                            <constraint firstItem="Gz9-vo-LMf" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leadingMargin" id="W8y-Bk-5pz"/>
+                            <constraint firstItem="lij-Fl-JnH" firstAttribute="top" secondItem="9Rz-BZ-G9y" secondAttribute="bottom" constant="8" id="WI9-N6-leg"/>
+                            <constraint firstItem="Gz9-vo-LMf" firstAttribute="centerX" secondItem="uYb-SS-pYW" secondAttribute="centerX" constant="4.5" id="dr1-J8-Tt3"/>
+                            <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="Gz9-vo-LMf" secondAttribute="bottom" constant="34" id="kLc-ib-uys"/>
+                            <constraint firstItem="Gz9-vo-LMf" firstAttribute="top" secondItem="uYb-SS-pYW" secondAttribute="bottom" constant="8" id="kek-XU-P3V"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="lij-Fl-JnH" secondAttribute="trailing" constant="9" id="owx-ey-ZcV"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
@@ -59,9 +63,10 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="90"/>
+                    <size key="freeformSize" width="320" height="160"/>
                     <connections>
                         <outlet property="countLabel" destination="9Rz-BZ-G9y" id="AEP-78-s1J"/>
+                        <outlet property="gaugeView" destination="lij-Fl-JnH" id="rhK-CA-z0d"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vXp-U4-Rya" userLabel="First Responder" sceneMemberID="firstResponder"/>
