@@ -23,7 +23,11 @@ class GoalsTabViewController: UIViewController {
         // NSNotificationCenter.defaultCenter().addObserver(self, selector: "setGoal", name: "fetchGoal", object: nil)
         self.setGoal()
     }
-    
+    /*
+    override func viewWillAppear(animated: Bool) {
+        model.grabGoal(false, newGoal: 0)
+    }
+    */
     // set the labels according to the record pulled from the cloud
     func setGoal(){
         if (model.maxGoal > 0)

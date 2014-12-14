@@ -28,8 +28,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let activeString:String = self.appIsActive ? "Active":"Not Active"
         println("Tracker Launched. App is \(activeString).")
         self.isInInitialSession = true
-        // Call update records from cloudData.swift
+        CloudDataObject.requestAttempts = 0
+        // Grab Records
         CloudDataObject.grab_todays_records()
+        CloudDataObject.grabAllRecords()
         return true
     }
 
@@ -54,6 +56,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
         self.appIsActive = true
         println("Tracker Returned from the Background.")
+        // Grab Records
+        CloudDataObject.grab_todays_records()
+        CloudDataObject.grabAllRecords()
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
@@ -61,7 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.appIsActive = true
         let activeString:String = self.appIsActive ? "Active":"Not Active"
         println("Tracker Became \(activeString).")
-
+        CloudDataObject.requestAttempts = 0
         // If there is a date saved from the Widget
         if let date = self.sharedDefaults?.objectForKey("record") as? NSDate {
 

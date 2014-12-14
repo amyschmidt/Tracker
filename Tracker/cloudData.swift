@@ -42,9 +42,8 @@ class cloudData
     // date of Last Cig
     var dateOfLastCig:NSDate = NSDate()
     // HTTP Request Variables for Network Issues
-    var iCloudResponse = false
+    var airPlaneMode = true
     var requestAttempts : Int = 0
-    // THE COUNT!
     var NumberOfDailyRecords : Int = 0
 
     init(){
@@ -52,21 +51,26 @@ class cloudData
         privateDB = container.privateCloudDatabase
         
         // Begin process of Grabbing the Goal
-        self.grabGoal(false, newGoal: 0)
-        
+        // self.grabGoal(false, newGoal: 0)
+    }
+    
+    func checkForAirplaneRecords_AttemptToUploadThem()
+    {
         // Unarchive + Load any records if user incremented during Airplane Mode or using the Widget.
         if let savedDates = NSUserDefaults.standardUserDefaults().objectForKey("records") as? [NSDate]
         {
-            println("There are some Records saved on the phone. Now Uploading them to iCloud...")
+            println("Found record(s) saved during Airplane Mode. Attempting to Upload them to iCloud...")
             // airplaneModeDates can be used in other ViewControllers if someone needs them.
             self.airplaneModeDates = savedDates
             // Save All the Records to the Cloud
+            var i:Int=0
             for records in self.airplaneModeDates
             {
                 // If savedForWidget is true, then it will grab the records after it's called.
-                self.save_record_to_cloud(records, savedForWidget: true)
+                self.save_record_to_cloud(records, savedForWidget: false)
+                i++
             }
-            println("Those Records have been sent to iCloud. Now Clearing local records.")
+            println("Clearing \(i) airplane record(s) from User's Phone.")
             // Clear out the local data from NSUserDefaults
             var appDomain = NSBundle.mainBundle().bundleIdentifier
             // NSUserDefaults.removePersistentDomainForName(appDomain)
@@ -170,12 +174,12 @@ class cloudData
         {
             results, error in
             println("Fetching Today's Records")
-            self.iCloudResponse = true
             // If iCloud responds with an Error, then display the error to the User.
             if error != nil
             {
                 dispatch_async(dispatch_get_main_queue())
                 {
+                    self.airPlaneMode = true
                     self.delegate?.errorUpdating(error)
                     return
                 }
@@ -185,6 +189,7 @@ class cloudData
             {
                 dispatch_async(dispatch_get_main_queue())
                 {
+                    self.airPlaneMode = false
                     var i = 0
                     // if grabbing today's records after the first time, then refresh the array (Before it was appending more and more records)
                     if self.requestAttempts != 1
@@ -194,7 +199,6 @@ class cloudData
                     // Records returned
                     for record in results
                     {
-                        println(record)
                         // Initialize multiple dailyRecord Objects
                         var grabRecord = dailyRecord(record: record as CKRecord, database: self.privateDB)
                         // Append the record to array IF in first session
@@ -321,11 +325,13 @@ class cloudData
         self.privateDB.saveRecord(record2, completionHandler: { record, error in
             if error != nil {
                 println("Error occurred while saving \(error)")
+                self.airPlaneMode = true
             }
             else
             {
-                NSLog("Saving Goal to iCloud As: \(newGoal)")
+                println("Saving Goal to iCloud As: \(newGoal)")
                 self.maxGoal = newGoal
+                self.airPlaneMode = false
             }
         })
 
@@ -344,6 +350,7 @@ class cloudData
                 dispatch_async(dispatch_get_main_queue())
                 {
                     println("Error Grabbing Goal from iCloud \(error)")
+                    self.airPlaneMode = true
                 }
             }
             // Else if there just isn't a goal in the database, then save a new one.
@@ -360,8 +367,10 @@ class cloudData
                 // Push this block to main thread
                 dispatch_async(dispatch_get_main_queue())
                 {
+                    self.airPlaneMode = false
                     // Set maxGoal
                     self.maxGoal = dbRecord.objectForKey("DailyMax") as Int!
+                    println("Received Goal from iCloud as: \(self.maxGoal)")
                     // If user wants to save, then push to Cloud, else don't push to Cloud
                     if (save)
                     {
@@ -372,7 +381,7 @@ class cloudData
                             }
                             else
                             {
-                                NSLog("Saving Goal to iCloud As: \(newGoal)")
+                                println("Saving Goal to iCloud As: \(newGoal)")
                                 // Set maxGoal
                                 self.maxGoal = newGoal
                             }
@@ -411,6 +420,7 @@ class cloudData
             {
                 dispatch_async(dispatch_get_main_queue())
                     {
+                        self.airPlaneMode = true
                         self.delegate?.errorUpdating(error)
                         return
                 }
@@ -419,7 +429,8 @@ class cloudData
             // Fetch todays data
             else
             {
-                NSLog("Fetching All Data")
+                self.airPlaneMode = false
+                println("Fetching All Data")
                 var i = 0
                 // Records returned
                 for record in results
@@ -473,11 +484,13 @@ class cloudData
         privateDB.deleteRecordWithID(record.recordID, completionHandler: ({returnRecord, error in
             if let err = error {
                 dispatch_async(dispatch_get_main_queue()) {
+                    self.airPlaneMode = true
                     // self.notifyUser("Delete Error", message: err.localizedDescription)
                     
                 }
             } else {
                 dispatch_async(dispatch_get_main_queue()) {
+                    self.airPlaneMode = false
                     // self.notifyUser("Success", message: "Record deleted successfully")
                 }
             }
