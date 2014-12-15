@@ -52,7 +52,7 @@ class GoalsTabViewController: UIViewController {
         dailyMax.text = "\(currentValue)"
         weeklyMax.text = "\(currentValue * 7)"
         monthlyMax.text = "\(currentValue * 30)"
-        yearlyMax.text = "\(currentValue * 356)"
+        yearlyMax.text = "\(currentValue * 365)"
     }
     // when slider stops (Technically user "untouches" the screen) then save goal
     @IBAction func sliderStopped(sender: UISlider) {

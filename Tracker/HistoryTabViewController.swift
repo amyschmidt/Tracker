@@ -15,42 +15,60 @@ class HistoryTabViewController: UIViewController {
     @IBOutlet weak var barGraph: UILabel!
     @IBOutlet weak var average: UILabel!
     @IBOutlet weak var lastSmokeTimer: UILabel!
-    @IBOutlet weak var mostSmokedDay: UILabel!
     @IBOutlet weak var MaxLabel: UILabel!
     @IBOutlet weak var dataLabel: UILabel!
     @IBOutlet weak var timeSpentSmokingLabel: UILabel!
     @IBOutlet weak var cigarettesPerLabel: UILabel!
+    @IBOutlet weak var maxTitle: UILabel!
+    @IBOutlet weak var recordHigh: UILabel!
+    @IBOutlet weak var recordLow: UILabel!
+    @IBOutlet weak var timeSinceLastSmoke: UILabel!
     
     // Cloud data
     var historyData : cloudData!
 
-    // Count for today
-    var todaysCount : Int!
-    
-    // UIWebView for bar chart
-    @IBOutlet weak var barChart: UIWebView!
-    
     // Strings for chart HTML
     var dayChartHTML: String!
     var weekChartHTML: String!
     var monthChartHTML: String!
     var yearChartHTML: String!
     
+    // Counts for different time periods
+    var dayCount: Int!
+    var weekCount: Int!
+    var monthCount: Int!
+    var yearCount: Int!
+    
+    // UIWebView for bar chart
+    @IBOutlet weak var barChart: UIWebView!
+    
     //labels for average
     @IBOutlet weak var averageData: UILabel!
     
     //var for averages
-    var hourlyAverage : float_t = 0
+    var hourlyAverage: float_t = 0
     
     override func viewWillAppear(animated: Bool) {
         // Update today's total count and max goal
-        todaysCount = historyData.dailyRecords.count + historyData.sessionRecords.count
+        dayCount = historyData.dailyRecords.count + historyData.sessionRecords.count
 
         // Create the HTML string for each chart
-        dayChartHTML = buildDayChartHTML()
-        weekChartHTML = buildWeekChartHTML()
-        monthChartHTML = buildMonthChartHTML()
-        yearChartHTML = buildYearChartHTML()
+        let dayInfo = buildDayChartHTML()
+        let weekInfo = buildWeekChartHTML()
+        let monthInfo = buildMonthChartHTML()
+        let yearInfo = buildYearChartHTML()
+        
+        // Set HTML strings
+        dayChartHTML = dayInfo.HTML
+        weekChartHTML = weekInfo.HTML
+        monthChartHTML = monthInfo.HTML
+        yearChartHTML = yearInfo.HTML
+        
+        // Set counts
+        dayCount = dayInfo.count
+        weekCount = weekInfo.count
+        monthCount = monthInfo.count
+        yearCount = yearInfo.count
         
         // Build the chart according to selected time period
         buildChart(segmentControl.selectedSegmentIndex)
@@ -97,88 +115,130 @@ class HistoryTabViewController: UIViewController {
             
         // Day information
         case 0:
+            // Set label titles
             total.text = "Today's Total"
             barGraph.text = "Hourly"
             average.text = "Hourly Average"
-            
-            hourlyAverage = getHourlyAverage()
-            averageData.text = String(format: "%.2f", hourlyAverage)
             cigarettesPerLabel.text = "cigarettes per hour"
             lastSmokeTimer.text = "Time Since Last Smoke"
-            mostSmokedDay.text = " "
             
-            dataLabel.text = "\(todaysCount)"
+            // Set false data
+            recordHigh.text = "Record High: 2"
+            recordLow.text = "Record Low: 0"
+            maxTitle.text = "Daily Max"
+            timeSinceLastSmoke.text = "01:12:23"
+            
+            // Insert data
+            dataLabel.text = "\(dayCount)"
             MaxLabel.text = "\(historyData.maxGoal)"
-            //days count * 5
-            timeSpentSmokingLabel.text = "\(todaysCount * 5)"
+            timeSpentSmokingLabel.text = "\(dayCount * 5)"
+            hourlyAverage = getHourlyAverage()
+            averageData.text = String(format: "%.2f", hourlyAverage)
             
+            // Draw graph
             drawChart(dayChartHTML)
             
         // Week information
         case 1:
+            // Set label titles
             total.text = "This Week"
             barGraph.text = "Daily"
             average.text = "Daily Average"
             lastSmokeTimer.text = "Average Time Between Cigarettes"
-            mostSmokedDay.text = " "
             cigarettesPerLabel.text = "cigarettes per day"
+            maxTitle.text = "Weekly Max"
+            
+            // Set false data
+            recordHigh.text = "Record High: 7"
+            recordLow.text = "Record Low: 0"
+            timeSinceLastSmoke.text = "24:10:25"
+            averageData.text = "0.97"
+            
+            // Insert data
             var weeklyMax: Int! = historyData.maxGoal * 7
             MaxLabel.text = "\(weeklyMax)"
-            dataLabel.text = "\(todaysCount)"
-            //weeks count * 5
-            timeSpentSmokingLabel.text = "\(todaysCount * 10)"
+            dataLabel.text = "\(weekCount)"
+            timeSpentSmokingLabel.text = "\(weekCount * 5)"
             
+            // Draw graph
             drawChart(weekChartHTML)
             
         // Month information
         case 2:
+            // Set label titles
             total.text = "This Month"
             barGraph.text = "Weekly"
             average.text = "Weekly Average"
             lastSmokeTimer.text = "Average Time Between Cigarettes"
             cigarettesPerLabel.text = "cigarettes per week"
-            mostSmokedDay.text = " "
+            maxTitle.text = "Monthly Max"
             
-            dataLabel.text = "\(todaysCount)"
+            // Set false data
+            recordHigh.text = "Record High: 27"
+            recordLow.text = "Record Low: 4"
+            timeSinceLastSmoke.text = "24:10:25"
+            averageData.text = "\(0.97 * 7)"
+            
+            // Insert data
+            dataLabel.text = "\(monthCount)"
             var monthlyMax: Int! = historyData.maxGoal * 30
             MaxLabel.text = "\(monthlyMax)"
+            timeSpentSmokingLabel.text = "\(monthCount * 5)"
             
-            //months count * 5
-            timeSpentSmokingLabel.text = "\(todaysCount * 20)"
-            
+            // Draw graph
             drawChart(monthChartHTML)
             
         // Year information
         case 3:
+            // Set label titles
             total.text = "This Year"
             barGraph.text = "Monthly"
             average.text = "Monthly Average"
             lastSmokeTimer.text = "Average Time Between Cigarettes"
             cigarettesPerLabel.text = "cigarettes per month"
-            mostSmokedDay.text = " "
+            maxTitle.text = "Yearly Max"
             
-            dataLabel.text = "\(todaysCount)"
+            // Set false data
+            recordHigh.text = "Record High: \(yearCount)"
+            recordLow.text = "Record Low: 0"
+            timeSinceLastSmoke.text = "24:10:25"
+            averageData.text = "\(0.97 * 30)"
             
-            //years count * 5
-            timeSpentSmokingLabel.text = "\(todaysCount * 30)"
+            // Insert data
+            dataLabel.text = "\(yearCount)"
+            timeSpentSmokingLabel.text = "\(yearCount * 5)"
             var yearlyMax: Int! = historyData.maxGoal * 365
             MaxLabel.text = "\(yearlyMax)"
             
+            // Draw graph
             drawChart(yearChartHTML)
             
         // Default to Day information
         default:
+            // Set label titles
             total.text = "Today's Total"
             barGraph.text = "Hourly"
             average.text = "Hourly Average"
             cigarettesPerLabel.text = "cigarettes per hour"
             lastSmokeTimer.text = "Time Since Last Smoke"
-            mostSmokedDay.text = " "
+            maxTitle.text = "Daily Max"
             
-            dataLabel.text = "\(todaysCount)"
+            // Set false data
+            recordHigh.text = "Record High: 5"
+            recordLow.text = "Record Low: 0"
+            timeSinceLastSmoke.text = "01:12:23"
+            
+            // Insert data
+            dataLabel.text = "\(dayCount)"
             MaxLabel.text = "\(historyData.maxGoal)"
-            timeSpentSmokingLabel.text = "\(todaysCount * 5)"
+            timeSpentSmokingLabel.text = "\(dayCount * 5)"
+            hourlyAverage = getHourlyAverage()
+            averageData.text = String(format: "%.2f", hourlyAverage)
             
+            // Reset segmented control to Day
+            segmentControl.selectedSegmentIndex = 0
+            
+            // Draw graph
             drawChart(dayChartHTML)
             
             break
@@ -187,17 +247,39 @@ class HistoryTabViewController: UIViewController {
     
     func getHourlyAverage() -> float_t {
     
-        var today = float_t(todaysCount)
+        // Formatter to get 24-hour time from record
+        var hourFormatter: NSDateFormatter = NSDateFormatter()
+        hourFormatter.dateFormat = "HH"
         
-        return (today / 24)
+        // Get today's date information
+        var today: NSDate = NSDate()
+        
+        // Get hour string from date
+        var HourString: String = hourFormatter.stringFromDate(today)
+    
+        // Get floating point value of hour string
+        var hour: Int = HourString.toInt()! + 1
+        
+        // Get floating point value of today's count
+        var count: float_t = float_t(dayCount)
+        
+        // Check that hour is not 0 to avoid divide by 0
+        if hour == 0 {
+            hour = 1
+        }
+    
+        // Get count of cigarettes smoked per hour
+        var average: float_t = count / float_t(hour)
+        
+        // Return average
+        return average
     
     }
     
-    func buildDayChartHTML() -> NSString {
+    func buildDayChartHTML() -> (HTML: NSString, count: Int) {
         
         // This array stories the count of cigs for each time interval ([0] = 12am - 4am, [1] = 4am - 8am, etc.)
         var dataArray: [Int] = [0, 0, 0, 0, 0, 0]
-        var arr: [Int] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         
         // Formatter to get 24-hour time from record
         var hourFormatter: NSDateFormatter = NSDateFormatter()
@@ -211,6 +293,7 @@ class HistoryTabViewController: UIViewController {
         var today: NSDate = NSDate()
         var date: String = formatter.stringFromDate(today)
         
+        // Count the number of records displayed in the graph
         var count: Int = 0
         
         // Add data stored in cloud
@@ -278,16 +361,15 @@ class HistoryTabViewController: UIViewController {
                 }
             }
         }
-        println("There were \(count) records.")
         
         // Build HTML string with dataArray info inserted into graph
         var stringHTML: String = "<html><head><script type='text/javascript' src='https://www.google.com/jsapi'></script><script type='text/javascript'>google.load('visualization', '1', {packages:['corechart']});google.setOnLoadCallback(drawChart);function drawChart() { var data = google.visualization.arrayToDataTable([ ['Hour', 'Cigs', { role: 'style' } ], ['12am - 4am', \(dataArray[0]), 'color: white; opacity: 0.75'], ['4am - 8am', \(dataArray[1]), 'color: white; opacity: 0.75'], ['8am - 12pm', \(dataArray[2]), 'color: white; opacity: 0.75'], ['12pm - 4pm', \(dataArray[3]), 'color: white; opacity: 0.75'], ['4pm - 8pm', \(dataArray[4]), 'color: white; opacity: 0.75'], ['8pm - 12am', \(dataArray[5]), 'color: white; opacity: 0.75'] ]); var options = { width: '100%', height: '100%', legend: { position: 'none' }, bar: { groupWidth: '70%' }, backgroundColor: '#333333', backgroundColor: { strokeWidth: 0, fill: '#333333' }, chartArea: { left: 20, top: 10, width:'95%', height:'85%'}, fontSize: 8, Style: { color: 'white' }, hAxis: { textStyle:{color: '#FFF'} }, vAxis: { textStyle:{color: '#FFF'} } }; var chart = new google.visualization.ColumnChart(document.getElementById('chart_div')); chart.draw(data, options);}</script><style> #chart_div { position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; color: white; }</style></head><body> <div id='chart_div'></div></body></html>"
         
         // Return HTML string
-        return stringHTML
+        return (stringHTML, count)
     }
     
-    func buildWeekChartHTML() -> NSString {
+    func buildWeekChartHTML() -> (HTML: NSString, count: Int) {
         
         // This array stories the count of cigs for each day ([0] = Sunday, [1] = Monday, etc.)
         var dataArray: [Int] = [0, 0, 0, 0, 0, 0, 0]
@@ -305,6 +387,9 @@ class HistoryTabViewController: UIViewController {
         var todayDayNum: Int! = getDayOfWeek(todayDate)
         
         var max = historyData.maxGoal
+        
+        // Count the number of records displayed in the graph
+        var count: Int = 0
         
         // Add data stored in cloud
         for record in historyData.allRecords {
@@ -325,7 +410,7 @@ class HistoryTabViewController: UIViewController {
                 var dateToGraph: String = formatter.stringFromDate(dateToInclude!)
                 
                 if( YearString == CurrentYearString && dateToGraph == DateString ) {
-
+                    count++
                     // Increment index based upon day of week
                     switch day {
                         // Sunday
@@ -359,6 +444,7 @@ class HistoryTabViewController: UIViewController {
         
         // Add data from current session
         for record in historyData.sessionRecords {
+            count++
             
             // Get date string from record's timestamp
             var DateString: String = formatter.stringFromDate(record.date_NS)
@@ -398,10 +484,10 @@ class HistoryTabViewController: UIViewController {
         var stringHTML: String = "<html><head><script type='text/javascript' src='https://www.google.com/jsapi'></script><script type='text/javascript'>google.load('visualization', '1', {packages:['corechart']});google.setOnLoadCallback(drawChart);function drawChart() { var data = google.visualization.arrayToDataTable([ ['Day', 'Cigs', { role: 'style' }, 'Maximum' ], ['SUN', \(dataArray[0]), 'color: white; opacity: 0.75', \(max)], ['MON', \(dataArray[1]), 'color: white; opacity: 0.75', \(max)], ['TUE', \(dataArray[2]), 'color: white; opacity: 0.75', \(max)], ['WED', \(dataArray[3]), 'color: white; opacity: 0.75', \(max)], ['THU', \(dataArray[4]), 'color: white; opacity: 0.75', \(max)], ['FRI', \(dataArray[5]), 'color: white; opacity: 0.75', \(max)], ['SAT', \(dataArray[6]), 'color: white; opacity: 0.75', \(max)] ]); var options = { seriesType: 'bars', series: {1: {type: 'line'}}, width: '100%', height: '100%', legend: { position: 'none' }, bar: { groupWidth: '70%' }, backgroundColor: '#333333', backgroundColor: { strokeWidth: 0, fill: '#333333' }, chartArea: { left: 20, top: 10, width:'95%', height:'85%'}, fontSize: 8, Style: { color: 'white' }, hAxis: { textStyle:{color: '#FFF'} }, vAxis: { textStyle:{color: '#FFF'} } }; var chart = new google.visualization.ComboChart(document.getElementById('chart_div')); chart.draw(data, options);}</script><style>#chart_div { position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px;}</style></head><body> <div id='chart_div'></div></body></html>"
         
         // Return HTML string
-        return stringHTML
+        return (stringHTML, count)
     }
     
-    func buildMonthChartHTML() -> NSString {
+    func buildMonthChartHTML() -> (HTML: NSString, count: Int) {
         // This array stories the count of cigs for each month ([0] = Week 1 (1st-7th), [1] = Week 2 (8th-15th), etc.)
         var dataArray: [Int] = [0, 0, 0, 0, 0]
         
@@ -426,6 +512,9 @@ class HistoryTabViewController: UIViewController {
         // Get goal number
         var max: Int = historyData.maxGoal * 7
         
+        // Count the number of records displayed in the graph
+        var count: Int = 0
+        
         // Add data stored in cloud
         for record in historyData.allRecords {
             
@@ -438,6 +527,7 @@ class HistoryTabViewController: UIViewController {
             
             // Check if record occurred in the current year
             if( YearString == CurrentYearString && MonthString == CurrentMonthString ) {
+                count++
                 
                 // Increment index based upon day of the month
                 switch day {
@@ -468,6 +558,7 @@ class HistoryTabViewController: UIViewController {
             
             // Check if record occurred in the current year
             if( YearString == CurrentYearString && MonthString == CurrentMonthString ) {
+                count++
                 
                 // Increment index based upon day of the month
                 switch day {
@@ -490,10 +581,10 @@ class HistoryTabViewController: UIViewController {
         var stringHTML: String = "<html><head><script type='text/javascript' src='https://www.google.com/jsapi'></script><script type='text/javascript'>google.load('visualization', '1', {packages:['corechart']});google.setOnLoadCallback(drawChart);function drawChart() { var data = google.visualization.arrayToDataTable([ ['Week', 'Cigs', { role: 'style' }, 'Maximum' ], ['1st - 7th', \(dataArray[0]), 'color: white; opacity: 0.75', \(max)], ['8th - 14th', \(dataArray[1]), 'color: white; opacity: 0.75', \(max)], ['15th - 21st', \(dataArray[2]), 'color: white; opacity: 0.75', \(max)], ['22nd - 28th', \(dataArray[3]), 'color: white; opacity: 0.75', \(max)], ['29th - \(lastDayOfMonth)', \(dataArray[4]), 'color: white; opacity: 0.75', \(max)] ]); var options = { seriesType: 'bars', series: {1: {type: 'line'}}, width: '100%', height: '100%', legend: { position: 'none' }, bar: { groupWidth: '70%' }, backgroundColor: '#333333', backgroundColor: { strokeWidth: 0, fill: '#333333' }, chartArea: { left: 20, top: 10, width:'95%', height:'85%'}, fontSize: 8, Style: { color: 'white' }, hAxis: { textStyle:{color: '#FFF'} }, vAxis: { textStyle:{color: '#FFF'} } }; var chart = new google.visualization.ComboChart(document.getElementById('chart_div')); chart.draw(data, options);}</script><style>#chart_div { position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px;}</style></head><body> <div id='chart_div'></div></body></html>"
         
         // Return HTML string
-        return stringHTML
+        return (stringHTML, count)
     }
     
-    func buildYearChartHTML() -> NSString {
+    func buildYearChartHTML() -> (HTML: NSString, count: Int) {
         
         // This array stories the count of cigs for each month ([0] = January, [1] = February, etc.)
         var dataArray: [Int] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -511,6 +602,9 @@ class HistoryTabViewController: UIViewController {
         
         var max = historyData.maxGoal * 30
         
+        // Count the number of records displayed in the graph
+        var count: Int = 0
+        
         // Add data stored in cloud
         for record in historyData.allRecords {
             
@@ -522,6 +616,7 @@ class HistoryTabViewController: UIViewController {
             
             // Check if record occurred in the current year
             if( YearString == CurrentYearString ) {
+                count++
                 
                 // Increment index based upon month of the year
                 switch month {
@@ -566,7 +661,8 @@ class HistoryTabViewController: UIViewController {
             
             // Check if record occurred in the current year
             if( YearString == CurrentYearString ) {
-            
+                count++
+                
                 // Increment index based upon month of the year
                 switch month {
                 case 1:
@@ -604,7 +700,7 @@ class HistoryTabViewController: UIViewController {
         stringHTML += "['JUN', \(dataArray[5]), 'color: white; opacity: 0.75', \(max)], ['JUL', \(dataArray[6]), 'color: white; opacity: 0.75', \(max)], ['AUG', \(dataArray[7]), 'color: white; opacity: 0.75', \(max)], ['SEP', \(dataArray[8]), 'color: white; opacity: 0.75', \(max)], ['OCT', \(dataArray[9]), 'color: white; opacity: 0.75', \(max)], ['NOV', \(dataArray[10]), 'color: white; opacity: 0.75', \(max)], ['DEC', \(dataArray[11]), 'color: white; opacity: 0.75', \(max)] ]); var options = { seriesType: 'bars', series: {1: {type: 'line'}}, width: '100%', height: '100%', legend: { position: 'none' }, bar: { groupWidth: '70%' }, backgroundColor: '#333333', backgroundColor: { strokeWidth: 0, fill: '#333333' }, chartArea: { left: 20, top: 10, width:'95%', height:'85%'}, fontSize: 8, Style: { color: 'white' }, hAxis: { textStyle:{color: '#FFF'} }, vAxis: { textStyle:{color: '#FFF'} } }; var chart = new google.visualization.ComboChart(document.getElementById('chart_div')); chart.draw(data, options);}</script><style>#chart_div { position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px;}</style></head><body> <div id='chart_div'></div></body></html>"
         
         // Return HTML string
-        return stringHTML
+        return (stringHTML, count)
     }
 
     func getLastDayOfMonth() -> NSString {
