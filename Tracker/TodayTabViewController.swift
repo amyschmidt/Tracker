@@ -199,6 +199,21 @@ class TodayTabViewController: UIViewController, CloudKitDelegate {
         self.airplaneMode = true
     }
     
+    /* CloudKit Delegate function to handle error when grabbing Goal from the server */
+    func unsuccessfulGrab(error: NSError) {
+        println("Unable to grab goal from the server.")
+        // Set into airplane mode
+        self.airplaneMode = true
+        self.displayAirplaneMode()
+    }
+    
+    /* CloudKit Delegate function to handle error when saving new Goal to the server */
+    func unsuccessfulGoalSave(error: NSError) {
+        println("Unable to save goal to the server.")
+        self.airplaneMode = true
+        self.displayAirplaneMode()
+    }
+    
     /* CloudKitDelegate function that Sets the Labels for the count and timer */
     func successfulGrab_UpdateCount(timeOfLastCig:NSDate) {
         // Save the Count

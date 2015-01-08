@@ -10,6 +10,8 @@ import Foundation
 protocol CloudKitDelegate {
     func successfulSave()
     func unsuccessfulSave(error : NSError)
+    func unsuccessfulGrab(error : NSError)
+    func unsuccessfulGoalSave(error : NSError)
     func errorUpdating(error: NSError)
     func successfulGrab_UpdateCount(timeOfLastCig:NSDate)
     // func updateCountFromWidget()
@@ -275,13 +277,12 @@ class cloudData
         self.privateDB.saveRecord(record2, completionHandler: { record, error in
             if error != nil {
                 println("Error occurred while saving \(error)")
-                self.airPlaneMode = true
+                self.delegate?.unsuccessfulGoalSave(error)
             }
             else
             {
                 println("Saving Goal to iCloud As: \(newGoal)")
                 self.maxGoal = newGoal
-                self.airPlaneMode = false
             }
         })
 
@@ -300,7 +301,7 @@ class cloudData
                 dispatch_async(dispatch_get_main_queue())
                 {
                     println("Error Grabbing Goal from iCloud \(error)")
-                    self.airPlaneMode = true
+                    self.delegate?.unsuccessfulGrab(error)
                 }
             }
             // Else if there just isn't a goal in the database, then save a new one.
@@ -317,7 +318,6 @@ class cloudData
                 // Push this block to main thread
                 dispatch_async(dispatch_get_main_queue())
                 {
-                    self.airPlaneMode = false
                     // Set maxGoal
                     self.maxGoal = dbRecord.objectForKey("DailyMax") as Int!
                     println("Received Goal from iCloud as: \(self.maxGoal)")
